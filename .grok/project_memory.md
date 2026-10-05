@@ -1,0 +1,4 @@
+- Factory Commerce OS（中国制造业出海多租户 B2B 分站矩阵）正在 /workspace/artifacts/my-factory-commerce 构建。约定：单代码库按 Host 分流；Prisma 模型以用户提供的 Tenant/Product/OeCrossReference/Fitment/Inquiry/SampleOrder/AnalyticsEvent 为准；OE 归一化去非字母数字并大写；YMM 从 Fitment 按租户级联；RFQ 与样品支付走飞书 interactive 卡片；后台为 super-admin + portal 四页。 [2026-10-05]
+- 支付契约：Stripe PaymentIntent + payment_intent.succeeded；PayPal create/capture；Binance Pay v3/order（出站 HMAC-SHA512，Webhook RSA-SHA256/SHA512）；TRC20 静态地址提交 TxHash 后 pending_review。环境变量名以用户给出的 .env.example 为准。种子 SKU 为 OS-B0258006027。 [2026-10-05]
+- 前台在 (storefront)/[lang]：首页、目录、SKU 详情、样品收银。后台 portal 四页（看板/产品/询盘/设置）和 super-admin（租户、域名、大盘）已落地。本地无 Host 命中时回退最早的 active 租户。 [2026-10-05]
+- 后台登录暂用用户名密码，不接 NextAuth/Clerk。User 表 + scrypt + fc_session Cookie。/login 注册时开工厂租户。/portal 与 /super-admin 无 Cookie 则跳登录。 [2026-10-05]

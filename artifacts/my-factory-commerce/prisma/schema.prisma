@@ -1,0 +1,170 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// 1. 租户表 (工厂分站主体)
+// customDomain 只存纯 Host，例如 "www.xinda-sensor.com"，不存协议与路径。
+// settings JSON 约定字段:
+// { logoUrl, primaryColor, contactEmail, whatsappNumber, certImages: [], feishuWebhookUrl }
+model Tenant {
+  id             String           @id @default(uuid())
+  name           String
+  slug           String           @unique
+  customDomain   String?          @unique
+  industryPreset String
+  status         String           @default("active")
+  settings       Json             @default("{}")
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  members        TenantMember[]
+  products       Product[]
+  inquiries      Inquiry[]
+  orders         SampleOrder[]
+  analytics      AnalyticsEvent[]
+
+  @@index([customDomain])
+  @@index([slug])
+}
+
+// 2. 账号。当前只用用户名和密码，后续可替换为 NextAuth / Clerk。
+model User {
+  id           String         @id @default(uuid())
+  username     String         @unique
+  passwordHash String
+  role         String         @default("tenant_admin")
+  createdAt    DateTime       @default(now())
+  memberships  TenantMember[]
+}
+
+// 3. 租户成员与权限表
+model TenantMember {
+  id        String   @id @default(uuid())
+  tenantId  String
+  tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  email     String
+  role      String   @default("tenant_admin")
+  createdAt DateTime @default(now())
+
+  @@unique([tenantId, email])
+  @@unique([tenantId, userId])
+  @@index([tenantId])
+}
+
+// 3. 产品主表
+model Product {
+  id             String             @id @default(uuid())
+  tenantId       String
+  tenant         Tenant             @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  sku            String
+  title          String
+  images         String[]           @default([])
+  moq            Int                @default(1)
+  priceRange     String?
+  samplePrice    Decimal            @db.Decimal(10, 2)
+  sampleStock    Int                @default(50)
+  pdfAttachment  String?
+  isPublished    Boolean            @default(true)
+  specifications Json               @default("{}")
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+  oeNumbers      OeCrossReference[]
+  fitments       Fitment[]
+  inquiries      Inquiry[]
+  sampleOrders   SampleOrder[]
+
+  @@unique([tenantId, sku])
+  @@index([tenantId, isPublished])
+}
+
+// 4. OE 零件号交叉互换表 (汽配核心)
+// normalizedOe 必须经 normalizeOeNumber 清洗后再入库。
+// 检索时必须同时约束 product.tenantId，避免跨租户命中。
+model OeCrossReference {
+  id           String  @id @default(uuid())
+  productId    String
+  product      Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  normalizedOe String
+  rawOe        String
+  brand        String?
+
+  @@index([normalizedOe])
+  @@index([productId])
+}
+
+// 5. 车型适配数据库 (YMM 级联关系)
+// 本表只表示「该 SKU 适配哪台车」，级联选项从本租户 Fitment 去重得出。
+model Fitment {
+  id        String  @id @default(uuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  year      Int
+  make      String
+  model     String
+  engine    String
+  position  String?
+
+  @@index([make, model, year])
+  @@index([productId])
+}
+
+// 6. 商机询盘表 (B2B Leads)
+model Inquiry {
+  id               String   @id @default(uuid())
+  tenantId         String
+  tenant           Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  productId        String?
+  product          Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+  customerName     String
+  customerEmail    String
+  customerWhatsapp String?
+  quantity         Int?
+  country          String?
+  message          String
+  status           String   @default("new")
+  createdAt        DateTime @default(now())
+
+  @@index([tenantId, createdAt])
+}
+
+// 7. 样品在线购买订单表 (无需买家注册)
+// paymentTxId 唯一，用于 Webhook 幂等。
+model SampleOrder {
+  id              String   @id @default(uuid())
+  tenantId        String
+  tenant          Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  productId       String
+  product         Product  @relation(fields: [productId], references: [id], onDelete: Restrict)
+  quantity        Int      @default(1)
+  amountTotal     Decimal  @db.Decimal(10, 2)
+  currency        String   @default("USD")
+  paymentGateway  String
+  paymentStatus   String   @default("pending")
+  paymentTxId     String?  @unique
+  shippingAddress Json
+  createdAt       DateTime @default(now())
+
+  @@index([tenantId, paymentStatus])
+}
+
+// 8. 轻量埋点与访问日志表
+model AnalyticsEvent {
+  id        BigInt   @id @default(autoincrement())
+  tenantId  String
+  tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  eventType String
+  path      String
+  targetId  String?
+  ip        String?
+  country   String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  @@index([tenantId, eventType, createdAt])
+}

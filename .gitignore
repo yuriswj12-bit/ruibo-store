@@ -7,9 +7,5 @@ dist
 !.env.example
 *.log
 .DS_Store
-artifacts
-screenshots
-.grok
 .tanstack
-public/__grok
 .node_modules.lock
