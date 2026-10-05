@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #f3f5f8;
+  --color-ink: #0c2340;
+  --color-muted: #5c6b80;
+  --color-line: #d5dde8;
+  --color-card: #ffffff;
+  --color-copper: #d0121a;
+  --color-copper-ink: #ffffff;
+  --color-brass: #1a4b8c;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Newsreader", Georgia, serif;
+  --radius-card: 0.9rem;
+}
+
+@layer base {
+  html { color: var(--color-ink); background: var(--color-paper); }
+  body { font-family: var(--font-sans); line-height: 1.5; }
+  h1, h2, .display { font-family: var(--font-display); font-weight: 500; letter-spacing: -0.02em; }
+  button:not(:disabled), [role="button"]:not(:disabled) { cursor: pointer; }
+  input, select, textarea { font: inherit; color: inherit; }
+}
+
+@utility wrap {
+  width: min(1120px, calc(100% - 2rem));
+  margin-inline: auto;
+}
