@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { getProduct, getStoreHome } from "@/lib/commerce.functions";
 import { StoreShell } from "@/components/store/shell";
 import { DualAction } from "@/components/store/dual-action";
@@ -35,9 +35,60 @@ function ProductPage() {
         <div className="grid gap-4">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-copper">{vehicle ? vehicleLabel(lang, vehicle) : product.sku}</p>
           <h1 className="text-4xl leading-tight">{product.sku}</h1>
-          <p className="text-muted">{sensorTitle(lang, vehicle, product.sku)}</p>
-          <p>{t("bulkLine", { range: moneyLabel(lang, product.priceRange), moq: product.moq, price: product.samplePrice })}</p>
-          <p className="text-sm text-muted">{product.oeBrands.map((oe) => `${oe.brand || "OE"} ${oe.raw}`).join(" · ")}</p>
+          <section className="grid gap-3 rounded-card border border-line bg-card p-4">
+            <h2 className="text-lg">{t("briefTitle")}</h2>
+            <p>
+              {t("briefBody", {
+                sku: product.sku,
+                vehicle: vehicle ? vehicleLabel(lang, vehicle) : product.sku,
+                price: product.samplePrice,
+                stock: product.sampleStock,
+                moq: product.moq,
+              })}
+            </p>
+            <dl className="grid gap-2 text-sm sm:grid-cols-2">
+              <div>
+                <dt className="text-muted">{t("attrSku")}</dt>
+                <dd className="font-medium">{product.sku}</dd>
+              </div>
+              <div>
+                <dt className="text-muted">{t("attrOrigin")}</dt>
+                <dd className="font-medium">{t("originWenzhou")}</dd>
+              </div>
+              <div>
+                <dt className="text-muted">{t("attrSample")}</dt>
+                <dd className="font-medium">${product.samplePrice}</dd>
+              </div>
+              <div>
+                <dt className="text-muted">{t("attrStock")}</dt>
+                <dd className="font-medium">{t("stockPcs", { n: product.sampleStock })}</dd>
+              </div>
+              <div>
+                <dt className="text-muted">{t("attrMoq")}</dt>
+                <dd className="font-medium">{t("stockPcs", { n: product.moq })}</dd>
+              </div>
+              <div>
+                <dt className="text-muted">{t("attrBulk")}</dt>
+                <dd className="font-medium">{moneyLabel(lang, product.priceRange)}</dd>
+              </div>
+              <div className="sm:col-span-2">
+                <dt className="text-muted">{t("attrOems")}</dt>
+                <dd className="font-medium">{product.oeBrands.map((oe) => `${oe.brand ? vehicleLabel(lang, oe.brand) : "OE"} ${oe.raw}`).join(" · ")}</dd>
+              </div>
+            </dl>
+            {product.shared.length > 0 && (
+              <div className="border-t border-line pt-3 text-sm">
+                <p>{t("sharedOem")}</p>
+                <p className="mt-2 flex flex-wrap gap-2">
+                  {product.shared.map((item) => (
+                    <Link key={item.sku} to="/products/$sku" params={{ sku: item.sku }} className="rounded-full border border-line px-3 py-1 font-medium text-brass">
+                      {vehicleLabel(lang, item.vehicle)} {item.sku}
+                    </Link>
+                  ))}
+                </p>
+              </div>
+            )}
+          </section>
           <DualAction
             sku={product.sku}
             title={sensorTitle(lang, vehicle, product.sku)}

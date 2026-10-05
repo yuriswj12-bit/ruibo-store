@@ -15,6 +15,8 @@ export type ProductCard = {
   moq: number;
   vehicle: string;
   oes: string[];
+  /** exact = the typed OEM is on this SKU; prefix = only the start matches; all = no OEM query */
+  match: "exact" | "prefix" | "all";
 };
 
 export type StoreHome = {
@@ -67,6 +69,7 @@ export const getStoreHome = createServerFn({ method: "GET" }).handler(async (): 
       moq: product.moq,
       vehicle: product.vehicle ?? "",
       oes: oes.filter((oe) => oe.sku === product.sku).map((oe) => oe.raw_oe),
+      match: "all",
     })),
   };
 });
@@ -92,16 +95,26 @@ export const searchCatalog = createServerFn({ method: "GET" })
       sample_stock: number;
       moq: number;
       vehicle: string | null;
+      exact: boolean;
     }>`
-      select distinct p.sku, p.title, p.price_range, p.sample_price::text, p.sample_stock, p.moq, p.specs->>'vehicle' as vehicle
-      from products p
-      left join oe_refs o on o.product_id = p.id
-      where p.factory_id = ${DEMO} and p.published = true
-        and (${oe} = '' or o.normalized_oe like ${oe + "%"})
-        and (${make} = '' or p.specs->>'vehicle' = ${make})
-        and (${line} = '' or p.specs->>'line' = ${line})
-      order by p.sku
+      with hits as (
+        select p.sku, p.title, p.price_range, p.sample_price::text as sample_price, p.sample_stock, p.moq,
+               p.specs->>'vehicle' as vehicle,
+               bool_or(o.normalized_oe = ${oe}) as exact
+        from products p
+        left join oe_refs o on o.product_id = p.id
+        where p.factory_id = ${DEMO} and p.published = true
+          and (${oe} = '' or o.normalized_oe = ${oe} or o.normalized_oe like ${oe + "%"})
+          and (${make} = '' or p.specs->>'vehicle' = ${make})
+          and (${line} = '' or p.specs->>'line' = ${line})
+        group by p.sku, p.title, p.price_range, p.sample_price, p.sample_stock, p.moq, p.specs
+      )
+      select sku, title, price_range, sample_price, sample_stock, moq, vehicle, exact
+      from hits
+      where ${oe} = '' or exact or not exists (select 1 from hits h where h.exact)
+      order by sku
     `;
+    const matchedExact = oe !== "" && products.some((row) => row.exact === true);
     const oes = await sql<{ sku: string; raw_oe: string }>`
       select p.sku, o.raw_oe from oe_refs o join products p on p.id = o.product_id where p.factory_id = ${DEMO}
     `;
@@ -114,6 +127,7 @@ export const searchCatalog = createServerFn({ method: "GET" })
       moq: product.moq,
       vehicle: product.vehicle ?? "",
       oes: oes.filter((row) => row.sku === product.sku).map((row) => row.raw_oe),
+      match: oe === "" ? "all" : matchedExact ? "exact" : "prefix",
     }));
   });
 
@@ -122,6 +136,7 @@ export type ProductDetail = ProductCard & {
   specs: Record<string, string | number>;
   oeBrands: { raw: string; brand: string | null }[];
   fitments: { year: number; make: string; model: string; engine: string; position: string | null }[];
+  shared: { sku: string; vehicle: string }[];
 };
 
 export const getProduct = createServerFn({ method: "GET" })
@@ -150,6 +165,14 @@ export const getProduct = createServerFn({ method: "GET" })
     const fitments = await sql<{ year: number; make: string; model: string; engine: string; position: string | null }>`
       select year, make, model, engine, position from fitments where product_id = ${product.id} order by year
     `;
+    const shared = await sql<{ sku: string; vehicle: string | null }>`
+      select distinct p2.sku, p2.specs->>'vehicle' as vehicle
+      from oe_refs o1
+      join oe_refs o2 on o2.normalized_oe = o1.normalized_oe and o2.product_id <> o1.product_id
+      join products p2 on p2.id = o2.product_id
+      where o1.product_id = ${product.id} and p2.factory_id = ${DEMO} and p2.published = true
+      order by p2.sku
+    `;
     const specs = typeof product.specs === "string" ? (JSON.parse(product.specs) as Record<string, string | number>) : product.specs;
     return {
       sku: product.sku,
@@ -160,10 +183,12 @@ export const getProduct = createServerFn({ method: "GET" })
       moq: product.moq,
       vehicle: String(specs.vehicle ?? ""),
       oes: oes.map((oe) => oe.raw_oe),
+      match: "all",
       pdfUrl: product.pdf_url,
       specs,
       oeBrands: oes.map((oe) => ({ raw: oe.raw_oe, brand: oe.brand })),
       fitments,
+      shared: shared.map((row) => ({ sku: row.sku, vehicle: row.vehicle ?? "" })),
     };
   });
 
