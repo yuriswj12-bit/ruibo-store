@@ -2,6 +2,18 @@ export function normalizeOe(input: string): string {
   return input.replace(/[^a-zA-Z0-9]/g, "").toUpperCase();
 }
 
+/** Buyer-facing number: the OEM they typed, otherwise the first number on the part. */
+export function shownOem(oes: string[], query = ""): string {
+  const typed = normalizeOe(query);
+  if (!typed) return oes[0] ?? "";
+  return (
+    oes.find((oe) => normalizeOe(oe) === typed) ??
+    oes.find((oe) => normalizeOe(oe).startsWith(typed)) ??
+    oes[0] ??
+    ""
+  );
+}
+
 export const SPEC_LABELS: Record<string, string> = {
   sensor_type: "Sensor type",
   wire_length_mm: "Wire length",

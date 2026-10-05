@@ -3,6 +3,7 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { searchCatalog, type ProductCard } from "@/lib/commerce.functions";
 import { sensorTitle, useI18n, vehicleLabel } from "@/lib/i18n";
 import { catalogSearch, lineImage } from "@/components/store/catalog";
+import { shownOem } from "@/lib/oe";
 
 export function OeSearch({ large = false }: { large?: boolean }) {
   const { t, lang } = useI18n();
@@ -54,25 +55,28 @@ export function OeSearch({ large = false }: { large?: boolean }) {
           {items.length === 0 ? (
             <p className="px-4 py-3 text-sm text-muted">{t("suggestEmpty")}</p>
           ) : (
-            items.map((product) => (
+            items.map((product) => {
+              const oem = shownOem(product.oes, q);
+              return (
               <Link
                 key={product.sku}
                 to="/products/$sku"
                 params={{ sku: product.sku }}
-                search={{ oe: q.trim() }}
+                search={{ oe: oem }}
                 onClick={() => setOpen(false)}
                 className="flex items-center gap-3 border-t border-line px-3 py-2 first:border-t-0 hover:bg-paper"
               >
                 <img src={lineImage("Automotive")} alt="" className="size-14 rounded-md object-cover" />
                 <span className="min-w-0">
-                  <span className="block font-medium">{product.sku}</span>
+                  <span className="block font-medium">{oem}</span>
                   <span className="block truncate text-sm text-muted">
-                    {vehicleLabel(lang, product.vehicle)} · {product.oes.slice(0, 2).join(" · ")}
+                    {vehicleLabel(lang, product.vehicle)}
                   </span>
-                  <span className="sr-only">{sensorTitle(lang, product.vehicle, product.sku)}</span>
+                  <span className="sr-only">{sensorTitle(lang, product.vehicle, oem)}</span>
                 </span>
               </Link>
-            ))
+              );
+            })
           )}
           <button type="submit" className="block w-full border-t border-line px-4 py-2 text-left text-sm font-medium text-brass">
             {t("viewMatches")}

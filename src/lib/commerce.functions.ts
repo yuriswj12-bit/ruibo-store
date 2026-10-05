@@ -351,9 +351,14 @@ export const portalProducts = createServerFn({ method: "GET" })
   .handler(async ({ context }) => {
     const factory = await ownedFactory(context.userId);
     const sql = await getSql();
-    return sql<{ sku: string; title: string; moq: number; sample_price: string; sample_stock: number }>`
-      select sku, title, moq, sample_price::text, sample_stock from products
-      where factory_id = ${factory.id} order by title
+    return sql<{ sku: string; title: string; moq: number; sample_price: string; sample_stock: number; oes: string }>`
+      select p.sku, p.title, p.moq, p.sample_price::text, p.sample_stock,
+             coalesce(string_agg(o.raw_oe, ' · ' order by o.raw_oe), '') as oes
+      from products p
+      left join oe_refs o on o.product_id = p.id
+      where p.factory_id = ${factory.id}
+      group by p.sku, p.title, p.moq, p.sample_price, p.sample_stock
+      order by p.sku
     `;
   });
 

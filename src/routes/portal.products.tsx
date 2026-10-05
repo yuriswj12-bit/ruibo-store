@@ -52,13 +52,13 @@ function ProductsDesk() {
       </form>
       <table className="mt-4 w-full text-sm">
         <thead className="text-left text-muted">
-          <tr><th className="py-2">SKU</th><th>名称</th><th>MOQ</th><th>样品价</th><th>库存</th></tr>
+          <tr><th className="py-2">货号</th><th>买家看到的 OEM</th><th>MOQ</th><th>样品价</th><th>库存</th></tr>
         </thead>
         <tbody>
           {products.map((product) => (
             <tr key={product.sku} className="border-t border-line">
-              <td className="py-2">{product.sku}</td>
-              <td>{product.title}</td>
+              <td className="py-2 font-medium">{product.sku}</td>
+              <td>{product.oes}</td>
               <td>{product.moq}</td>
               <td>${product.sample_price}</td>
               <td>{product.sample_stock}</td>

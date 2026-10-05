@@ -24,6 +24,6 @@ This repo is the whole storefront workspace, meant to be picked up by another AI
 - Do not commit `node_modules`, `.env`, or build caches.
 - After every storefront change, commit and push to `main` on [yuriswj12-bit/ruibo-store](https://github.com/yuriswj12-bit/ruibo-store). Do not leave the repo behind the working copy.
 
-One Ruibo SKU is one sensor to ship. OEM numbers printed under it are cross-references, not extra sensors. The order stores the Ruibo SKU plus the OEM number the buyer searched.
+One catalog row can list several OEM numbers, but the buyer sees only the number they searched. The Ruibo SKU stays in the factory portal, on the inquiry, and on the sample order.
 
 

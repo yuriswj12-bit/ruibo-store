@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { getProduct, getStoreHome, placeSample } from "@/lib/commerce.functions";
 import { StoreShell } from "@/components/store/shell";
-import { sensorTitle, useI18n } from "@/lib/i18n";
+import { useI18n, vehicleLabel } from "@/lib/i18n";
 import { UsdtCashier } from "@/components/store/usdt-cashier";
 
 export const Route = createFileRoute("/checkout")({
@@ -27,7 +27,7 @@ function Checkout() {
   if (!store || !product) return <main className="wrap py-16">{t("pickSample")}</main>;
   const total = (Number(product.samplePrice) * qty).toFixed(2);
   const vehicle = String(product.specs.vehicle || "");
-  const title = sensorTitle(lang, vehicle, product.sku);
+  const displayOe = oe || product.oes[0] || "";
 
   async function pay(gateway: "stripe" | "paypal" | "binance_pay" | "crypto_manual" | "gmpay", form: FormData) {
     setError("");
@@ -54,9 +54,8 @@ function Checkout() {
       <main className="wrap grid gap-6 py-8 lg:grid-cols-[280px_1fr]">
         <aside className="rounded-card border border-line bg-card p-4">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-copper">{t("sample")}</p>
-          <h1 className="mt-1 text-2xl">{title}</h1>
-          <p className="mt-2 text-sm text-muted">{t("shipOnly", { sku: product.sku })}</p>
-          {oe && <p className="text-sm text-muted">{t("numberYouTyped")} {oe}</p>}
+          <h1 className="mt-1 text-2xl">{displayOe}</h1>
+          <p className="mt-2 text-sm text-muted">{vehicleLabel(lang, vehicle)}</p>
           <p className="mt-4">{t("qtyLine", { qty })}</p>
           <p className="text-2xl">USD ${total}</p>
           <p className="mt-3 text-sm text-muted">{t("previewNote")}</p>

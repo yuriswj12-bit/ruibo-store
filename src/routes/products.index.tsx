@@ -3,6 +3,7 @@ import { getStoreHome, searchCatalog } from "@/lib/commerce.functions";
 import { StoreShell } from "@/components/store/shell";
 import { LINES, MAKES, catalogSearch, lineImage } from "@/components/store/catalog";
 import { moneyLabel, useI18n, vehicleLabel } from "@/lib/i18n";
+import { shownOem } from "@/lib/oe";
 
 export const Route = createFileRoute("/products/")({
   validateSearch: (search: Record<string, unknown>) => ({
@@ -60,20 +61,22 @@ function Catalog() {
           <button type="submit" className="h-11 rounded-lg bg-ink px-4 text-copper-ink">{t("filter")}</button>
         </form>
         <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {products.map((product) => (
-            <Link key={product.sku} to="/products/$sku" params={{ sku: product.sku }} search={{ oe: deps.q }} className="overflow-hidden rounded-card border border-line bg-card">
+          {products.map((product) => {
+            const oem = shownOem(product.oes, deps.q);
+            return (
+            <Link key={product.sku} to="/products/$sku" params={{ sku: product.sku }} search={{ oe: oem }} className="overflow-hidden rounded-card border border-line bg-card">
               <img src={lineImage(deps.line || "Automotive")} alt="" className="aspect-square w-full object-cover" />
               <span className="block p-4">
                 <span className="text-xs font-semibold uppercase tracking-[0.14em] text-copper">{vehicleLabel(lang, product.vehicle)}</span>
-                <span className="block text-2xl">{product.sku}</span>
-                <span className="block text-sm text-muted">{t("briefShort", { vehicle: vehicleLabel(lang, product.vehicle), price: product.samplePrice })}</span>
-                <span className="mt-2 block text-sm">{t("samePartLine")} · {product.oes.slice(0, 3).join(" · ")}</span>
+                <span className="block text-2xl">{oem}</span>
+                <span className="block text-sm text-muted">{t("briefShort", { oe: oem, vehicle: vehicleLabel(lang, product.vehicle), price: product.samplePrice })}</span>
                 <span className="mt-2 block text-sm font-medium">
                   {t("sampleMeta", { price: product.samplePrice, moq: product.moq, range: moneyLabel(lang, product.priceRange) })}
                 </span>
               </span>
             </Link>
-          ))}
+            );
+          })}
           {products.length === 0 && <p className="text-muted">{t("noMatch")}</p>}
         </div>
       </main>
