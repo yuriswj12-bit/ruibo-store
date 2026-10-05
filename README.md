@@ -22,4 +22,8 @@ This repo is the whole storefront workspace, meant to be picked up by another AI
 - `.grok/skills` and `.grok/references` are the harness skills (auth, data, deploy, UI).
 - Buyer pages live in `src/routes` and `src/components/store`. Catalog data is `migrations/`.
 - Do not commit `node_modules`, `.env`, or build caches.
+- After every storefront change, commit and push to `main` on [yuriswj12-bit/ruibo-store](https://github.com/yuriswj12-bit/ruibo-store). Do not leave the repo behind the working copy.
+
+One Ruibo SKU is one sensor to ship. OEM numbers printed under it are cross-references, not extra sensors. The order stores the Ruibo SKU plus the OEM number the buyer searched.
+
 

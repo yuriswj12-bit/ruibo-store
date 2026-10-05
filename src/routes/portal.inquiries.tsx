@@ -20,7 +20,8 @@ function Inquiries() {
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
                 <p className="font-medium">{row.customer_name} · {row.country || "—"}</p>
-                <p className="text-sm text-muted">{row.customer_email} · {row.product_sku || "整站"} · {row.quantity ?? "—"} pcs</p>
+                <p className="text-sm text-muted">{row.customer_email}</p>
+                <p className="text-sm text-muted">发货 {row.product_sku || "未指定"}{row.matched_oe ? ` · 买家搜的号码 ${row.matched_oe}` : ""} · {row.quantity ?? "—"} pcs</p>
                 <p className="mt-2 text-sm">{row.message}</p>
               </div>
               <select

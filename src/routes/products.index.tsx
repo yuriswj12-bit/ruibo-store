@@ -67,7 +67,7 @@ function Catalog() {
                 <span className="text-xs font-semibold uppercase tracking-[0.14em] text-copper">{vehicleLabel(lang, product.vehicle)}</span>
                 <span className="block text-2xl">{product.sku}</span>
                 <span className="block text-sm text-muted">{t("briefShort", { vehicle: vehicleLabel(lang, product.vehicle), price: product.samplePrice })}</span>
-                <span className="mt-2 block text-sm">{product.oes.slice(0, 3).join(" · ")}</span>
+                <span className="mt-2 block text-sm">{t("samePartLine")} · {product.oes.slice(0, 3).join(" · ")}</span>
                 <span className="mt-2 block text-sm font-medium">
                   {t("sampleMeta", { price: product.samplePrice, moq: product.moq, range: moneyLabel(lang, product.priceRange) })}
                 </span>

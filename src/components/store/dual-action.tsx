@@ -8,12 +8,14 @@ export function DualAction({
   title,
   samplePrice,
   sampleStock,
+  matchedOe = "",
   whatsapp,
 }: {
   sku: string;
   title: string;
   samplePrice: string;
   sampleStock: number;
+  matchedOe?: string;
   whatsapp: string;
 }) {
   const { t } = useI18n();
@@ -38,6 +40,7 @@ export function DualAction({
           quantity: Number(formData.get("quantity") || 0) || undefined,
           country: String(formData.get("country") || ""),
           message: String(formData.get("message") || ""),
+          matchedOe,
         },
       });
       setOpen(false);
@@ -75,7 +78,7 @@ export function DualAction({
           type="button"
           disabled={sampleStock < 1}
           className="h-11 rounded-lg bg-copper px-4 text-copper-ink disabled:opacity-50"
-          onClick={() => navigate({ to: "/checkout", search: { sku, qty } })}
+          onClick={() => navigate({ to: "/checkout", search: { sku, qty, oe: matchedOe } })}
         >
           {t("orderSample")}
         </button>

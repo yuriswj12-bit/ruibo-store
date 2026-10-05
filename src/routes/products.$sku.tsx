@@ -80,27 +80,31 @@ function ProductPage() {
                 <dd className="font-medium">{moneyLabel(lang, product.priceRange)}</dd>
               </div>
             </dl>
-            <p>{t("oneSensor", { sku: product.sku })}</p>
-            <p>{t("shipRule", { sku: product.sku })}</p>
-            {matched ? (
-              <div className="text-sm">
-                <p>{t("youSearched", { oe: matched.raw })}</p>
-                <p className="mt-2 text-muted">{t("numberYouTyped")}</p>
-                <p className="font-medium">{matched.raw}</p>
-                {others.length > 0 && (
-                  <>
-                    <p className="mt-3">{t("alsoPrinted")}</p>
-                    <p className="mt-1 text-muted">{t("otherNumbers")}</p>
-                    <p className="font-medium">{others.map((item) => item.raw).join(" · ")}</p>
-                  </>
-                )}
+            <dl className="grid gap-3 border-t border-line pt-3 text-sm">
+              <div>
+                <dt className="text-muted">{t("buyThis")}</dt>
+                <dd className="text-base font-medium">{product.sku}</dd>
               </div>
-            ) : (
-              <div className="text-sm">
-                <p>{t("allOnOne")}</p>
-                <p className="mt-2 font-medium">{product.oeBrands.map((item) => item.raw).join(" · ")}</p>
+              {matched && (
+                <div>
+                  <dt className="text-muted">{t("numberYouTyped")}</dt>
+                  <dd className="font-medium">{matched.raw}</dd>
+                </div>
+              )}
+              {(matched ? others : product.oeBrands).length > 0 && (
+                <div>
+                  <dt className="text-muted">{matched ? t("otherNumbers") : t("samePartLine")}</dt>
+                  <dd className="font-medium">
+                    {(matched ? others : product.oeBrands).map((item) => item.raw).join(" · ")}
+                    <span className="mt-1 block font-normal text-muted">{t("notAnother")}</span>
+                  </dd>
+                </div>
+              )}
+              <div>
+                <dt className="text-muted">{t("shipLabel")}</dt>
+                <dd className="font-medium">{t("shipOnly", { sku: product.sku })}</dd>
               </div>
-            )}
+            </dl>
             {product.shared.length > 0 && (
               <div className="border-t border-line pt-3 text-sm">
                 <p>{t("sharedOem")}</p>
@@ -119,6 +123,7 @@ function ProductPage() {
             title={sensorTitle(lang, vehicle, product.sku)}
             samplePrice={product.samplePrice}
             sampleStock={product.sampleStock}
+            matchedOe={matched?.raw ?? ""}
             whatsapp={store.whatsapp}
           />
           <table className="w-full text-sm">

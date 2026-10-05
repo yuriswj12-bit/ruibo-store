@@ -9,18 +9,19 @@ export const Route = createFileRoute("/checkout")({
   validateSearch: (search: Record<string, unknown>) => ({
     sku: typeof search.sku === "string" ? search.sku : "",
     qty: Math.min(5, Math.max(1, Number(search.qty) || 1)),
+    oe: typeof search.oe === "string" ? search.oe : "",
   }),
   loaderDeps: ({ search }) => search,
   loader: async ({ deps }) => {
     const [store, product] = await Promise.all([getStoreHome(), getProduct({ data: { sku: deps.sku } })]);
-    return { store, product, qty: deps.qty };
+    return { store, product, qty: deps.qty, oe: deps.oe };
   },
   component: Checkout,
 });
 
 function Checkout() {
   const { t, lang } = useI18n();
-  const { store, product, qty } = Route.useLoaderData();
+  const { store, product, qty, oe } = Route.useLoaderData();
   const [result, setResult] = useState<{ id: string; amount: string; status: string } | null>(null);
   const [error, setError] = useState("");
   if (!store || !product) return <main className="wrap py-16">{t("pickSample")}</main>;
@@ -38,6 +39,7 @@ function Checkout() {
           gateway,
           buyerName: String(form.get("name") || ""),
           country: String(form.get("country") || ""),
+          matchedOe: oe,
           txHash: undefined,
         },
       });
@@ -53,7 +55,8 @@ function Checkout() {
         <aside className="rounded-card border border-line bg-card p-4">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-copper">{t("sample")}</p>
           <h1 className="mt-1 text-2xl">{title}</h1>
-          <p className="mt-2 text-sm text-muted">{product.sku}</p>
+          <p className="mt-2 text-sm text-muted">{t("shipOnly", { sku: product.sku })}</p>
+          {oe && <p className="text-sm text-muted">{t("numberYouTyped")} {oe}</p>}
           <p className="mt-4">{t("qtyLine", { qty })}</p>
           <p className="text-2xl">USD ${total}</p>
           <p className="mt-3 text-sm text-muted">{t("previewNote")}</p>

@@ -257,6 +257,7 @@ const inquiryInput = z.object({
   quantity: z.number().int().positive().max(1000000).optional(),
   country: z.string().max(60).optional(),
   message: z.string().min(1).max(2000),
+  matchedOe: z.string().max(80).optional(),
 });
 
 export const submitInquiry = createServerFn({ method: "POST" })
@@ -265,8 +266,8 @@ export const submitInquiry = createServerFn({ method: "POST" })
     const sql = await getSql();
     const id = crypto.randomUUID();
     await sql`
-      insert into inquiries (id, factory_id, product_sku, customer_name, customer_email, whatsapp, quantity, country, message)
-      values (${id}, ${DEMO}, ${data.sku ?? null}, ${data.customerName}, ${data.customerEmail}, ${data.whatsapp ?? null}, ${data.quantity ?? null}, ${data.country ?? null}, ${data.message})
+      insert into inquiries (id, factory_id, product_sku, customer_name, customer_email, whatsapp, quantity, country, message, matched_oe)
+      values (${id}, ${DEMO}, ${data.sku ?? null}, ${data.customerName}, ${data.customerEmail}, ${data.whatsapp ?? null}, ${data.quantity ?? null}, ${data.country ?? null}, ${data.message}, ${data.matchedOe ?? ""})
     `;
     return { id };
   });
@@ -278,6 +279,7 @@ const orderInput = z.object({
   buyerName: z.string().min(1).max(80),
   country: z.string().min(1).max(60),
   txHash: z.string().max(120).optional(),
+  matchedOe: z.string().max(80).optional(),
 });
 
 export const placeSample = createServerFn({ method: "POST" })
@@ -295,8 +297,8 @@ export const placeSample = createServerFn({ method: "POST" })
     const id = crypto.randomUUID();
     const status = data.gateway === "crypto_manual" ? "pending_review" : "paid";
     await sql`
-      insert into sample_orders (id, factory_id, product_sku, quantity, amount, gateway, status, buyer_name, country)
-      values (${id}, ${DEMO}, ${data.sku}, ${data.quantity}, ${amount}, ${data.gateway}, ${status}, ${data.buyerName}, ${data.country})
+      insert into sample_orders (id, factory_id, product_sku, quantity, amount, gateway, status, buyer_name, country, matched_oe)
+      values (${id}, ${DEMO}, ${data.sku}, ${data.quantity}, ${amount}, ${data.gateway}, ${status}, ${data.buyerName}, ${data.country}, ${data.matchedOe ?? ""})
     `;
     if (status === "paid") {
       await sql`update products set sample_stock = sample_stock - ${data.quantity} where factory_id = ${DEMO} and sku = ${data.sku}`;
@@ -406,12 +408,13 @@ export const portalInquiries = createServerFn({ method: "GET" })
       customer_email: string;
       country: string | null;
       product_sku: string | null;
+      matched_oe: string | null;
       quantity: number | null;
       status: string;
       message: string;
       created_at: string;
     }>`
-      select id, customer_name, customer_email, country, product_sku, quantity, status, message, created_at::text
+      select id, customer_name, customer_email, country, product_sku, matched_oe, quantity, status, message, created_at::text
       from inquiries where factory_id = ${factory.id} order by created_at desc
     `;
   });
