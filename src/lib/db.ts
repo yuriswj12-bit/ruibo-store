@@ -129,7 +129,7 @@ async function createPgliteSql(): Promise<Sql> {
   });
   const pg = await globalRef.__pgliteInstance__;
 
-  // Apply migrations/*.sql so preview matches production. 0006 stores the OEM the buyer searched.
+  // Apply migrations/*.sql so preview matches production. 0007 sets RBAU-2862H OEM to 1K0998262H.
   // SQL is inlined by the bundler via import.meta.glob (no runtime fs); applied
   // files are tracked in _migrations. The glob does not descend, so the opt-in
   // auth schema under migrations/auth/ stays out. Runs once per module instance

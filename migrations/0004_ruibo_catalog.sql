@@ -367,7 +367,7 @@ insert into oe_refs (id, product_id, raw_oe, normalized_oe, brand) select 'oe_rb
 insert into oe_refs (id, product_id, raw_oe, normalized_oe, brand) select 'oe_rbau27058_1', id, '0258027058', '0258027058', 'Audi' from products where factory_id = 'fac_xinda' and sku = 'RBAU-27058';
 insert into oe_refs (id, product_id, raw_oe, normalized_oe, brand) select 'oe_rbau27058_2', id, '4B0906262H', '4B0906262H', 'Audi' from products where factory_id = 'fac_xinda' and sku = 'RBAU-27058';
 insert into oe_refs (id, product_id, raw_oe, normalized_oe, brand) select 'oe_rbau262cs_1', id, '04E906262CS', '04E906262CS', 'Audi' from products where factory_id = 'fac_xinda' and sku = 'RBAU-262CS';
-insert into oe_refs (id, product_id, raw_oe, normalized_oe, brand) select 'oe_rbau2862h_1', id, '06D906262H', '06D906262H', 'Audi' from products where factory_id = 'fac_xinda' and sku = 'RBAU-2862H';
+insert into oe_refs (id, product_id, raw_oe, normalized_oe, brand) select 'oe_rbau2862h_1', id, '1K0998262H', '1K0998262H', 'Audi' from products where factory_id = 'fac_xinda' and sku = 'RBAU-2862H';
 insert into oe_refs (id, product_id, raw_oe, normalized_oe, brand) select 'oe_rbau6265d_1', id, '8W0906265D', '8W0906265D', 'Audi' from products where factory_id = 'fac_xinda' and sku = 'RBAU-6265D';
 insert into oe_refs (id, product_id, raw_oe, normalized_oe, brand) select 'oe_rbau2620e_1', id, '04E9062620E', '04E9062620E', 'Audi' from products where factory_id = 'fac_xinda' and sku = 'RBAU-2620E';
 insert into oe_refs (id, product_id, raw_oe, normalized_oe, brand) select 'oe_rbau27080_1', id, '0258027080', '0258027080', 'Audi' from products where factory_id = 'fac_xinda' and sku = 'RBAU-27080';
