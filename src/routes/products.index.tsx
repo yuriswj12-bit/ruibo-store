@@ -61,7 +61,7 @@ function Catalog() {
         </form>
         <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((product) => (
-            <Link key={product.sku} to="/products/$sku" params={{ sku: product.sku }} className="overflow-hidden rounded-card border border-line bg-card">
+            <Link key={product.sku} to="/products/$sku" params={{ sku: product.sku }} search={{ oe: deps.q }} className="overflow-hidden rounded-card border border-line bg-card">
               <img src={lineImage(deps.line || "Automotive")} alt="" className="aspect-square w-full object-cover" />
               <span className="block p-4">
                 <span className="text-xs font-semibold uppercase tracking-[0.14em] text-copper">{vehicleLabel(lang, product.vehicle)}</span>

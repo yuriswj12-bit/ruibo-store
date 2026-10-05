@@ -59,6 +59,7 @@ export function OeSearch({ large = false }: { large?: boolean }) {
                 key={product.sku}
                 to="/products/$sku"
                 params={{ sku: product.sku }}
+                search={{ oe: q.trim() }}
                 onClick={() => setOpen(false)}
                 className="flex items-center gap-3 border-t border-line px-3 py-2 first:border-t-0 hover:bg-paper"
               >

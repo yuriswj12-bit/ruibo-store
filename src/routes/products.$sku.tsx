@@ -4,8 +4,12 @@ import { StoreShell } from "@/components/store/shell";
 import { DualAction } from "@/components/store/dual-action";
 import { moneyLabel, sensorTitle, specText, specValue, useI18n, vehicleLabel } from "@/lib/i18n";
 import { lineImage } from "@/components/store/catalog";
+import { normalizeOe } from "@/lib/oe";
 
 export const Route = createFileRoute("/products/$sku")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    oe: typeof search.oe === "string" ? search.oe : "",
+  }),
   loader: async ({ params }) => {
     const [store, product] = await Promise.all([getStoreHome(), getProduct({ data: { sku: params.sku } })]);
     return { store, product };
@@ -15,9 +19,13 @@ export const Route = createFileRoute("/products/$sku")({
 
 function ProductPage() {
   const { t, lang } = useI18n();
+  const { oe } = Route.useSearch();
   const { store, product } = Route.useLoaderData();
   if (!store || !product) return <main className="wrap py-16">{t("notPublished")}</main>;
   const vehicle = String(product.specs.vehicle || "");
+  const typed = normalizeOe(oe);
+  const matched = product.oeBrands.find((item) => normalizeOe(item.raw) === typed);
+  const others = matched ? product.oeBrands.filter((item) => item !== matched) : product.oeBrands;
   return (
     <StoreShell name={store.name} email={store.email}>
       <main className="wrap grid gap-6 py-8 lg:grid-cols-[280px_1fr]">
@@ -71,17 +79,34 @@ function ProductPage() {
                 <dt className="text-muted">{t("attrBulk")}</dt>
                 <dd className="font-medium">{moneyLabel(lang, product.priceRange)}</dd>
               </div>
-              <div className="sm:col-span-2">
-                <dt className="text-muted">{t("attrOems")}</dt>
-                <dd className="font-medium">{product.oeBrands.map((oe) => `${oe.brand ? vehicleLabel(lang, oe.brand) : "OE"} ${oe.raw}`).join(" · ")}</dd>
-              </div>
             </dl>
+            <p>{t("oneSensor", { sku: product.sku })}</p>
+            <p>{t("shipRule", { sku: product.sku })}</p>
+            {matched ? (
+              <div className="text-sm">
+                <p>{t("youSearched", { oe: matched.raw })}</p>
+                <p className="mt-2 text-muted">{t("numberYouTyped")}</p>
+                <p className="font-medium">{matched.raw}</p>
+                {others.length > 0 && (
+                  <>
+                    <p className="mt-3">{t("alsoPrinted")}</p>
+                    <p className="mt-1 text-muted">{t("otherNumbers")}</p>
+                    <p className="font-medium">{others.map((item) => item.raw).join(" · ")}</p>
+                  </>
+                )}
+              </div>
+            ) : (
+              <div className="text-sm">
+                <p>{t("allOnOne")}</p>
+                <p className="mt-2 font-medium">{product.oeBrands.map((item) => item.raw).join(" · ")}</p>
+              </div>
+            )}
             {product.shared.length > 0 && (
               <div className="border-t border-line pt-3 text-sm">
                 <p>{t("sharedOem")}</p>
                 <p className="mt-2 flex flex-wrap gap-2">
                   {product.shared.map((item) => (
-                    <Link key={item.sku} to="/products/$sku" params={{ sku: item.sku }} className="rounded-full border border-line px-3 py-1 font-medium text-brass">
+                    <Link key={item.sku} to="/products/$sku" params={{ sku: item.sku }} search={{ oe }} className="rounded-full border border-line px-3 py-1 font-medium text-brass">
                       {vehicleLabel(lang, item.vehicle)} {item.sku}
                     </Link>
                   ))}

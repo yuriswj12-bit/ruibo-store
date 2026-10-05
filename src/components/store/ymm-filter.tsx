@@ -66,7 +66,7 @@ export function YmmFilter() {
         <ul className="mt-3 divide-y divide-line text-sm">
           {visible.map((item) => (
             <li key={`${item.sku}-${item.engine}`} className="flex items-center justify-between gap-3 py-2">
-              <Link to="/products/$sku" params={{ sku: item.sku }} search={{ q: "", make: "" }} className="font-medium underline decoration-line underline-offset-4">
+              <Link to="/products/$sku" params={{ sku: item.sku }} search={{ oe: "" }} className="font-medium underline decoration-line underline-offset-4">
                 {item.title}
               </Link>
               <span className="text-muted">{item.position} · ${item.samplePrice}</span>
