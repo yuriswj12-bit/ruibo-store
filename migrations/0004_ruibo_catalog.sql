@@ -322,8 +322,8 @@ insert into oe_refs (id, product_id, raw_oe, normalized_oe, brand) select 'oe_rb
 insert into oe_refs (id, product_id, raw_oe, normalized_oe, brand) select 'oe_rbvw262en_2', id, '04E906262AH', '04E906262AH', 'Volkswagen' from products where factory_id = 'fac_xinda' and sku = 'RBVW-262EN';
 insert into oe_refs (id, product_id, raw_oe, normalized_oe, brand) select 'oe_rbvw262dm_1', id, '06A906262DM', '06A906262DM', 'Volkswagen' from products where factory_id = 'fac_xinda' and sku = 'RBVW-262DM';
 insert into oe_refs (id, product_id, raw_oe, normalized_oe, brand) select 'oe_rbvw262ar_1', id, '03D906262AR', '03D906262AR', 'Volkswagen' from products where factory_id = 'fac_xinda' and sku = 'RBVW-262AR';
-insert into oe_refs (id, product_id, raw_oe, normalized_oe, brand) select 'oe_rbvw262ar_2', id, '06A906262CF', '06A906262CF', 'Volkswagen' from products where factory_id = 'fac_xinda' and sku = 'RBVW-262AR';
-insert into oe_refs (id, product_id, raw_oe, normalized_oe, brand) select 'oe_rbvw262ar_3', id, '06A906262BA', '06A906262BA', 'Volkswagen' from products where factory_id = 'fac_xinda' and sku = 'RBVW-262AR';
+insert into oe_refs (id, product_id, raw_oe, normalized_oe, brand) select 'oe_rbvw262ar_2', id, '06K906262CF', '06K906262CF', 'Volkswagen' from products where factory_id = 'fac_xinda' and sku = 'RBVW-262AR';
+insert into oe_refs (id, product_id, raw_oe, normalized_oe, brand) select 'oe_rbvw262ar_3', id, '06K906262BA', '06K906262BA', 'Volkswagen' from products where factory_id = 'fac_xinda' and sku = 'RBVW-262AR';
 insert into oe_refs (id, product_id, raw_oe, normalized_oe, brand) select 'oe_rbvw262ar_4', id, '04E906262TR', '04E906262TR', 'Volkswagen' from products where factory_id = 'fac_xinda' and sku = 'RBVW-262AR';
 insert into oe_refs (id, product_id, raw_oe, normalized_oe, brand) select 'oe_rbvw6262h_1', id, '06D906262H', '06D906262H', 'Volkswagen' from products where factory_id = 'fac_xinda' and sku = 'RBVW-6262H';
 insert into oe_refs (id, product_id, raw_oe, normalized_oe, brand) select 'oe_rbvw262cs_1', id, '04E906262CS', '04E906262CS', 'Volkswagen' from products where factory_id = 'fac_xinda' and sku = 'RBVW-262CS';
