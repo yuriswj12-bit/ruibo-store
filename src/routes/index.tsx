@@ -63,25 +63,25 @@ function Home() {
               </div>
             </div>
           </div>
+          <dl className="relative wrap grid grid-cols-2 gap-4 border-t border-white/20 py-6 sm:grid-cols-4">
+            <div>
+              <dt className="text-xs text-white/70">{t("statProducts")}</dt>
+              <dd className="text-3xl text-white">302</dd>
+            </div>
+            <div>
+              <dt className="text-xs text-white/70">{t("statOems")}</dt>
+              <dd className="text-3xl text-white">601</dd>
+            </div>
+            <div>
+              <dt className="text-xs text-white/70">{t("statLangs")}</dt>
+              <dd className="text-3xl text-white">4</dd>
+            </div>
+            <div>
+              <dt className="text-xs text-white/70">{t("statOrigin")}</dt>
+              <dd className="text-3xl text-white">{t("statOriginValue")}</dd>
+            </div>
+          </dl>
         </div>
-        <dl className="wrap grid grid-cols-2 gap-4 border-t border-[#1d314c]/15 py-6 sm:grid-cols-4">
-          <div>
-            <dt className="text-xs text-[#1d314c]/70">{t("statProducts")}</dt>
-            <dd className="text-3xl text-[#1d314c]">302</dd>
-          </div>
-          <div>
-            <dt className="text-xs text-[#1d314c]/70">{t("statOems")}</dt>
-            <dd className="text-3xl text-[#1d314c]">601</dd>
-          </div>
-          <div>
-            <dt className="text-xs text-[#1d314c]/70">{t("statLangs")}</dt>
-            <dd className="text-3xl text-[#1d314c]">4</dd>
-          </div>
-          <div>
-            <dt className="text-xs text-[#1d314c]/70">{t("statOrigin")}</dt>
-            <dd className="text-3xl text-[#1d314c]">{t("statOriginValue")}</dd>
-          </div>
-        </dl>
       </section>
       <section className="wrap py-12">
         <h2 className="text-3xl">{t("pillarTitle")}</h2>
