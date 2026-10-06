@@ -37,7 +37,7 @@ function Catalog() {
   const to = Math.min(products.length, page * pageSize);
   return (
     <StoreShell name={store.name} email={store.email}>
-      <main className="wrap grid gap-8 py-8 lg:grid-cols-[240px_1fr]">
+      <main className="wrap grid gap-8 py-8 lg:grid-cols-[220px_minmax(0,1fr)]">
         <aside className="grid content-start gap-4">
           <form className="grid gap-2" method="get">
             <input name="q" defaultValue={deps.q} placeholder={t("oemOrBosch")} className="h-11 rounded-lg border border-line bg-card px-3" />
@@ -63,7 +63,7 @@ function Catalog() {
             </ul>
           </div>
         </aside>
-        <div>
+        <div className="min-w-0">
           <h1 className="text-4xl">{title}</h1>
           <p className="mt-2 text-sm text-muted">{t("showing", { from, to, total: products.length })}</p>
           {deps.q && products[0]?.match === "exact" && products.length > 1 && (
@@ -72,13 +72,13 @@ function Catalog() {
           {deps.q && products[0]?.match === "prefix" && (
             <p className="mt-3 rounded-card border border-line bg-card px-4 py-3 text-sm">{t("prefixNote")}</p>
           )}
-          <div className="mt-4 flex gap-2 overflow-x-auto pb-1">
+          <div className="mt-4 flex max-w-full flex-wrap gap-2">
             {MAKES.map((make) => (
               <Link
                 key={make}
                 to="/products"
                 search={catalogSearch({ q: deps.q, make, line: "Automotive", page: 1 })}
-                className={`shrink-0 rounded-full border px-3 py-1 text-sm ${deps.make === make ? "border-ink bg-ink text-copper-ink" : "border-line bg-card"}`}
+                className={`rounded-full border px-3 py-1 text-sm ${deps.make === make ? "border-ink bg-ink text-copper-ink" : "border-line bg-card"}`}
               >
                 {vehicleLabel(lang, make)}
               </Link>
@@ -88,11 +88,11 @@ function Catalog() {
             {visible.map((product) => {
               const oem = shownOem(product.oes, deps.q);
               return (
-                <Link key={product.sku} to="/products/$sku" params={{ sku: product.sku }} search={{ oe: oem }} className="overflow-hidden rounded-card border border-line bg-card">
+                <Link key={product.sku} to="/products/$sku" params={{ sku: product.sku }} search={{ oe: oem }} className="min-w-0 overflow-hidden rounded-card border border-line bg-card">
                   <img src={lineImage(deps.line || product.line || "Automotive")} alt="" className="aspect-[4/3] w-full object-cover" />
                   <span className="block p-4">
                     <span className="text-xs font-semibold uppercase tracking-[0.14em] text-copper">{vehicleLabel(lang, product.vehicle)}</span>
-                    <span className="block text-2xl">{oem}</span>
+                    <span className="block break-words text-2xl">{oem}</span>
                     <span className="block text-sm text-muted">{t("briefShort", { oe: oem, vehicle: vehicleLabel(lang, product.vehicle), price: product.samplePrice })}</span>
                   </span>
                 </Link>
