@@ -44,25 +44,26 @@ function Home() {
                   <span className="text-white">{t("heroTitle")}</span>
                   <span className="text-[#d4c4f0]">{t("heroAccent")}</span>
                 </h1>
-                <p className="mt-6 max-w-lg text-sm leading-relaxed text-white/90 sm:text-base">{t("heroBody")}</p>
+                <p className="mt-6 max-w-xl text-base leading-relaxed text-white/90 sm:text-lg">{t("heroBody")}</p>
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <Link to="/products" search={catalogSearch()} className="inline-flex items-center gap-2 rounded-lg bg-[#f5a623] px-5 py-3 text-sm font-semibold text-white">
+                  <Link to="/products" search={catalogSearch()} className="inline-flex items-center gap-2 rounded-md bg-[#f5a623] px-6 py-3.5 text-base font-semibold text-white">
                     {t("heroBrowse")} <span aria-hidden>→</span>
                   </Link>
-                  <Link to="/downloads" className="rounded-lg border border-white/70 px-5 py-3 text-sm font-semibold text-white">
+                  <Link to="/downloads" className="rounded-md border border-white/60 px-6 py-3.5 text-base font-semibold text-white">
                     {t("heroCatalog")}
                   </Link>
                 </div>
-                <dl className="mt-8 grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-4">
+                <div className="mt-6 h-px w-full bg-white/35" />
+                <dl className="mt-6 grid grid-cols-4 gap-3">
                   {([
                     ["statYears", "statYearsLabel"],
                     ["statCount", "statCountLabel"],
                     ["statCountries", "statCountriesLabel"],
                     ["statRate", "statRateLabel"],
                   ] as const).map(([value, label]) => (
-                    <div key={value}>
-                      <dd className="text-3xl font-semibold leading-none text-white sm:text-4xl">{t(value)}</dd>
-                      <dt className="mt-2 text-sm text-white/80">{t(label)}</dt>
+                    <div key={value} className="min-w-0">
+                      <dd className="whitespace-nowrap text-3xl font-semibold leading-none tracking-tight text-white sm:text-4xl">{t(value)}</dd>
+                      <dt className="mt-2 text-xs text-white/75 sm:text-sm">{t(label)}</dt>
                     </div>
                   ))}
                 </dl>
