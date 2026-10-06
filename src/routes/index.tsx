@@ -32,7 +32,11 @@ function Home() {
         <div className="relative wrap py-10 sm:py-14">
           <div className="grid items-start gap-8 lg:grid-cols-[1.15fr_0.85fr]">
             <div>
-              <p className="inline-flex rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-semibold tracking-wide">
+              <p className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-sm font-semibold tracking-wide text-white">
+                <svg viewBox="0 0 24 24" className="size-4 shrink-0 text-amber-300" aria-hidden>
+                  <circle cx="12" cy="9" r="5.2" fill="none" stroke="currentColor" strokeWidth="1.7" />
+                  <path d="M9.2 13.2 8 20.5l4-2.1 4 2.1-1.2-7.3" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
+                </svg>
                 {t("heroBadge")}
               </p>
               <h1 className="mt-4 max-w-xl text-4xl leading-[1.05] text-white sm:text-6xl">{t("heroTitle")}</h1>
