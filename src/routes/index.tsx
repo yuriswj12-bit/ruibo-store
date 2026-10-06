@@ -40,12 +40,10 @@ function Home() {
                   </svg>
                   {t("heroBadge")}
                 </p>
-                <h1 className="mt-6 max-w-xl whitespace-pre-line text-[2.6rem] font-semibold leading-[0.98] tracking-tight text-white sm:text-6xl lg:text-7xl">
-                  {t("heroTitle")}
+                <h1 className="mt-6 max-w-2xl text-4xl font-semibold leading-[1.2] tracking-tight sm:text-5xl lg:text-[3.4rem]">
+                  <span className="text-white">{t("heroTitle")}</span>
+                  <span className="text-[#d4c4f0]">{t("heroAccent")}</span>
                 </h1>
-                <p className="mt-1 max-w-xl whitespace-pre-line text-[2.6rem] font-semibold leading-[0.98] tracking-tight text-white sm:text-6xl lg:text-7xl">
-                  {t("heroAccent")}
-                </p>
                 <p className="mt-6 max-w-lg text-sm leading-relaxed text-white/90 sm:text-base">{t("heroBody")}</p>
                 <div className="mt-8 flex flex-wrap gap-3">
                   <Link to="/products" search={catalogSearch()} className="inline-flex items-center gap-2 rounded-lg bg-[#f5a623] px-5 py-3 text-sm font-semibold text-white">
