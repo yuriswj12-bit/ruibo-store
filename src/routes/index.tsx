@@ -41,7 +41,7 @@ function Home() {
               <h1 className="mt-6 max-w-xl whitespace-pre-line text-[2.6rem] font-semibold leading-[0.98] tracking-tight text-white sm:text-6xl lg:text-7xl">
                 {t("heroTitle")}
               </h1>
-              <p className="mt-1 max-w-xl whitespace-pre-line text-[2.6rem] font-semibold leading-[0.98] tracking-tight text-[#c4b6ea] sm:text-6xl lg:text-7xl">
+              <p className="mt-1 max-w-xl whitespace-pre-line text-[2.6rem] font-semibold leading-[0.98] tracking-tight text-copper sm:text-6xl lg:text-7xl">
                 {t("heroAccent")}
               </p>
               <p className="mt-6 max-w-lg text-sm leading-relaxed text-white/85 sm:text-base">{t("heroBody")}</p>
