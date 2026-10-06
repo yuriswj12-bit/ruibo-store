@@ -143,8 +143,8 @@ function Home() {
             ] as const).map(([src, line, title, body, icon]) => (
               <Link key={line} to="/products" search={catalogSearch({ line })} className="relative block min-h-64 overflow-hidden rounded-2xl">
                 <img src={src} alt="" className="absolute inset-0 h-full w-full object-cover" />
-                <span className="absolute inset-0 bg-[#08356a]/72" />
-                <span className="relative flex h-full min-h-64 flex-col items-center justify-center px-8 py-8 text-center text-white">
+                <span className="absolute inset-0 bg-[#0a3f78]/25" />
+                <span className="relative flex h-full min-h-64 flex-col items-center justify-center px-8 py-8 text-center text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]">
                   <TileIcon name={icon} />
                   <span className="mt-3 text-2xl font-semibold">{t(title)}</span>
                   <span className="mt-3 max-w-md text-sm leading-6 text-white/90">{t(body)}</span>
