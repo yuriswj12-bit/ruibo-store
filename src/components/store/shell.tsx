@@ -22,7 +22,7 @@ export function StoreShell({
       <header className="sticky top-0 z-30 border-b border-line bg-card">
         <div className="wrap flex min-h-14 items-center justify-between gap-4">
           <Link to="/" className="flex shrink-0 items-center">
-            <img src="/rbtc-logo.png" alt={name} className="h-11 w-auto sm:h-12" />
+            <img src="/rbtc-logo-navy.png" alt={name} className="h-14 w-auto sm:h-16" />
           </Link>
           <nav className="hidden items-center gap-4 text-sm lg:flex">
             <Link to="/" className="hover:text-copper">{t("navHome")}</Link>
