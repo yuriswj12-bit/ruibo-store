@@ -1072,6 +1072,10 @@ const pt: Record<Key, string> = {
 
 const DICT: Record<Lang, Record<Key, string>> = { zh, en, es, pt };
 
+export function phrase(lang: Lang, key: Key) {
+  return DICT[lang][key];
+}
+
 const VEHICLES: Record<string, Record<Lang, string>> = {
   Volkswagen: { zh: "大众", en: "Volkswagen", es: "Volkswagen", pt: "Volkswagen" },
   Audi: { zh: "奥迪", en: "Audi", es: "Audi", pt: "Audi" },

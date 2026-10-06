@@ -4,7 +4,7 @@ import { getStoreHome } from "@/lib/commerce.functions";
 import { StoreShell } from "@/components/store/shell";
 import { InquiryForm } from "@/components/store/inquiry-form";
 import { catalogSearch } from "@/components/store/catalog";
-import { useI18n } from "@/lib/i18n";
+import { phrase, useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/")({
   loader: () => getStoreHome(),
@@ -12,7 +12,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const store = Route.useLoaderData();
   if (!store) return <main className="wrap py-16">{t("catalogNotReady")}</main>;
   return (
@@ -140,15 +140,20 @@ function Home() {
               ["/line-moto-bg.jpg", "Motorcycle", "tileMoto", "tileMotoBody"],
               ["/line-ind-bg.jpg", "Industrial", "tileInd", "tileIndBody"],
               ["/line-nox-bg.jpg", "NOx", "tileNox", "tileNoxBody"],
-            ] as const).map(([src, line, title, body]) => (
-              <Link key={line} to="/products" search={catalogSearch({ line })} className="relative block overflow-hidden rounded-2xl">
-                <img src={src} alt="" className="aspect-[16/9] w-full object-cover" />
-                <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#04182e]/88 via-[#04182e]/45 to-transparent px-5 pb-4 pt-12 text-center text-white">
-                  <span className="block text-lg font-semibold sm:text-xl">{t(title)}</span>
-                  <span className="mt-1 block text-xs leading-5 text-white/90 sm:text-sm">{t(body)}</span>
-                </span>
-              </Link>
-            ))}
+            ] as const).map(([src, line, title, body]) => {
+              const alt = lang === "zh" ? "en" : "zh";
+              return (
+                <Link key={line} to="/products" search={catalogSearch({ line })} className="relative block overflow-hidden rounded-2xl">
+                  <img src={src} alt="" className="aspect-[4/3] w-full object-cover object-top" />
+                  <span className="absolute inset-x-0 bottom-0 top-[42%] flex flex-col items-center justify-center bg-gradient-to-b from-transparent via-[#04182e]/40 to-[#04182e]/60 px-6 pb-4 text-center text-white [text-shadow:0_2px_8px_rgba(0,0,0,0.7)]">
+                    <span className="text-2xl font-bold leading-tight">{phrase(lang, title)}</span>
+                    <span className="mt-1 text-lg font-semibold leading-tight">{phrase(alt, title)}</span>
+                    <span className="mt-3 max-w-lg text-sm leading-6">{phrase(lang, body)}</span>
+                    <span className="mt-2 max-w-lg text-sm leading-6 text-white/90">{phrase(alt, body)}</span>
+                  </span>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
