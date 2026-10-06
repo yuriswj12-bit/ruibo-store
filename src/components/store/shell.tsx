@@ -80,16 +80,20 @@ export function StoreShell({
         )}
       </header>
       {children}
-      <footer className="mt-12 border-t border-line bg-ink py-10 text-sm text-white/80">
-        <div className="wrap grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="lg:col-span-2">
-            <p className="text-base text-white">{name}</p>
-            <p className="mt-2 max-w-md">{t("footerCompany")}</p>
-            {email ? <p className="mt-3">{email}</p> : null}
+      <footer className="bg-[#17182b] text-sm text-white/70">
+        <div className="wrap grid gap-10 py-12 lg:grid-cols-[1.4fr_0.8fr_0.8fr]">
+          <div>
+            <img src="/rbtc-logo-navy.png" alt={name} className="h-14 w-auto rounded-md bg-white px-2" />
+            <p className="mt-4 max-w-sm leading-6">{t("footerBlurb")}</p>
+            <ul className="mt-5 grid gap-2">
+              <li>{email || "info@cnrbic.com"}</li>
+              <li>{t("footerPhone")}</li>
+              <li className="max-w-xs">{t("footerAddress")}</li>
+            </ul>
           </div>
           <div>
-            <p className="text-white">{t("navProducts")}</p>
-            <ul className="mt-2 grid gap-1">
+            <p className="font-semibold text-white">{t("footerProducts")}</p>
+            <ul className="mt-3 grid gap-2">
               {LINES.map((line) => (
                 <li key={line.id}>
                   <Link to="/products" search={catalogSearch({ line: line.id })} className="hover:text-white">{t(line.title)}</Link>
@@ -98,16 +102,23 @@ export function StoreShell({
             </ul>
           </div>
           <div>
-            <p className="text-white">{t("navAbout")}</p>
-            <ul className="mt-2 grid gap-1">
+            <p className="font-semibold text-white">{t("footerCol")}</p>
+            <ul className="mt-3 grid gap-2">
               <li><Link to="/about" className="hover:text-white">{t("navAbout")}</Link></li>
               <li><Link to="/manufacturing" className="hover:text-white">{t("navMfg")}</Link></li>
               <li><Link to="/downloads" className="hover:text-white">{t("navDownloads")}</Link></li>
               <li><Link to="/contact" className="hover:text-white">{t("navContact")}</Link></li>
-              <li><Link to="/faq" className="hover:text-white">{t("navFaq")}</Link></li>
-              <li><Link to="/privacy" className="hover:text-white">{t("navPrivacy")}</Link></li>
-              <li><Link to="/terms" className="hover:text-white">{t("navTerms")}</Link></li>
             </ul>
+          </div>
+        </div>
+        <div className="border-t border-white/10">
+          <div className="wrap flex flex-wrap items-center justify-between gap-3 py-4 text-xs">
+            <p>{t("footerCopy")}</p>
+            <div className="flex gap-4">
+              <Link to="/privacy" className="hover:text-white">{t("navPrivacy")}</Link>
+              <Link to="/terms" className="hover:text-white">{t("navTerms")}</Link>
+              <Link to="/faq" className="hover:text-white">{t("navFaq")}</Link>
+            </div>
           </div>
         </div>
       </footer>

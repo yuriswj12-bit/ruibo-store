@@ -1,10 +1,10 @@
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { getStoreHome } from "@/lib/commerce.functions";
 import { StoreShell } from "@/components/store/shell";
 import { InquiryForm } from "@/components/store/inquiry-form";
-import { LINES, MAKES, catalogSearch, lineImage } from "@/components/store/catalog";
-import { useI18n, vehicleLabel } from "@/lib/i18n";
-import { shownOem } from "@/lib/oe";
+import { LINES, catalogSearch } from "@/components/store/catalog";
+import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/")({
   loader: () => getStoreHome(),
@@ -12,7 +12,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-  const { t, lang } = useI18n();
+  const { t } = useI18n();
   const store = Route.useLoaderData();
   if (!store) return <main className="wrap py-16">{t("catalogNotReady")}</main>;
   return (
@@ -122,76 +122,140 @@ function Home() {
           </div>
         </div>
       </section>
-      <section className="wrap pb-4">
-        <h2 className="text-3xl">{t("solutionsTitle")}</h2>
-        <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {LINES.map((line) => (
-            <Link key={line.id} to="/products" search={catalogSearch({ line: line.id })} className="group relative block aspect-[4/5] overflow-hidden rounded-card bg-card">
-              <img src={line.image} alt={t(line.title)} className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]" />
-              <span className="absolute bottom-3 left-3 rounded-full bg-card px-3 py-1 text-sm font-medium">{t(line.title)}</span>
+      <section className="bg-[#f4f6fb] py-14 sm:py-16">
+        <div className="wrap">
+          <p className="text-sm font-medium text-[#6d5ce7]">{t("svcEyebrow")}</p>
+          <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <h2 className="text-3xl font-semibold tracking-tight text-[#1a1a2e] sm:text-4xl">{t("svcTitle")}</h2>
+              <p className="mt-3 max-w-xl text-sm text-[#5c6370] sm:text-base">{t("svcLead")}</p>
+            </div>
+            <Link to="/products" search={catalogSearch()} className="inline-flex items-center gap-2 rounded-lg bg-[#6d5ce7] px-5 py-3 text-sm font-semibold text-white">
+              {t("svcAll")} <span aria-hidden>→</span>
             </Link>
-          ))}
-        </div>
-      </section>
-      <section className="wrap py-8">
-        <h2 className="text-3xl">{t("reliableTitle")}</h2>
-        <div className="mt-6 grid gap-3 lg:grid-cols-3">
-          {[
-            ["reliable1", "reliable1Body"],
-            ["reliable2", "reliable2Body"],
-            ["reliable3", "reliable3Body"],
-          ].map(([title, body]) => (
-            <article key={title} className="rounded-card border border-line bg-card p-4">
-              <h3 className="text-xl">{t(title as "reliable1")}</h3>
-              <p className="mt-2 text-sm text-muted">{t(body as "reliable1Body")}</p>
+          </div>
+          <div className="mt-8 grid gap-4 lg:grid-cols-2">
+            <article className="overflow-hidden rounded-3xl bg-white shadow-sm">
+              <div className="grid grid-cols-3 gap-2 p-4">
+                {LINES.slice(0, 3).map((line) => (
+                  <Link key={line.id} to="/products" search={catalogSearch({ line: line.id })} className="overflow-hidden rounded-xl">
+                    <img src={line.image} alt={t(line.title)} className="aspect-[4/3] w-full object-cover" />
+                  </Link>
+                ))}
+              </div>
+              <div className="px-6 pb-6">
+                <h3 className="text-xl font-semibold text-[#1a1a2e]">{t("cardSensorTitle")}</h3>
+                <p className="mt-2 text-sm leading-6 text-[#5c6370]">{t("cardSensorBody")}</p>
+                <p className="mt-4 inline-flex rounded-full bg-[#f3f0ff] px-3 py-1 text-xs text-[#6d5ce7]">{t("cardSensorChip")}</p>
+              </div>
             </article>
-          ))}
+            <article className="overflow-hidden rounded-3xl bg-white shadow-sm">
+              <img src="/sensor.jpg" alt="" className="h-52 w-full object-cover" />
+              <div className="px-6 py-6">
+                <h3 className="text-xl font-semibold text-[#1a1a2e]">{t("cardOemTitle")}</h3>
+                <p className="mt-2 text-sm leading-6 text-[#5c6370]">{t("cardOemBody")}</p>
+                <p className="mt-4 inline-flex rounded-full bg-[#f3f0ff] px-3 py-1 text-xs text-[#6d5ce7]">{t("cardOemNote")}</p>
+              </div>
+            </article>
+          </div>
+          <div className="mt-4 grid gap-4 lg:grid-cols-2">
+            <article className="overflow-hidden rounded-3xl bg-white shadow-sm">
+              <img src="/auto.jpg" alt="" className="h-56 w-full object-cover" />
+              <div className="px-6 py-6">
+                <h3 className="text-xl font-semibold text-[#6d5ce7]">{t("srcTitle")}</h3>
+                <p className="mt-2 text-sm leading-6 text-[#5c6370]">{t("srcBody")}</p>
+                <p className="mt-4 inline-flex rounded-full bg-[#f3f0ff] px-3 py-1 text-xs text-[#6d5ce7]">{t("srcChip")}</p>
+              </div>
+            </article>
+            <article className="overflow-hidden rounded-3xl bg-white shadow-sm">
+              <img src="/industrial.jpg" alt="" className="h-56 w-full object-cover" />
+              <div className="px-6 py-6">
+                <h3 className="text-xl font-semibold text-[#1a1a2e]">{t("expTitle")}</h3>
+                <p className="mt-2 text-sm leading-6 text-[#5c6370]">{t("expBody")}</p>
+                <p className="mt-4 inline-flex rounded-full bg-[#f3f0ff] px-3 py-1 text-xs text-[#6d5ce7]">{t("expChip")}</p>
+              </div>
+            </article>
+          </div>
         </div>
       </section>
-      <section className="wrap pb-4">
-        <h2 className="text-3xl">{t("shopByVehicle")}</h2>
-        <div className="mt-4 flex gap-2 overflow-x-auto pb-2">
-          {MAKES.map((make) => (
-            <Link
-              key={make}
-              to="/products"
-              search={catalogSearch({ make, line: "Automotive" })}
-              className="shrink-0 rounded-full border border-line bg-card px-4 py-2 text-sm font-medium hover:border-ink"
-            >
-              {vehicleLabel(lang, make)}
+      <section className="bg-white py-16">
+        <div className="wrap grid items-center gap-10 lg:grid-cols-2">
+          <div>
+            <p className="text-sm font-medium text-[#6d5ce7]">{t("advEyebrow")}</p>
+            <h2 className="mt-3 text-4xl font-semibold tracking-tight text-[#1a1a2e]">{t("advTitle")}</h2>
+            <ul className="mt-8 grid gap-6">
+              {([
+                ["adv1", "adv1Body"],
+                ["adv2", "adv2Body"],
+                ["adv3", "adv3Body"],
+              ] as const).map(([title, body]) => (
+                <li key={title} className="flex gap-4">
+                  <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-[#efeafc] text-[#6d5ce7]">
+                    <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
+                      <circle cx="12" cy="12" r="8" />
+                    </svg>
+                  </span>
+                  <div>
+                    <h3 className="font-semibold text-[#1a1a2e]">{t(title)}</h3>
+                    <p className="mt-1 text-sm leading-6 text-[#5c6370]">{t(body)}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <Link to="/about" className="mt-8 inline-flex items-center gap-2 rounded-lg bg-[#6d5ce7] px-5 py-3 text-sm font-semibold text-white">
+              {t("advMore")} <span aria-hidden>→</span>
             </Link>
-          ))}
+          </div>
+          <img src="/moto.jpg" alt="" className="h-80 w-full rounded-3xl object-cover sm:h-[420px]" />
         </div>
       </section>
-      <section className="wrap py-6">
-        <div className="flex items-end justify-between gap-3">
-          <h2 className="text-3xl">{t("ready")}</h2>
-          <Link to="/products" search={catalogSearch()} className="text-sm font-medium text-brass">{t("allParts")}</Link>
-        </div>
-        <div className="mt-4 flex gap-3 overflow-x-auto pb-2">
-          {store.products.slice(0, 8).map((product) => {
-            const oem = shownOem(product.oes);
-            return (
-            <Link key={product.sku} to="/products/$sku" params={{ sku: product.sku }} search={{ oe: oem }} className="w-64 shrink-0 overflow-hidden rounded-card border border-line bg-card">
-              <img src={lineImage("Automotive")} alt="" className="aspect-square w-full object-cover" />
-              <span className="block p-4">
-                <span className="text-xs font-semibold uppercase tracking-[0.14em] text-copper">{vehicleLabel(lang, product.vehicle)}</span>
-                <span className="mt-1 block text-2xl">{oem}</span>
-                <span className="block text-sm text-muted">{t("briefShort", { oe: oem, vehicle: vehicleLabel(lang, product.vehicle), price: product.samplePrice })}</span>
-                <span className="mt-2 block text-sm font-medium">{t("samplePrice", { price: product.samplePrice })}</span>
-              </span>
+      <TrustStrip />
+      <section className="bg-[#6d4ae0] py-16 text-center text-white">
+        <div className="wrap">
+          <h2 className="mx-auto max-w-3xl text-3xl font-semibold sm:text-5xl">{t("ctaReady")}</h2>
+          <p className="mx-auto mt-4 max-w-2xl text-white/85">{t("ctaReadyBody")}</p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <Link to="/contact" className="inline-flex items-center gap-2 rounded-lg bg-white px-5 py-3 text-sm font-semibold text-[#1a1a2e]">
+              {t("ctaContact")} <span aria-hidden>→</span>
             </Link>
-            );
-          })}
-        </div>
-      </section>
-      <section className="wrap pb-10">
-        <div className="rounded-card bg-ink px-6 py-8 text-white">
-          <h2 className="text-3xl">{t("ctaTitle")}</h2>
-          <p className="mt-2 max-w-xl text-white/80">{t("ctaBody")}</p>
-          <Link to="/contact" className="mt-5 inline-block rounded-lg bg-copper px-5 py-3 text-sm font-semibold text-white">{t("navContact")}</Link>
+            <Link to="/products" search={catalogSearch()} className="rounded-lg border border-white/70 px-5 py-3 text-sm font-semibold text-white">
+              {t("heroBrowse")}
+            </Link>
+          </div>
         </div>
       </section>
     </StoreShell>
+  );
+}
+
+function TrustStrip() {
+  const { t } = useI18n();
+  const slides = [
+    { src: "/industrial.jpg", cap: "trustCap1" },
+    { src: "/sensor.jpg", cap: "trustCap2" },
+    { src: "/auto.jpg", cap: "trustCap3" },
+  ] as const;
+  const [index, setIndex] = useState(0);
+  const slide = slides[index];
+  const go = (step: number) => setIndex((current) => (current + step + slides.length) % slides.length);
+  return (
+    <section className="bg-white py-16">
+      <div className="wrap">
+        <p className="text-center text-xs font-semibold tracking-[0.18em] text-[#6d5ce7]">{t("trustEyebrow")}</p>
+        <h2 className="mt-2 text-center text-3xl font-semibold text-[#1a1a2e] sm:text-4xl">{t("trustTitle")}</h2>
+        <p className="mx-auto mt-3 max-w-3xl text-center text-sm text-[#5c6370] sm:text-base">{t("trustLead")}</p>
+        <div className="relative mt-8 overflow-hidden rounded-3xl">
+          <img src={slide.src} alt="" className="h-72 w-full object-cover sm:h-[420px]" />
+          <p className="absolute bottom-4 left-5 text-sm text-white drop-shadow">{t(slide.cap)}</p>
+          <button type="button" aria-label="Previous" onClick={() => go(-1)} className="absolute left-3 top-1/2 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-[#1a1a2e]">‹</button>
+          <button type="button" aria-label="Next" onClick={() => go(1)} className="absolute right-3 top-1/2 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-[#1a1a2e]">›</button>
+        </div>
+        <div className="mt-4 flex justify-center gap-2">
+          {slides.map((item, dot) => (
+            <button key={item.src} type="button" aria-label={t(item.cap)} onClick={() => setIndex(dot)} className={dot === index ? "h-1.5 w-6 rounded-full bg-[#6d5ce7]" : "size-1.5 rounded-full bg-[#cfc8ee]"} />
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
