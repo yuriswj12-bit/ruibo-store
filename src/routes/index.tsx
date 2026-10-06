@@ -54,14 +54,14 @@ function Home() {
                   </Link>
                 </div>
                 <div className="mt-6 h-px w-full bg-white/35" />
-                <dl className="mt-6 grid grid-cols-4 gap-3">
+                <dl className="mt-8 grid w-full justify-between gap-x-8" style={{ gridTemplateColumns: "repeat(4, max-content)" }}>
                   {([
                     ["statYears", "statYearsLabel"],
                     ["statCount", "statCountLabel"],
                     ["statCountries", "statCountriesLabel"],
                     ["statRate", "statRateLabel"],
                   ] as const).map(([value, label]) => (
-                    <div key={value} className="min-w-0">
+                    <div key={value} className="min-w-[6.5rem]">
                       <dd className="whitespace-nowrap text-3xl font-semibold leading-none tracking-tight text-white sm:text-4xl">{t(value)}</dd>
                       <dt className="mt-2 text-xs text-white/75 sm:text-sm">{t(label)}</dt>
                     </div>
