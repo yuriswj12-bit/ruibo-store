@@ -44,18 +44,21 @@ export function StoreShell({
             <Link to="/contact" className="hover:text-copper">{t("navContact")}</Link>
           </nav>
           <div className="flex items-center gap-2 text-sm sm:gap-3">
-            <label className="sr-only" htmlFor="lang">{t("language")}</label>
-            <select
-              id="lang"
-              value={lang}
-              aria-label={t("language")}
-              onChange={(event) => setLang(event.target.value as typeof lang)}
-              className="h-9 rounded-lg border border-line bg-card px-2"
-            >
+            <div className="flex items-center rounded-full border border-line p-0.5" role="group" aria-label={t("language")}>
               {LANGS.map((item) => (
-                <option key={item.id} value={item.id}>{item.label}</option>
+                <button
+                  key={item.id}
+                  type="button"
+                  aria-pressed={lang === item.id}
+                  onClick={() => setLang(item.id)}
+                  className={lang === item.id
+                    ? "rounded-full bg-ink px-2.5 py-1 text-xs font-semibold text-white"
+                    : "rounded-full px-2.5 py-1 text-xs text-muted"}
+                >
+                  {item.id === "zh" ? "中文" : item.id === "en" ? "EN" : item.id === "es" ? "ES" : "PT"}
+                </button>
               ))}
-            </select>
+            </div>
             <AuthSlot />
           </div>
         </div>
