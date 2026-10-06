@@ -55,6 +55,19 @@ function Home() {
                     {t("heroCatalog")}
                   </Link>
                 </div>
+                <dl className="mt-8 grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-4">
+                  {([
+                    ["statYears", "statYearsLabel"],
+                    ["statCount", "statCountLabel"],
+                    ["statCountries", "statCountriesLabel"],
+                    ["statRate", "statRateLabel"],
+                  ] as const).map(([value, label]) => (
+                    <div key={value}>
+                      <dd className="text-3xl font-semibold leading-none text-white sm:text-4xl">{t(value)}</dd>
+                      <dt className="mt-2 text-sm text-white/80">{t(label)}</dt>
+                    </div>
+                  ))}
+                </dl>
               </div>
               <div className="rounded-3xl bg-white p-6 text-ink shadow-2xl sm:p-7">
                 <h2 className="text-2xl font-semibold text-ink">{t("quoteTitle")}</h2>
@@ -63,24 +76,6 @@ function Home() {
               </div>
             </div>
           </div>
-          <dl className="relative wrap grid grid-cols-2 gap-4 border-t border-white/20 py-6 sm:grid-cols-4">
-            <div>
-              <dt className="text-xs text-white/70">{t("statProducts")}</dt>
-              <dd className="text-3xl text-white">302</dd>
-            </div>
-            <div>
-              <dt className="text-xs text-white/70">{t("statOems")}</dt>
-              <dd className="text-3xl text-white">601</dd>
-            </div>
-            <div>
-              <dt className="text-xs text-white/70">{t("statLangs")}</dt>
-              <dd className="text-3xl text-white">4</dd>
-            </div>
-            <div>
-              <dt className="text-xs text-white/70">{t("statOrigin")}</dt>
-              <dd className="text-3xl text-white">{t("statOriginValue")}</dd>
-            </div>
-          </dl>
         </div>
       </section>
       <section className="wrap py-12">
