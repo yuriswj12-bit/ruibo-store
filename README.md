@@ -6,13 +6,13 @@ Search oxygen sensors by OEM number, request a bulk quote, or order a sample. La
 
 ## Catalog
 
-`migrations/0004_ruibo_catalog.sql` loads **303 SKUs** and **608 OEM numbers** transcribed from the factory catalog, pages 6–37. The source PDF is `attachments/RUIBO SENSORS.pdf`.
+`migrations/0008_wps_catalog.sql` is what a database that already ran the old import uses. `scripts/catalog_canonical.json` is the source: **302 factory SKUs** and **601 OEM numbers**. `scripts/catalog_seed.py` regenerates `migrations/0004_ruibo_catalog.sql` from that file. The source PDF is `attachments/RUIBO SENSORS.pdf`.
+
+The numbers come from a WPS reading of the catalog, checked against the page layout. Ten cards that reading dropped are filled from the layout: `RBBM-04612`, `RBBM-54710`, `RBTO-0D040`, `RBTO-06070`, `RBNI-1JA0A`, `RBNI-EY00A`, `RBSU-8A232`, `RBSU-8A025`, `RBLA-96129`, `RBLA-3000L`.
 
 - Sample price is the demo fee ($32). Wholesale stays “Factory quote”. No list prices were invented.
-- SKUs in large type are the reliable field. Some OEM digits were read from scan images. Crowded pages (BMW, Mercedes, Land Rover, Honda, Toyota, and the Chinese brands) should be checked against the printed catalog before production use.
-- Duplicate printed SKUs were merged onto one product.
-
-`scripts/catalog_seed.py` is the transcription used to generate that migration.
+- A factory SKU is `RB` plus a two-letter make code, then a hyphen, then the factory number. `RBVO-51723` is Volvo, not `RB-VO51723`. Its OEM is `30651723`, not `3065-1-723`.
+- One SKU can list several OEM numbers. A few OEM numbers are printed on more than one SKU. Buyers search the OEM. The factory SKU stays in the portal, on the inquiry, and on the sample order.
 
 ## For other agents
 
