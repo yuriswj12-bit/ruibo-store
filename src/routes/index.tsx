@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { getStoreHome } from "@/lib/commerce.functions";
 import { StoreShell } from "@/components/store/shell";
 import { InquiryForm } from "@/components/store/inquiry-form";
-import { OeSearch } from "@/components/store/oe-search";
 import { LINES, MAKES, catalogSearch, lineImage } from "@/components/store/catalog";
 import { useI18n, vehicleLabel } from "@/lib/i18n";
 import { shownOem } from "@/lib/oe";
@@ -32,31 +31,33 @@ function Home() {
         <div className="relative wrap py-10 sm:py-14">
           <div className="grid items-start gap-8 lg:grid-cols-[1.15fr_0.85fr]">
             <div>
-              <p className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-sm font-semibold tracking-wide text-white">
+              <p className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/25 px-3 py-1.5 text-sm text-white/90">
                 <svg viewBox="0 0 24 24" className="size-4 shrink-0 text-amber-300" aria-hidden>
                   <circle cx="12" cy="9" r="5.2" fill="none" stroke="currentColor" strokeWidth="1.7" />
                   <path d="M9.2 13.2 8 20.5l4-2.1 4 2.1-1.2-7.3" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
                 </svg>
                 {t("heroBadge")}
               </p>
-              <h1 className="mt-4 max-w-xl text-4xl leading-[1.05] text-white sm:text-6xl">{t("heroTitle")}</h1>
-              <p className="mt-4 max-w-lg text-base text-white/80">{t("heroBody")}</p>
-              <div className="mt-5 max-w-lg">
-                <OeSearch large />
-              </div>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <Link to="/products" search={catalogSearch()} className="rounded-lg bg-copper px-5 py-3 text-sm font-semibold text-white">
-                  {t("heroBrowse")}
+              <h1 className="mt-6 max-w-xl whitespace-pre-line text-[2.6rem] font-semibold leading-[0.98] tracking-tight text-white sm:text-6xl lg:text-7xl">
+                {t("heroTitle")}
+              </h1>
+              <p className="mt-1 max-w-xl whitespace-pre-line text-[2.6rem] font-semibold leading-[0.98] tracking-tight text-[#c4b6ea] sm:text-6xl lg:text-7xl">
+                {t("heroAccent")}
+              </p>
+              <p className="mt-6 max-w-lg text-sm leading-relaxed text-white/85 sm:text-base">{t("heroBody")}</p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link to="/products" search={catalogSearch()} className="inline-flex items-center gap-2 rounded-lg bg-[#f5a623] px-5 py-3 text-sm font-semibold text-ink">
+                  {t("heroBrowse")} <span aria-hidden>→</span>
                 </Link>
-                <Link to="/downloads" className="rounded-lg border border-white/40 px-5 py-3 text-sm font-semibold text-white">
-                  {t("navDownloads")}
+                <Link to="/downloads" className="rounded-lg border border-white/50 px-5 py-3 text-sm font-semibold text-white">
+                  {t("heroCatalog")}
                 </Link>
               </div>
             </div>
-            <div className="rounded-card bg-card p-5 text-ink shadow-xl sm:p-6">
-              <h2 className="text-2xl text-ink">{t("quoteTitle")}</h2>
+            <div className="rounded-3xl bg-white p-6 text-ink shadow-2xl sm:p-7">
+              <h2 className="text-2xl font-semibold text-ink">{t("quoteTitle")}</h2>
               <p className="mt-1 mb-4 text-sm text-muted">{t("quoteHint")}</p>
-              <InquiryForm compact />
+              <InquiryForm hero />
             </div>
           </div>
           <dl className="mt-10 grid grid-cols-2 gap-4 border-t border-white/15 pt-6 sm:grid-cols-4">
