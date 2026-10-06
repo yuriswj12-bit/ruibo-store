@@ -18,9 +18,9 @@ function Home() {
   return (
     <StoreShell name={store.name} email={store.email} showSearch={false}>
       <section className="bg-paper">
-        <div className="relative overflow-hidden bg-[#0a4d86] text-white">
+        <div className="relative overflow-hidden bg-[#071e36] text-white">
           <video
-            className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[30%_center]"
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[30%_center] grayscale contrast-125"
             src="/sensor.mp4"
             poster="/auto.jpg"
             autoPlay
@@ -28,8 +28,8 @@ function Home() {
             loop
             playsInline
           />
-          <div className="pointer-events-none absolute inset-0 bg-[#0c5ea8] mix-blend-multiply" />
-          <div className="pointer-events-none absolute inset-0 bg-[#083e70]/35" />
+          <div className="pointer-events-none absolute inset-0 bg-[#092949] mix-blend-multiply" />
+          <div className="pointer-events-none absolute inset-0 bg-[#0e375e]/45" />
           <div className="relative wrap py-10 sm:py-14">
             <div className="grid items-start gap-8 lg:grid-cols-[1.15fr_0.85fr]">
               <div>
