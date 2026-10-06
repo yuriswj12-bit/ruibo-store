@@ -19,12 +19,6 @@ export function StoreShell({
   const { t, lang, setLang } = useI18n();
   return (
     <div className="min-h-screen bg-paper text-ink">
-      <div className="bg-ink text-copper-ink">
-        <div className="wrap flex min-h-10 items-center justify-between gap-3 text-sm">
-          <span className="truncate">{t("banner")}</span>
-          <span className="hidden sm:inline">{email}</span>
-        </div>
-      </div>
       <header className="sticky top-0 z-30 border-b border-line bg-card">
         <div className="wrap flex min-h-14 items-center justify-between gap-4">
           <Link to="/" className="flex shrink-0 items-center">
