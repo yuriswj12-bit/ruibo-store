@@ -136,13 +136,19 @@ function Home() {
           </div>
           <div className="mt-8 grid gap-4 lg:grid-cols-2">
             {([
-              ["/line-auto.png", "Automotive", "lineAuto"],
-              ["/line-moto.png", "Motorcycle", "lineMoto"],
-              ["/line-ind.png", "Industrial", "lineInd"],
-              ["/line-nox.png", "NOx", "lineNox"],
-            ] as const).map(([src, line, label]) => (
-              <Link key={line} to="/products" search={catalogSearch({ line })} className="block overflow-hidden rounded-2xl bg-white shadow-sm">
-                <img src={src} alt={t(label)} className="h-auto w-full" />
+              ["/line-auto-bg.jpg", "Automotive", "tileAuto", "tileAutoBody", "car"],
+              ["/line-moto-bg.jpg", "Motorcycle", "tileMoto", "tileMotoBody", "moto"],
+              ["/line-ind-bg.jpg", "Industrial", "tileInd", "tileIndBody", "plant"],
+              ["/line-nox-bg.jpg", "NOx", "tileNox", "tileNoxBody", "home"],
+            ] as const).map(([src, line, title, body, icon]) => (
+              <Link key={line} to="/products" search={catalogSearch({ line })} className="relative block min-h-64 overflow-hidden rounded-2xl">
+                <img src={src} alt="" className="absolute inset-0 h-full w-full object-cover" />
+                <span className="absolute inset-0 bg-[#08356a]/72" />
+                <span className="relative flex h-full min-h-64 flex-col items-center justify-center px-8 py-8 text-center text-white">
+                  <TileIcon name={icon} />
+                  <span className="mt-3 text-2xl font-semibold">{t(title)}</span>
+                  <span className="mt-3 max-w-md text-sm leading-6 text-white/90">{t(body)}</span>
+                </span>
               </Link>
             ))}
           </div>
@@ -195,6 +201,41 @@ function Home() {
         </div>
       </section>
     </StoreShell>
+  );
+}
+
+function TileIcon({ name }: { name: "car" | "moto" | "plant" | "home" }) {
+  const common = "size-12";
+  if (name === "car") {
+    return (
+      <svg viewBox="0 0 48 48" className={common} fill="currentColor" aria-hidden>
+        <path d="M10 28 14 16h20l4 12v8h-4v-3H14v3h-4v-8Zm6.2-8 1.6 5h12.4l1.6-5H16.2ZM16 33a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Zm16 0a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
+      </svg>
+    );
+  }
+  if (name === "moto") {
+    return (
+      <svg viewBox="0 0 48 48" className={common} fill="currentColor" aria-hidden>
+        <path d="M14 30a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm20 0a6 6 0 1 0 0-12 6 6 0 0 0 0 12ZM18 24h6l4-6h6l-3 8h3" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinejoin="round" />
+        <circle cx="14" cy="24" r="3.2" fill="none" stroke="currentColor" strokeWidth="2.2" />
+        <circle cx="34" cy="24" r="3.2" fill="none" stroke="currentColor" strokeWidth="2.2" />
+      </svg>
+    );
+  }
+  if (name === "plant") {
+    return (
+      <svg viewBox="0 0 64 48" className="h-12 w-16" fill="currentColor" aria-hidden>
+        <path d="M6 38V20l10 6V18l12 7V16l10 6v16H6Zm8-4h4v-6h-4v6Zm8 0h4v-6h-4v6Z" />
+        <path d="M42 28c0-4 3-6 6-6 1 3 1 6 0 8 3-1 6-1 8 1-3 1-6 2-8 4-1-3-3-5-6-7Z" />
+        <path d="M46 22v-4M50 24v-3" stroke="currentColor" strokeWidth="2" />
+      </svg>
+    );
+  }
+  return (
+    <svg viewBox="0 0 48 48" className={common} fill="currentColor" aria-hidden>
+      <path d="M24 14 12 24h4v10h16V24h4L24 14Z" />
+      <path d="M34 10c3 3 3 7 0 10M38 7c5 5 5 12 0 17" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+    </svg>
   );
 }
 
