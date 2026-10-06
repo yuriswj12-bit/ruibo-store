@@ -41,8 +41,8 @@ function Home() {
                   {t("heroBadge")}
                 </p>
                 <h1 className="mt-6 max-w-2xl text-4xl font-semibold leading-[1.2] tracking-tight sm:text-5xl lg:text-[3.4rem]">
-                  <span className="text-white">{t("heroTitle")}</span>{" "}
-                  <span className="text-[#002c58]">{t("heroAccent")}</span>
+                  <span className="text-white">{t("heroTitle")}</span>
+                  <span className="mt-2 block text-[#d6ebff]">{t("heroAccent")}</span>
                 </h1>
                 <p className="mt-6 max-w-xl text-base leading-relaxed text-white/90 sm:text-lg">{t("heroBody")}</p>
                 <div className="mt-8 flex flex-wrap gap-3">
