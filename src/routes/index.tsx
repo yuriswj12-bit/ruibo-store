@@ -136,16 +136,18 @@ function Home() {
           </div>
           <div className="mt-8 grid gap-4 lg:grid-cols-2">
             {([
-              ["/line-auto-bg.jpg", "Automotive", "tileAuto", "tileAutoBody"],
-              ["/line-moto-bg.jpg", "Motorcycle", "tileMoto", "tileMotoBody"],
-              ["/line-ind-bg.jpg", "Industrial", "tileInd", "tileIndBody"],
-              ["/line-nox-bg.jpg", "NOx", "tileNox", "tileNoxBody"],
-            ] as const).map(([src, line, title, body]) => (
+              ["/line-auto-bg.jpg", "Automotive", "tileAuto", "tileAutoBody", "car"],
+              ["/line-moto-bg.jpg", "Motorcycle", "tileMoto", "tileMotoBody", "moto"],
+              ["/line-ind-bg.jpg", "Industrial", "tileInd", "tileIndBody", "plant"],
+              ["/line-nox-bg.jpg", "NOx", "tileNox", "tileNoxBody", "home"],
+            ] as const).map(([src, line, title, body, icon]) => (
               <Link key={line} to="/products" search={catalogSearch({ line })} className="relative block overflow-hidden rounded-2xl">
-                <img src={src} alt="" className="aspect-[4/3] w-full object-cover object-top" />
-                <span className="absolute inset-x-0 bottom-0 top-[42%] flex flex-col items-center justify-center bg-gradient-to-b from-transparent via-[#04182e]/40 to-[#04182e]/60 px-6 pb-4 text-center text-white [text-shadow:0_2px_8px_rgba(0,0,0,0.7)]">
-                  <span className="text-2xl font-bold leading-tight">{t(title)}</span>
-                  <span className="mt-3 max-w-lg text-sm leading-6">{t(body)}</span>
+                <img src={src} alt="" className="aspect-[4/3] w-full object-cover" />
+                <span className="absolute inset-0 bg-[#04182e]/25" />
+                <span className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.75)]">
+                  <TileIcon name={icon} />
+                  <span className="mt-3 text-2xl font-bold leading-tight">{t(title)}</span>
+                  <span className="mt-2 max-w-lg text-sm leading-6">{t(body)}</span>
                 </span>
               </Link>
             ))}
@@ -199,6 +201,38 @@ function Home() {
         </div>
       </section>
     </StoreShell>
+  );
+}
+
+function TileIcon({ name }: { name: "car" | "moto" | "plant" | "home" }) {
+  if (name === "car") {
+    return (
+      <svg viewBox="0 0 48 48" className="size-14" fill="currentColor" aria-hidden>
+        <path d="M8 30 13 16h22l5 14v8h-5v-3H13v3H8v-8Zm7.4-10 2 6h13.2l2-6H15.4ZM15 34.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm18 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+      </svg>
+    );
+  }
+  if (name === "moto") {
+    return (
+      <svg viewBox="0 0 48 48" className="size-14" fill="none" stroke="currentColor" strokeWidth="2.6" aria-hidden>
+        <circle cx="13" cy="30" r="6" />
+        <circle cx="35" cy="30" r="6" />
+        <path d="M19 30h8l5-9h6M24 21l-4 9" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+  if (name === "plant") {
+    return (
+      <svg viewBox="0 0 48 48" className="size-14" fill="currentColor" aria-hidden>
+        <path d="M6 38V18l8 5V16l10 6V14l10 6v18H6Zm7-3h4v-7h-4v7Zm8 0h4v-7h-4v7Z" />
+      </svg>
+    );
+  }
+  return (
+    <svg viewBox="0 0 48 48" className="size-14" fill="currentColor" aria-hidden>
+      <path d="M24 16 10 28h5v10h18V28h5L24 16Z" />
+      <path d="M33 12c4 4 4 9 0 13M37 8c6 6 6 15 0 21" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" />
+    </svg>
   );
 }
 
