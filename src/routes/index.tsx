@@ -3,7 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { getStoreHome } from "@/lib/commerce.functions";
 import { StoreShell } from "@/components/store/shell";
 import { InquiryForm } from "@/components/store/inquiry-form";
-import { LINES, catalogSearch } from "@/components/store/catalog";
+import { catalogSearch } from "@/components/store/catalog";
 import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/")({
@@ -135,46 +135,16 @@ function Home() {
             </Link>
           </div>
           <div className="mt-8 grid gap-4 lg:grid-cols-2">
-            <article className="overflow-hidden rounded-3xl bg-white shadow-sm">
-              <div className="grid grid-cols-3 gap-2 p-4">
-                {LINES.slice(0, 3).map((line) => (
-                  <Link key={line.id} to="/products" search={catalogSearch({ line: line.id })} className="overflow-hidden rounded-xl">
-                    <img src={line.image} alt={t(line.title)} className="aspect-[4/3] w-full object-cover" />
-                  </Link>
-                ))}
-              </div>
-              <div className="px-6 pb-6">
-                <h3 className="text-xl font-semibold text-[#1a1a2e]">{t("cardSensorTitle")}</h3>
-                <p className="mt-2 text-sm leading-6 text-[#5c6370]">{t("cardSensorBody")}</p>
-                <p className="mt-4 inline-flex rounded-full bg-[#e6eef6] px-3 py-1 text-xs text-[#092949]">{t("cardSensorChip")}</p>
-              </div>
-            </article>
-            <article className="overflow-hidden rounded-3xl bg-white shadow-sm">
-              <img src="/sensor.jpg" alt="" className="h-52 w-full object-cover" />
-              <div className="px-6 py-6">
-                <h3 className="text-xl font-semibold text-[#1a1a2e]">{t("cardOemTitle")}</h3>
-                <p className="mt-2 text-sm leading-6 text-[#5c6370]">{t("cardOemBody")}</p>
-                <p className="mt-4 inline-flex rounded-full bg-[#e6eef6] px-3 py-1 text-xs text-[#092949]">{t("cardOemNote")}</p>
-              </div>
-            </article>
-          </div>
-          <div className="mt-4 grid gap-4 lg:grid-cols-2">
-            <article className="overflow-hidden rounded-3xl bg-white shadow-sm">
-              <img src="/auto.jpg" alt="" className="h-56 w-full object-cover" />
-              <div className="px-6 py-6">
-                <h3 className="text-xl font-semibold text-[#092949]">{t("srcTitle")}</h3>
-                <p className="mt-2 text-sm leading-6 text-[#5c6370]">{t("srcBody")}</p>
-                <p className="mt-4 inline-flex rounded-full bg-[#e6eef6] px-3 py-1 text-xs text-[#092949]">{t("srcChip")}</p>
-              </div>
-            </article>
-            <article className="overflow-hidden rounded-3xl bg-white shadow-sm">
-              <img src="/industrial.jpg" alt="" className="h-56 w-full object-cover" />
-              <div className="px-6 py-6">
-                <h3 className="text-xl font-semibold text-[#1a1a2e]">{t("expTitle")}</h3>
-                <p className="mt-2 text-sm leading-6 text-[#5c6370]">{t("expBody")}</p>
-                <p className="mt-4 inline-flex rounded-full bg-[#e6eef6] px-3 py-1 text-xs text-[#092949]">{t("expChip")}</p>
-              </div>
-            </article>
+            {([
+              ["/line-auto.png", "Automotive", "lineAuto"],
+              ["/line-moto.png", "Motorcycle", "lineMoto"],
+              ["/line-ind.png", "Industrial", "lineInd"],
+              ["/line-nox.png", "NOx", "lineNox"],
+            ] as const).map(([src, line, label]) => (
+              <Link key={line} to="/products" search={catalogSearch({ line })} className="block overflow-hidden rounded-2xl bg-white shadow-sm">
+                <img src={src} alt={t(label)} className="h-auto w-full" />
+              </Link>
+            ))}
           </div>
         </div>
       </section>
