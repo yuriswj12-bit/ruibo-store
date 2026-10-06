@@ -17,68 +17,71 @@ function Home() {
   if (!store) return <main className="wrap py-16">{t("catalogNotReady")}</main>;
   return (
     <StoreShell name={store.name} email={store.email} showSearch={false}>
-      <section className="relative overflow-hidden bg-paper text-ink">
-        <video
-          className="pointer-events-none absolute inset-y-0 left-0 h-full w-full object-cover object-[72%_center] lg:w-[62%]"
-          src="/sensor.mp4"
-          poster="/auto.jpg"
-          autoPlay
-          muted
-          loop
-          playsInline
-        />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/20 via-white/25 to-paper" />
-        <div className="relative wrap py-10 sm:py-14">
-          <div className="grid items-start gap-8 lg:grid-cols-[1.15fr_0.85fr]">
-            <div>
-              <p className="inline-flex items-center gap-2 rounded-full border border-[#1d314c]/20 bg-white/70 px-3 py-1.5 text-sm text-[#1d314c]">
-                <svg viewBox="0 0 24 24" className="size-4 shrink-0 text-amber-300" aria-hidden>
-                  <circle cx="12" cy="9" r="5.2" fill="none" stroke="currentColor" strokeWidth="1.7" />
-                  <path d="M9.2 13.2 8 20.5l4-2.1 4 2.1-1.2-7.3" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
-                </svg>
-                {t("heroBadge")}
-              </p>
-              <h1 className="mt-6 max-w-xl whitespace-pre-line text-[2.6rem] font-semibold leading-[0.98] tracking-tight text-[#1d314c] sm:text-6xl lg:text-7xl">
-                {t("heroTitle")}
-              </h1>
-              <p className="mt-1 max-w-xl whitespace-pre-line text-[2.6rem] font-semibold leading-[0.98] tracking-tight text-[#1d314c] sm:text-6xl lg:text-7xl">
-                {t("heroAccent")}
-              </p>
-              <p className="mt-6 max-w-lg text-sm leading-relaxed text-[#1d314c] sm:text-base">{t("heroBody")}</p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Link to="/products" search={catalogSearch()} className="inline-flex items-center gap-2 rounded-lg bg-[#f5a623] px-5 py-3 text-sm font-semibold text-white">
-                  {t("heroBrowse")} <span aria-hidden>→</span>
-                </Link>
-                <Link to="/downloads" className="rounded-lg border border-[#1d314c] px-5 py-3 text-sm font-semibold text-[#1d314c]">
-                  {t("heroCatalog")}
-                </Link>
+      <section className="bg-paper">
+        <div className="relative overflow-hidden bg-[#0a4d86] text-white">
+          <video
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[30%_center]"
+            src="/sensor.mp4"
+            poster="/auto.jpg"
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
+          <div className="pointer-events-none absolute inset-0 bg-[#0c5ea8] mix-blend-multiply" />
+          <div className="pointer-events-none absolute inset-0 bg-[#083e70]/35" />
+          <div className="relative wrap py-10 sm:py-14">
+            <div className="grid items-start gap-8 lg:grid-cols-[1.15fr_0.85fr]">
+              <div>
+                <p className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-black/20 px-3 py-1.5 text-sm text-white">
+                  <svg viewBox="0 0 24 24" className="size-4 shrink-0 text-amber-300" aria-hidden>
+                    <circle cx="12" cy="9" r="5.2" fill="none" stroke="currentColor" strokeWidth="1.7" />
+                    <path d="M9.2 13.2 8 20.5l4-2.1 4 2.1-1.2-7.3" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
+                  </svg>
+                  {t("heroBadge")}
+                </p>
+                <h1 className="mt-6 max-w-xl whitespace-pre-line text-[2.6rem] font-semibold leading-[0.98] tracking-tight text-white sm:text-6xl lg:text-7xl">
+                  {t("heroTitle")}
+                </h1>
+                <p className="mt-1 max-w-xl whitespace-pre-line text-[2.6rem] font-semibold leading-[0.98] tracking-tight text-white sm:text-6xl lg:text-7xl">
+                  {t("heroAccent")}
+                </p>
+                <p className="mt-6 max-w-lg text-sm leading-relaxed text-white/90 sm:text-base">{t("heroBody")}</p>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <Link to="/products" search={catalogSearch()} className="inline-flex items-center gap-2 rounded-lg bg-[#f5a623] px-5 py-3 text-sm font-semibold text-white">
+                    {t("heroBrowse")} <span aria-hidden>→</span>
+                  </Link>
+                  <Link to="/downloads" className="rounded-lg border border-white/70 px-5 py-3 text-sm font-semibold text-white">
+                    {t("heroCatalog")}
+                  </Link>
+                </div>
+              </div>
+              <div className="rounded-3xl bg-white p-6 text-ink shadow-2xl sm:p-7">
+                <h2 className="text-2xl font-semibold text-ink">{t("quoteTitle")}</h2>
+                <p className="mt-1 mb-4 text-sm text-muted">{t("quoteHint")}</p>
+                <InquiryForm hero />
               </div>
             </div>
-            <div className="rounded-3xl bg-white p-6 text-ink shadow-2xl sm:p-7">
-              <h2 className="text-2xl font-semibold text-ink">{t("quoteTitle")}</h2>
-              <p className="mt-1 mb-4 text-sm text-muted">{t("quoteHint")}</p>
-              <InquiryForm hero />
-            </div>
           </div>
-          <dl className="mt-10 grid grid-cols-2 gap-4 border-t border-[#1d314c]/15 pt-6 sm:grid-cols-4">
-            <div>
-              <dt className="text-xs text-[#1d314c]/70">{t("statProducts")}</dt>
-              <dd className="text-3xl text-[#1d314c]">302</dd>
-            </div>
-            <div>
-              <dt className="text-xs text-[#1d314c]/70">{t("statOems")}</dt>
-              <dd className="text-3xl text-[#1d314c]">601</dd>
-            </div>
-            <div>
-              <dt className="text-xs text-[#1d314c]/70">{t("statLangs")}</dt>
-              <dd className="text-3xl text-[#1d314c]">4</dd>
-            </div>
-            <div>
-              <dt className="text-xs text-[#1d314c]/70">{t("statOrigin")}</dt>
-              <dd className="text-3xl text-[#1d314c]">{t("statOriginValue")}</dd>
-            </div>
-          </dl>
         </div>
+        <dl className="wrap grid grid-cols-2 gap-4 border-t border-[#1d314c]/15 py-6 sm:grid-cols-4">
+          <div>
+            <dt className="text-xs text-[#1d314c]/70">{t("statProducts")}</dt>
+            <dd className="text-3xl text-[#1d314c]">302</dd>
+          </div>
+          <div>
+            <dt className="text-xs text-[#1d314c]/70">{t("statOems")}</dt>
+            <dd className="text-3xl text-[#1d314c]">601</dd>
+          </div>
+          <div>
+            <dt className="text-xs text-[#1d314c]/70">{t("statLangs")}</dt>
+            <dd className="text-3xl text-[#1d314c]">4</dd>
+          </div>
+          <div>
+            <dt className="text-xs text-[#1d314c]/70">{t("statOrigin")}</dt>
+            <dd className="text-3xl text-[#1d314c]">{t("statOriginValue")}</dd>
+          </div>
+        </dl>
       </section>
       <section className="wrap py-12">
         <h2 className="text-3xl">{t("pillarTitle")}</h2>
