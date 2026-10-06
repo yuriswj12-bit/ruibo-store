@@ -141,11 +141,11 @@ function Home() {
               ["/line-ind-bg.jpg", "Industrial", "tileInd", "tileIndBody"],
               ["/line-nox-bg.jpg", "NOx", "tileNox", "tileNoxBody"],
             ] as const).map(([src, line, title, body]) => (
-              <Link key={line} to="/products" search={catalogSearch({ line })} className="block overflow-hidden rounded-2xl bg-white shadow-sm">
+              <Link key={line} to="/products" search={catalogSearch({ line })} className="relative block overflow-hidden rounded-2xl">
                 <img src={src} alt="" className="aspect-[16/9] w-full object-cover" />
-                <span className="block px-5 py-4 text-center">
-                  <span className="block text-xl font-semibold text-[#1a1a2e]">{t(title)}</span>
-                  <span className="mt-1 block text-sm leading-5 text-[#5c6370]">{t(body)}</span>
+                <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#04182e]/88 via-[#04182e]/45 to-transparent px-5 pb-4 pt-12 text-center text-white">
+                  <span className="block text-lg font-semibold sm:text-xl">{t(title)}</span>
+                  <span className="mt-1 block text-xs leading-5 text-white/90 sm:text-sm">{t(body)}</span>
                 </span>
               </Link>
             ))}
