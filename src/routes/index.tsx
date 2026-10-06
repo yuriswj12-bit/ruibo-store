@@ -17,9 +17,9 @@ function Home() {
   if (!store) return <main className="wrap py-16">{t("catalogNotReady")}</main>;
   return (
     <StoreShell name={store.name} email={store.email} showSearch={false}>
-      <section className="relative overflow-hidden bg-[#ececec]">
+      <section className="relative overflow-hidden bg-ink text-copper-ink">
         <video
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover opacity-35"
           src="/sensor.mp4"
           poster="/auto.jpg"
           autoPlay
@@ -27,15 +27,50 @@ function Home() {
           loop
           playsInline
         />
-        <div className="relative wrap grid items-center gap-6 py-10 lg:min-h-[520px] lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="max-w-xl rounded-card border border-line bg-card/95 p-5 sm:p-7">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-copper">{t("eyebrow")}</p>
-            <h1 className="mt-2 text-4xl leading-tight sm:text-5xl">{t("heroTitle")}</h1>
-            <p className="mt-3 text-muted">{t("heroBody")}</p>
-            <div className="mt-5">
-              <OeSearch large />
+        <div className="absolute inset-0 bg-ink/75" />
+        <div className="relative wrap py-10 sm:py-14">
+          <div className="grid items-start gap-8 lg:grid-cols-[1.15fr_0.85fr]">
+            <div>
+              <p className="inline-flex rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-semibold tracking-wide">
+                {t("heroBadge")}
+              </p>
+              <h1 className="mt-4 max-w-xl text-4xl leading-[1.05] text-white sm:text-6xl">{t("heroTitle")}</h1>
+              <p className="mt-4 max-w-lg text-base text-white/80">{t("heroBody")}</p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link to="/products" search={catalogSearch()} className="rounded-lg bg-copper px-5 py-3 text-sm font-semibold text-white">
+                  {t("heroBrowse")}
+                </Link>
+                <Link to="/products" search={catalogSearch({ line: "Automotive" })} className="rounded-lg border border-white/40 px-5 py-3 text-sm font-semibold text-white">
+                  {t("heroVehicles")}
+                </Link>
+              </div>
+            </div>
+            <div className="rounded-card bg-card p-5 text-ink shadow-xl sm:p-6">
+              <h2 className="text-2xl text-ink">{t("findCardTitle")}</h2>
+              <p className="mt-1 text-sm text-muted">{t("findCardHint")}</p>
+              <div className="mt-4">
+                <OeSearch large />
+              </div>
             </div>
           </div>
+          <dl className="mt-10 grid grid-cols-2 gap-4 border-t border-white/15 pt-6 sm:grid-cols-4">
+            <div>
+              <dt className="text-xs text-white/70">{t("statProducts")}</dt>
+              <dd className="text-3xl text-white">302</dd>
+            </div>
+            <div>
+              <dt className="text-xs text-white/70">{t("statOems")}</dt>
+              <dd className="text-3xl text-white">601</dd>
+            </div>
+            <div>
+              <dt className="text-xs text-white/70">{t("statLangs")}</dt>
+              <dd className="text-3xl text-white">4</dd>
+            </div>
+            <div>
+              <dt className="text-xs text-white/70">{t("statOrigin")}</dt>
+              <dd className="text-3xl text-white">{t("statOriginValue")}</dd>
+            </div>
+          </dl>
         </div>
       </section>
       <section className="wrap py-8">
