@@ -14,6 +14,7 @@ export type ProductCard = {
   sampleStock: number;
   moq: number;
   vehicle: string;
+  line: string;
   oes: string[];
   /** exact = the typed OEM is on this SKU; prefix = only the start matches; all = no OEM query */
   match: "exact" | "prefix" | "all";
@@ -46,8 +47,9 @@ export const getStoreHome = createServerFn({ method: "GET" }).handler(async (): 
     sample_stock: number;
     moq: number;
     vehicle: string | null;
+    line: string | null;
   }>`
-    select sku, title, price_range, sample_price::text, sample_stock, moq, specs->>'vehicle' as vehicle
+    select sku, title, price_range, sample_price::text, sample_stock, moq, specs->>'vehicle' as vehicle, specs->>'line' as line
     from products where factory_id = ${factory.id} and published = true
     order by sku
   `;
@@ -68,6 +70,7 @@ export const getStoreHome = createServerFn({ method: "GET" }).handler(async (): 
       sampleStock: product.sample_stock,
       moq: product.moq,
       vehicle: product.vehicle ?? "",
+      line: product.line ?? "",
       oes: oes.filter((oe) => oe.sku === product.sku).map((oe) => oe.raw_oe),
       match: "all",
     })),
@@ -126,6 +129,7 @@ export const searchCatalog = createServerFn({ method: "GET" })
       sampleStock: product.sample_stock,
       moq: product.moq,
       vehicle: product.vehicle ?? "",
+      line: "",
       oes: oes.filter((row) => row.sku === product.sku).map((row) => row.raw_oe),
       match: oe === "" ? "all" : matchedExact ? "exact" : "prefix",
     }));
@@ -182,6 +186,7 @@ export const getProduct = createServerFn({ method: "GET" })
       sampleStock: product.sample_stock,
       moq: product.moq,
       vehicle: String(specs.vehicle ?? ""),
+      line: String(specs.line ?? ""),
       oes: oes.map((oe) => oe.raw_oe),
       match: "all",
       pdfUrl: product.pdf_url,

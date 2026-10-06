@@ -33,12 +33,13 @@ export const LINES = [
   { id: "NOx", image: "/nox.jpg", title: "lineNox", body: "lineNoxBody" },
 ] as const;
 
-export type CatalogSearch = { q: string; make: string; line: string };
+export type CatalogSearch = { q: string; make: string; line: string; page: number };
 
 export const catalogSearch = (patch: Partial<CatalogSearch> = {}): CatalogSearch => ({
   q: "",
   make: "",
   line: "",
+  page: 1,
   ...patch,
 });
 

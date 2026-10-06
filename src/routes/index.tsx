@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { getStoreHome } from "@/lib/commerce.functions";
 import { StoreShell } from "@/components/store/shell";
+import { InquiryForm } from "@/components/store/inquiry-form";
 import { OeSearch } from "@/components/store/oe-search";
 import { LINES, MAKES, catalogSearch, lineImage } from "@/components/store/catalog";
 import { useI18n, vehicleLabel } from "@/lib/i18n";
@@ -36,21 +37,22 @@ function Home() {
               </p>
               <h1 className="mt-4 max-w-xl text-4xl leading-[1.05] text-white sm:text-6xl">{t("heroTitle")}</h1>
               <p className="mt-4 max-w-lg text-base text-white/80">{t("heroBody")}</p>
+              <div className="mt-5 max-w-lg">
+                <OeSearch large />
+              </div>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link to="/products" search={catalogSearch()} className="rounded-lg bg-copper px-5 py-3 text-sm font-semibold text-white">
                   {t("heroBrowse")}
                 </Link>
-                <Link to="/products" search={catalogSearch({ line: "Automotive" })} className="rounded-lg border border-white/40 px-5 py-3 text-sm font-semibold text-white">
-                  {t("heroVehicles")}
+                <Link to="/downloads" className="rounded-lg border border-white/40 px-5 py-3 text-sm font-semibold text-white">
+                  {t("navDownloads")}
                 </Link>
               </div>
             </div>
             <div className="rounded-card bg-card p-5 text-ink shadow-xl sm:p-6">
-              <h2 className="text-2xl text-ink">{t("findCardTitle")}</h2>
-              <p className="mt-1 text-sm text-muted">{t("findCardHint")}</p>
-              <div className="mt-4">
-                <OeSearch large />
-              </div>
+              <h2 className="text-2xl text-ink">{t("quoteTitle")}</h2>
+              <p className="mt-1 mb-4 text-sm text-muted">{t("quoteHint")}</p>
+              <InquiryForm compact />
             </div>
           </div>
           <dl className="mt-10 grid grid-cols-2 gap-4 border-t border-white/15 pt-6 sm:grid-cols-4">
@@ -73,13 +75,45 @@ function Home() {
           </dl>
         </div>
       </section>
-      <section className="wrap py-8">
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="wrap py-12">
+        <h2 className="text-3xl">{t("pillarTitle")}</h2>
+        <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            ["pillarMake", "pillarMakeBody"],
+            ["pillarCheck", "pillarCheckBody"],
+            ["pillarExport", "pillarExportBody"],
+            ["pillarPerson", "pillarPersonBody"],
+          ].map(([title, body]) => (
+            <article key={title} className="rounded-card border border-line bg-card p-4">
+              <h3 className="text-xl">{t(title as "pillarMake")}</h3>
+              <p className="mt-2 text-sm text-muted">{t(body as "pillarMakeBody")}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+      <section className="wrap pb-4">
+        <h2 className="text-3xl">{t("solutionsTitle")}</h2>
+        <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {LINES.map((line) => (
             <Link key={line.id} to="/products" search={catalogSearch({ line: line.id })} className="group relative block aspect-[4/5] overflow-hidden rounded-card bg-card">
               <img src={line.image} alt={t(line.title)} className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]" />
               <span className="absolute bottom-3 left-3 rounded-full bg-card px-3 py-1 text-sm font-medium">{t(line.title)}</span>
             </Link>
+          ))}
+        </div>
+      </section>
+      <section className="wrap py-8">
+        <h2 className="text-3xl">{t("reliableTitle")}</h2>
+        <div className="mt-6 grid gap-3 lg:grid-cols-3">
+          {[
+            ["reliable1", "reliable1Body"],
+            ["reliable2", "reliable2Body"],
+            ["reliable3", "reliable3Body"],
+          ].map(([title, body]) => (
+            <article key={title} className="rounded-card border border-line bg-card p-4">
+              <h3 className="text-xl">{t(title as "reliable1")}</h3>
+              <p className="mt-2 text-sm text-muted">{t(body as "reliable1Body")}</p>
+            </article>
           ))}
         </div>
       </section>
@@ -118,6 +152,13 @@ function Home() {
             </Link>
             );
           })}
+        </div>
+      </section>
+      <section className="wrap pb-10">
+        <div className="rounded-card bg-ink px-6 py-8 text-white">
+          <h2 className="text-3xl">{t("ctaTitle")}</h2>
+          <p className="mt-2 max-w-xl text-white/80">{t("ctaBody")}</p>
+          <Link to="/contact" className="mt-5 inline-block rounded-lg bg-copper px-5 py-3 text-sm font-semibold text-white">{t("navContact")}</Link>
         </div>
       </section>
     </StoreShell>

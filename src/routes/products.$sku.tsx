@@ -1,8 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { getProduct, getStoreHome } from "@/lib/commerce.functions";
 import { StoreShell } from "@/components/store/shell";
 import { DualAction } from "@/components/store/dual-action";
-import { moneyLabel, specText, specValue, useI18n, vehicleLabel } from "@/lib/i18n";
+import { InquiryForm } from "@/components/store/inquiry-form";
+import { moneyLabel, useI18n, vehicleLabel } from "@/lib/i18n";
 import { lineImage } from "@/components/store/catalog";
 import { normalizeOe, shownOem } from "@/lib/oe";
 
@@ -85,16 +86,6 @@ function ProductPage() {
             matchedOe={displayOe}
             whatsapp={store.whatsapp}
           />
-          <table className="w-full text-sm">
-            <tbody>
-              {Object.entries(product.specs).map(([key, value]) => (
-                <tr key={key} className="border-t border-line">
-                  <th className="py-2 pr-4 text-left font-medium">{specText(lang, key)}</th>
-                  <td className="py-2">{specValue(lang, key, String(value))}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
           {product.fitments.length > 0 && (
           <section className="overflow-x-auto rounded-card border border-line bg-card">
             <p className="border-b border-line px-4 py-3 text-sm">{t("fitsFor", { oe: displayOe })}</p>
@@ -122,6 +113,38 @@ function ProductPage() {
             </table>
           </section>
           )}
+          <section className="grid gap-3">
+            {([
+              ["secOverview", "detailOverview"],
+              ["secFeatures", "detailFeatures"],
+              ["secAdvantages", "detailAdvantages"],
+              ["secApps", "detailApps"],
+              ["secQa", "detailQa"],
+            ] as const).map(([title, body]) => (
+              <article key={title} className="rounded-card border border-line bg-card p-4">
+                <h2 className="text-xl">{t(title)}</h2>
+                <p className="mt-2 text-sm text-muted">{t(body)}</p>
+              </article>
+            ))}
+          </section>
+          <section>
+            <h2 className="text-2xl">{t("related")}</h2>
+            <div className="mt-3 grid gap-2 sm:grid-cols-2">
+              {store.products.filter((item) => item.vehicle === vehicle && item.sku !== product.sku).slice(0, 4).map((item) => {
+                const oem = shownOem(item.oes);
+                return (
+                  <Link key={item.sku} to="/products/$sku" params={{ sku: item.sku }} search={{ oe: oem }} className="rounded-card border border-line bg-card p-3">
+                    <span className="block font-medium">{oem}</span>
+                    <span className="text-sm text-muted">{vehicleLabel(lang, item.vehicle)}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </section>
+          <section className="rounded-card border border-line bg-card p-4">
+            <h2 className="mb-3 text-2xl">{t("quoteTitle")}</h2>
+            <InquiryForm sku={product.sku} matchedOe={displayOe} />
+          </section>
         </div>
       </main>
     </StoreShell>
