@@ -80,7 +80,7 @@ export function StoreShell({
         )}
       </header>
       {children}
-      <footer className="bg-[#17182b] text-sm text-white/70">
+      <footer className="bg-[#071e36] text-sm text-white/70">
         <div className="wrap grid gap-10 py-12 lg:grid-cols-[1.4fr_0.8fr_0.8fr]">
           <div>
             <img src="/rbtc-logo-navy.png" alt={name} className="h-14 w-auto rounded-md bg-white px-2" />
@@ -154,7 +154,7 @@ function SideDock({ email, whatsapp }: { email?: string; whatsapp?: string }) {
       <a
         href={`mailto:${mail}`}
         aria-label="Email"
-        className="grid size-12 place-items-center rounded-full bg-[#6d5ce7] text-white shadow-lg"
+        className="grid size-12 place-items-center rounded-full bg-[#092949] text-white shadow-lg"
       >
         <svg viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
           <rect x="3.5" y="5.5" width="17" height="13" rx="2" />

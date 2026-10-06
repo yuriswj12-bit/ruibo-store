@@ -79,7 +79,7 @@ function Home() {
       </section>
       <section data-page="2" className="bg-white py-16 sm:py-20">
         <div className="wrap">
-          <p className="text-center text-sm font-medium text-[#6d5ce7]">{t("pillarEyebrow")}</p>
+          <p className="text-center text-sm font-medium text-[#092949]">{t("pillarEyebrow")}</p>
           <h2 className="mx-auto mt-3 max-w-4xl text-center text-3xl font-semibold tracking-tight text-[#1a1a2e] sm:text-4xl">{t("pillarTitle")}</h2>
           <p className="mx-auto mt-5 max-w-4xl text-center text-sm leading-7 text-[#5c6370] sm:text-base">{t("pillarIntro")}</p>
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -90,7 +90,7 @@ function Home() {
               ["pillarPerson", "pillarPersonBody", "person"],
             ] as const).map(([title, body, icon]) => (
               <article key={title} className="rounded-2xl bg-[#f7f8fc] p-6 shadow-[0_8px_24px_rgba(20,20,40,0.04)]">
-                <span className="grid size-12 place-items-center rounded-xl bg-[#efeafc] text-[#6d5ce7]">
+                <span className="grid size-12 place-items-center rounded-xl bg-[#e6eef6] text-[#092949]">
                   {icon === "factory" && (
                     <svg viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
                       <path d="M3 21V10l6 3V10l6 3V8l6 3v10" strokeLinejoin="round" />
@@ -124,13 +124,13 @@ function Home() {
       </section>
       <section className="bg-[#f4f6fb] py-14 sm:py-16">
         <div className="wrap">
-          <p className="text-sm font-medium text-[#6d5ce7]">{t("svcEyebrow")}</p>
+          <p className="text-sm font-medium text-[#092949]">{t("svcEyebrow")}</p>
           <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
             <div>
               <h2 className="text-3xl font-semibold tracking-tight text-[#1a1a2e] sm:text-4xl">{t("svcTitle")}</h2>
               <p className="mt-3 max-w-xl text-sm text-[#5c6370] sm:text-base">{t("svcLead")}</p>
             </div>
-            <Link to="/products" search={catalogSearch()} className="inline-flex items-center gap-2 rounded-lg bg-[#6d5ce7] px-5 py-3 text-sm font-semibold text-white">
+            <Link to="/products" search={catalogSearch()} className="inline-flex items-center gap-2 rounded-lg bg-[#092949] px-5 py-3 text-sm font-semibold text-white">
               {t("svcAll")} <span aria-hidden>→</span>
             </Link>
           </div>
@@ -146,7 +146,7 @@ function Home() {
               <div className="px-6 pb-6">
                 <h3 className="text-xl font-semibold text-[#1a1a2e]">{t("cardSensorTitle")}</h3>
                 <p className="mt-2 text-sm leading-6 text-[#5c6370]">{t("cardSensorBody")}</p>
-                <p className="mt-4 inline-flex rounded-full bg-[#f3f0ff] px-3 py-1 text-xs text-[#6d5ce7]">{t("cardSensorChip")}</p>
+                <p className="mt-4 inline-flex rounded-full bg-[#e6eef6] px-3 py-1 text-xs text-[#092949]">{t("cardSensorChip")}</p>
               </div>
             </article>
             <article className="overflow-hidden rounded-3xl bg-white shadow-sm">
@@ -154,7 +154,7 @@ function Home() {
               <div className="px-6 py-6">
                 <h3 className="text-xl font-semibold text-[#1a1a2e]">{t("cardOemTitle")}</h3>
                 <p className="mt-2 text-sm leading-6 text-[#5c6370]">{t("cardOemBody")}</p>
-                <p className="mt-4 inline-flex rounded-full bg-[#f3f0ff] px-3 py-1 text-xs text-[#6d5ce7]">{t("cardOemNote")}</p>
+                <p className="mt-4 inline-flex rounded-full bg-[#e6eef6] px-3 py-1 text-xs text-[#092949]">{t("cardOemNote")}</p>
               </div>
             </article>
           </div>
@@ -162,9 +162,9 @@ function Home() {
             <article className="overflow-hidden rounded-3xl bg-white shadow-sm">
               <img src="/auto.jpg" alt="" className="h-56 w-full object-cover" />
               <div className="px-6 py-6">
-                <h3 className="text-xl font-semibold text-[#6d5ce7]">{t("srcTitle")}</h3>
+                <h3 className="text-xl font-semibold text-[#092949]">{t("srcTitle")}</h3>
                 <p className="mt-2 text-sm leading-6 text-[#5c6370]">{t("srcBody")}</p>
-                <p className="mt-4 inline-flex rounded-full bg-[#f3f0ff] px-3 py-1 text-xs text-[#6d5ce7]">{t("srcChip")}</p>
+                <p className="mt-4 inline-flex rounded-full bg-[#e6eef6] px-3 py-1 text-xs text-[#092949]">{t("srcChip")}</p>
               </div>
             </article>
             <article className="overflow-hidden rounded-3xl bg-white shadow-sm">
@@ -172,7 +172,7 @@ function Home() {
               <div className="px-6 py-6">
                 <h3 className="text-xl font-semibold text-[#1a1a2e]">{t("expTitle")}</h3>
                 <p className="mt-2 text-sm leading-6 text-[#5c6370]">{t("expBody")}</p>
-                <p className="mt-4 inline-flex rounded-full bg-[#f3f0ff] px-3 py-1 text-xs text-[#6d5ce7]">{t("expChip")}</p>
+                <p className="mt-4 inline-flex rounded-full bg-[#e6eef6] px-3 py-1 text-xs text-[#092949]">{t("expChip")}</p>
               </div>
             </article>
           </div>
@@ -181,7 +181,7 @@ function Home() {
       <section className="bg-white py-16">
         <div className="wrap grid items-center gap-10 lg:grid-cols-2">
           <div>
-            <p className="text-sm font-medium text-[#6d5ce7]">{t("advEyebrow")}</p>
+            <p className="text-sm font-medium text-[#092949]">{t("advEyebrow")}</p>
             <h2 className="mt-3 text-4xl font-semibold tracking-tight text-[#1a1a2e]">{t("advTitle")}</h2>
             <ul className="mt-8 grid gap-6">
               {([
@@ -190,7 +190,7 @@ function Home() {
                 ["adv3", "adv3Body"],
               ] as const).map(([title, body]) => (
                 <li key={title} className="flex gap-4">
-                  <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-[#efeafc] text-[#6d5ce7]">
+                  <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-[#e6eef6] text-[#092949]">
                     <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
                       <circle cx="12" cy="12" r="8" />
                     </svg>
@@ -202,7 +202,7 @@ function Home() {
                 </li>
               ))}
             </ul>
-            <Link to="/about" className="mt-8 inline-flex items-center gap-2 rounded-lg bg-[#6d5ce7] px-5 py-3 text-sm font-semibold text-white">
+            <Link to="/about" className="mt-8 inline-flex items-center gap-2 rounded-lg bg-[#092949] px-5 py-3 text-sm font-semibold text-white">
               {t("advMore")} <span aria-hidden>→</span>
             </Link>
           </div>
@@ -210,7 +210,7 @@ function Home() {
         </div>
       </section>
       <TrustStrip />
-      <section className="bg-[#6d4ae0] py-16 text-center text-white">
+      <section className="bg-[#071e36] py-16 text-center text-white">
         <div className="wrap">
           <h2 className="mx-auto max-w-3xl text-3xl font-semibold sm:text-5xl">{t("ctaReady")}</h2>
           <p className="mx-auto mt-4 max-w-2xl text-white/85">{t("ctaReadyBody")}</p>
@@ -241,7 +241,7 @@ function TrustStrip() {
   return (
     <section className="bg-white py-16">
       <div className="wrap">
-        <p className="text-center text-xs font-semibold tracking-[0.18em] text-[#6d5ce7]">{t("trustEyebrow")}</p>
+        <p className="text-center text-xs font-semibold tracking-[0.18em] text-[#092949]">{t("trustEyebrow")}</p>
         <h2 className="mt-2 text-center text-3xl font-semibold text-[#1a1a2e] sm:text-4xl">{t("trustTitle")}</h2>
         <p className="mx-auto mt-3 max-w-3xl text-center text-sm text-[#5c6370] sm:text-base">{t("trustLead")}</p>
         <div className="relative mt-8 overflow-hidden rounded-3xl">
@@ -252,7 +252,7 @@ function TrustStrip() {
         </div>
         <div className="mt-4 flex justify-center gap-2">
           {slides.map((item, dot) => (
-            <button key={item.src} type="button" aria-label={t(item.cap)} onClick={() => setIndex(dot)} className={dot === index ? "h-1.5 w-6 rounded-full bg-[#6d5ce7]" : "size-1.5 rounded-full bg-[#cfc8ee]"} />
+            <button key={item.src} type="button" aria-label={t(item.cap)} onClick={() => setIndex(dot)} className={dot === index ? "h-1.5 w-6 rounded-full bg-[#092949]" : "size-1.5 rounded-full bg-[#c5d4e4]"} />
           ))}
         </div>
       </div>
