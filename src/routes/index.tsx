@@ -16,7 +16,7 @@ function Home() {
   const store = Route.useLoaderData();
   if (!store) return <main className="wrap py-16">{t("catalogNotReady")}</main>;
   return (
-    <StoreShell name={store.name} email={store.email} showSearch={false}>
+    <StoreShell name={store.name} email={store.email} whatsapp={store.whatsapp} showSearch={false}>
       <section className="bg-paper">
         <div className="relative overflow-hidden bg-[#071e36] text-white">
           <video
@@ -77,20 +77,49 @@ function Home() {
           </div>
         </div>
       </section>
-      <section className="wrap py-12">
-        <h2 className="text-3xl">{t("pillarTitle")}</h2>
-        <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            ["pillarMake", "pillarMakeBody"],
-            ["pillarCheck", "pillarCheckBody"],
-            ["pillarExport", "pillarExportBody"],
-            ["pillarPerson", "pillarPersonBody"],
-          ].map(([title, body]) => (
-            <article key={title} className="rounded-card border border-line bg-card p-4">
-              <h3 className="text-xl">{t(title as "pillarMake")}</h3>
-              <p className="mt-2 text-sm text-muted">{t(body as "pillarMakeBody")}</p>
-            </article>
-          ))}
+      <section data-page="2" className="bg-white py-16 sm:py-20">
+        <div className="wrap">
+          <p className="text-center text-sm font-medium text-[#6d5ce7]">{t("pillarEyebrow")}</p>
+          <h2 className="mx-auto mt-3 max-w-4xl text-center text-3xl font-semibold tracking-tight text-[#1a1a2e] sm:text-4xl">{t("pillarTitle")}</h2>
+          <p className="mx-auto mt-5 max-w-4xl text-center text-sm leading-7 text-[#5c6370] sm:text-base">{t("pillarIntro")}</p>
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {([
+              ["pillarMake", "pillarMakeBody", "factory"],
+              ["pillarCheck", "pillarCheckBody", "shield"],
+              ["pillarExport", "pillarExportBody", "globe"],
+              ["pillarPerson", "pillarPersonBody", "person"],
+            ] as const).map(([title, body, icon]) => (
+              <article key={title} className="rounded-2xl bg-[#f7f8fc] p-6 shadow-[0_8px_24px_rgba(20,20,40,0.04)]">
+                <span className="grid size-12 place-items-center rounded-xl bg-[#efeafc] text-[#6d5ce7]">
+                  {icon === "factory" && (
+                    <svg viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
+                      <path d="M3 21V10l6 3V10l6 3V8l6 3v10" strokeLinejoin="round" />
+                      <path d="M3 21h18" />
+                    </svg>
+                  )}
+                  {icon === "shield" && (
+                    <svg viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
+                      <path d="M12 3 5 6v6c0 4.2 2.8 7.2 7 9 4.2-1.8 7-4.8 7-9V6l-7-3Z" strokeLinejoin="round" />
+                    </svg>
+                  )}
+                  {icon === "globe" && (
+                    <svg viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
+                      <circle cx="12" cy="12" r="8" />
+                      <path d="M4 12h16M12 4c2.2 2.4 3.3 5.1 3.3 8S14.2 17.6 12 20c-2.2-2.4-3.3-5.1-3.3-8S9.8 6.4 12 4Z" />
+                    </svg>
+                  )}
+                  {icon === "person" && (
+                    <svg viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
+                      <circle cx="12" cy="8" r="3" />
+                      <path d="M6 19c1.2-2.4 3.2-3.5 6-3.5s4.8 1.1 6 3.5" strokeLinecap="round" />
+                    </svg>
+                  )}
+                </span>
+                <h3 className="mt-8 text-lg font-semibold text-[#1a1a2e]">{t(title)}</h3>
+                <p className="mt-2 text-sm leading-6 text-[#5c6370]">{t(body)}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
       <section className="wrap pb-4">
