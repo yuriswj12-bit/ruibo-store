@@ -1,3 +1,5 @@
+-- Replace the live Ruibo catalog. 0004 already ran with the old transcription.
+delete from products where factory_id = 'fac_xinda' and sku like 'RB%';
 -- Catalog from the WPS reading of the Ruibo PDF, plus 10 cards that reading dropped.
 insert into products (id, factory_id, sku, title, price_range, moq, sample_price, sample_stock, specs) values
 ('prd_rbvw262ee', 'fac_xinda', 'RBVW-262EE', 'Volkswagen oxygen sensor', 'Factory quote', 100, 32.00, 24, '{"line":"Automotive","vehicle":"Volkswagen","sensor":"Heated zirconia"}'),
