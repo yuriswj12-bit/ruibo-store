@@ -27,8 +27,6 @@ function Catalog() {
   const { t, lang } = useI18n();
   const { store, products, deps } = Route.useLoaderData();
   if (!store) return null;
-  const line = LINES.find((item) => item.id === deps.line);
-  const title = deps.make ? vehicleLabel(lang, deps.make) : line ? t(line.title) : t("pageProducts");
   const pageSize = 12;
   const pages = Math.max(1, Math.ceil(products.length / pageSize));
   const page = Math.min(deps.page, pages);
@@ -37,6 +35,14 @@ function Catalog() {
   const to = Math.min(products.length, page * pageSize);
   return (
     <StoreShell name={store.name} email={store.email}>
+      <section className="relative overflow-hidden bg-[#071e36] text-white">
+        <img src="/auto.jpg" alt="" className="absolute inset-0 h-full w-full object-cover opacity-35" />
+        <div className="absolute inset-0 bg-[#071e36]/70" />
+        <div className="relative wrap py-14 sm:py-20">
+          <h1 className="text-4xl text-white sm:text-6xl">{t("rangeTitle")}</h1>
+          <p className="mt-3 max-w-2xl text-lg text-white/85">{t("rangeSub")}</p>
+        </div>
+      </section>
       <main className="wrap grid gap-8 py-8 lg:grid-cols-[220px_minmax(0,1fr)]">
         <aside className="grid content-start gap-4">
           <form className="grid gap-2" method="get">
@@ -64,8 +70,7 @@ function Catalog() {
           </div>
         </aside>
         <div className="min-w-0">
-          <h1 className="text-4xl">{title}</h1>
-          <p className="mt-2 text-sm text-muted">{t("showing", { from, to, total: products.length })}</p>
+          <p className="text-sm text-muted">{t("showing", { from, to, total: products.length })}</p>
           {deps.q && products[0]?.match === "exact" && products.length > 1 && (
             <p className="mt-3 rounded-card border border-line bg-card px-4 py-3 text-sm">{t("multiExact", { n: products.length })}</p>
           )}
