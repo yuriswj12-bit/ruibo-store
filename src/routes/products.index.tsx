@@ -35,19 +35,8 @@ function Catalog() {
   const to = Math.min(products.length, page * pageSize);
   return (
     <StoreShell name={store.name} email={store.email}>
-      <section className="relative overflow-hidden bg-[#3d4658] text-white">
-        <div className="pointer-events-none absolute inset-0 flex flex-col justify-center gap-5 opacity-35" aria-hidden>
-          <div className="flex justify-center gap-x-10 whitespace-nowrap px-6 text-4xl font-black uppercase leading-none tracking-tight sm:text-6xl">
-            {MAKES.slice(0, 13).map((make) => <span key={make}>{make}</span>)}
-          </div>
-          <div className="flex justify-center gap-x-10 whitespace-nowrap px-6 text-4xl font-black uppercase leading-none tracking-tight sm:text-6xl">
-            {MAKES.slice(13).map((make) => <span key={make}>{make}</span>)}
-          </div>
-        </div>
-        <div className="relative wrap py-16 sm:py-20">
-          <h1 className="text-4xl font-semibold text-white sm:text-6xl">{t("rangeTitle")}</h1>
-          <p className="mt-3 max-w-2xl text-lg text-white/90">{t("rangeSub")}</p>
-        </div>
+      <section>
+        <img src="/product-range-banner.png" alt="Our Product Range" className="h-auto w-full" />
       </section>
       <main className="wrap grid gap-8 py-8 lg:grid-cols-[220px_minmax(0,1fr)]">
         <aside className="grid content-start gap-4">
