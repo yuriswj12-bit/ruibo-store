@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { getStoreHome, searchCatalog } from "@/lib/commerce.functions";
 import { StoreShell } from "@/components/store/shell";
-import { LINES, MAKES, catalogSearch, lineImage, brandFromCabinet } from "@/components/store/catalog";
+import { LINES, MAKES, catalogSearch, lineImage, brandFromCabinet, type CatalogSearch } from "@/components/store/catalog";
 import { skuImage } from "@/components/store/sku-photos";
 import { useI18n, vehicleLabel } from "@/lib/i18n";
 import { shownOem } from "@/lib/oe";
@@ -164,15 +164,20 @@ function Catalog() {
               </tbody>
             </table>
           </div>
-          {pages > 1 && (
-            <div className="mt-4 flex flex-wrap items-center gap-3 text-sm">
-              <Link to="/products" search={{ ...deps, page: 1 }} className="hover:text-[#092949]">First</Link>
-              <Link to="/products" search={{ ...deps, page: Math.max(1, page - 1) }} className="hover:text-[#092949]">Back</Link>
-              <Link to="/products" search={{ ...deps, page: Math.min(pages, page + 1) }} className="hover:text-[#092949]">Next</Link>
-              <Link to="/products" search={{ ...deps, page: pages }} className="hover:text-[#092949]">Last</Link>
-              <span className="text-muted">{page}/{pages} · {products.length}</span>
+          <nav className="mt-6 flex flex-col items-center gap-3" aria-label="pagination">
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              <PageBtn search={{ ...deps, page: 1 }} disabled={page <= 1}>{"|<"}</PageBtn>
+              <PageBtn search={{ ...deps, page: Math.max(1, page - 1) }} disabled={page <= 1}>{"<"}</PageBtn>
+              {pageWindow(page, pages).map((item, index) => item === "..." ? (
+                <span key={`gap-${index}`} className="grid h-9 min-w-9 place-items-center px-1 text-sm text-muted">...</span>
+              ) : (
+                <PageBtn key={item} search={{ ...deps, page: item }} current={item === page}>{item}</PageBtn>
+              ))}
+              <PageBtn search={{ ...deps, page: Math.min(pages, page + 1) }} disabled={page >= pages}>{">"}</PageBtn>
+              <PageBtn search={{ ...deps, page: pages }} disabled={page >= pages}>{">|"}</PageBtn>
             </div>
-          )}
+            <p className="text-sm text-muted">{t("pageOf", { page, pages })}</p>
+          </nav>
           <div className="mt-10 rounded-card bg-ink px-5 py-6 text-white">
             <h2 className="text-2xl">{t("cantFind")}</h2>
             <p className="mt-2 text-white/80">{t("cantFindBody")}</p>
@@ -181,5 +186,36 @@ function Catalog() {
         </div>
       </main>
     </StoreShell>
+  );
+}
+
+function pageWindow(current: number, total: number): Array<number | "..."> {
+  if (total <= 7) return Array.from({ length: total }, (_, index) => index + 1);
+  if (current <= 4) return [1, 2, 3, 4, "...", total];
+  if (current >= total - 3) return [1, "...", total - 3, total - 2, total - 1, total];
+  return [1, "...", current - 1, current, current + 1, "...", total];
+}
+
+function PageBtn({
+  search,
+  disabled,
+  current,
+  children,
+}: {
+  search: CatalogSearch;
+  disabled?: boolean;
+  current?: boolean;
+  children: React.ReactNode;
+}) {
+  const className = current
+    ? "grid h-9 min-w-9 place-items-center rounded-lg bg-[#092949] px-2 text-sm font-semibold text-white"
+    : "grid h-9 min-w-9 place-items-center rounded-lg border border-line bg-white px-2 text-sm text-ink hover:border-[#092949]";
+  if (disabled) {
+    return <span className="grid h-9 min-w-9 place-items-center rounded-lg border border-line bg-white px-2 text-sm text-muted opacity-40">{children}</span>;
+  }
+  return (
+    <Link to="/products" search={search} className={className}>
+      {children}
+    </Link>
   );
 }
