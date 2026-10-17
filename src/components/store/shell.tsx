@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { SignedIn, SignedOut, UserButton } from "@/lib/auth/gates";
-import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { LANGS, useI18n } from "@/lib/i18n";
 import { LINES, catalogSearch } from "@/components/store/catalog";
 import { OeSearch } from "@/components/store/oe-search";
@@ -19,7 +17,7 @@ export function StoreShell({
   showSearch?: boolean;
   children: React.ReactNode;
 }) {
-  const { t, lang, setLang } = useI18n();
+  const { t } = useI18n();
   return (
     <div className="min-h-screen bg-paper text-ink">
       <header className="sticky top-0 z-30 border-b border-line bg-card">
@@ -46,23 +44,8 @@ export function StoreShell({
             <Link to="/about" className="hover:text-copper">{t("navAbout")}</Link>
             <Link to="/contact" className="hover:text-copper">{t("navContact")}</Link>
           </nav>
-          <div className="flex items-center gap-2 text-sm sm:gap-3">
-            <div className="flex items-center rounded-full border border-line p-0.5" role="group" aria-label={t("language")}>
-              {LANGS.map((item) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  aria-pressed={lang === item.id}
-                  onClick={() => setLang(item.id)}
-                  className={lang === item.id
-                    ? "rounded-full bg-ink px-2.5 py-1 text-xs font-semibold text-white"
-                    : "rounded-full px-2.5 py-1 text-xs text-muted"}
-                >
-                  {item.id === "zh" ? "中文" : item.id === "en" ? "EN" : item.id === "es" ? "ES" : "PT"}
-                </button>
-              ))}
-            </div>
-            <AuthSlot />
+          <div className="flex items-center gap-2 text-sm">
+            <LangMenu />
           </div>
         </div>
         <div className="wrap flex gap-2 overflow-x-auto pb-2 text-sm lg:hidden">
@@ -127,6 +110,55 @@ export function StoreShell({
   );
 }
 
+function LangMenu() {
+  const { t, lang, setLang } = useI18n();
+  const [open, setOpen] = useState(false);
+  const box = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    const close = (event: MouseEvent) => {
+      if (!box.current?.contains(event.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", close);
+    return () => document.removeEventListener("mousedown", close);
+  }, [open]);
+  return (
+    <div className="relative" ref={box}>
+      <button
+        type="button"
+        aria-label={t("language")}
+        aria-expanded={open}
+        onClick={() => setOpen((value) => !value)}
+        className="grid size-10 place-items-center rounded-full text-[#5c6370] hover:bg-[#f4f6fb]"
+      >
+        <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
+          <circle cx="12" cy="12" r="9" />
+          <path d="M3 12h18M12 3c2.5 2.8 3.8 5.8 3.8 9s-1.3 6.2-3.8 9c-2.5-2.8-3.8-5.8-3.8-9s1.3-6.2 3.8-9Z" />
+        </svg>
+      </button>
+      {open && (
+        <div className="absolute right-0 top-full z-50 mt-2 w-40 overflow-hidden rounded-xl border border-line bg-white py-1 text-sm shadow-lg">
+          {LANGS.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              onClick={() => {
+                setLang(item.id);
+                setOpen(false);
+              }}
+              className={lang === item.id
+                ? "block w-full px-4 py-2.5 text-left font-semibold text-[#092949]"
+                : "block w-full px-4 py-2.5 text-left text-[#1a1a2e] hover:bg-[#f4f6fb]"}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function SideDock({ email, whatsapp }: { email?: string; whatsapp?: string }) {
   const [show, setShow] = useState(false);
   useEffect(() => {
@@ -172,23 +204,5 @@ function SideDock({ email, whatsapp }: { email?: string; whatsapp?: string }) {
         </svg>
       </button>
     </div>
-  );
-}
-
-function AuthSlot() {
-  const { t } = useI18n();
-  const { user, isPending } = useCurrentUserState();
-  if (isPending) return <span className="inline-block h-8 w-16 animate-pulse rounded-full bg-line" />;
-  if (user) {
-    return (
-      <SignedIn>
-        <UserButton />
-      </SignedIn>
-    );
-  }
-  return (
-    <SignedOut>
-      <Link to="/login" className="rounded-full bg-ink px-3 py-2 text-copper-ink">{t("signIn")}</Link>
-    </SignedOut>
   );
 }
