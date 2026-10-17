@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { getStoreHome, searchCatalog } from "@/lib/commerce.functions";
 import { StoreShell } from "@/components/store/shell";
-import { LINES, catalogSearch, lineImage, brandFromCabinet } from "@/components/store/catalog";
+import { LINES, MAKES, catalogSearch, lineImage, brandFromCabinet } from "@/components/store/catalog";
 import { useI18n, vehicleLabel } from "@/lib/i18n";
 import { shownOem } from "@/lib/oe";
 
@@ -36,12 +36,16 @@ function Catalog() {
   const visible = products.slice((page - 1) * pageSize, page * pageSize);
   const from = products.length === 0 ? 0 : (page - 1) * pageSize + 1;
   const to = Math.min(products.length, page * pageSize);
-  const brands = [...new Set(
+  const present = new Set(
     store.products
       .filter((product) => !deps.line || product.line === deps.line)
       .map((product) => brandFromCabinet(product.sku, product.vehicle))
       .filter(Boolean),
-  )].sort();
+  );
+  const brands = [
+    ...MAKES.filter((brand) => present.has(brand)),
+    ...[...present].filter((brand) => !MAKES.includes(brand as (typeof MAKES)[number])).sort(),
+  ];
   const go = (patch: Partial<typeof deps>) => {
     void navigate({ to: "/products", search: catalogSearch({ ...deps, page: 1, ...patch }) });
   };
