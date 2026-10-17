@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { getStoreHome, searchCatalog } from "@/lib/commerce.functions";
 import { StoreShell } from "@/components/store/shell";
-import { LINES, catalogSearch, lineImage } from "@/components/store/catalog";
+import { LINES, catalogSearch, lineImage, brandFromCabinet } from "@/components/store/catalog";
 import { useI18n, vehicleLabel } from "@/lib/i18n";
 import { shownOem } from "@/lib/oe";
 
@@ -39,7 +39,7 @@ function Catalog() {
   const brands = [...new Set(
     store.products
       .filter((product) => !deps.line || product.line === deps.line)
-      .map((product) => product.vehicle)
+      .map((product) => brandFromCabinet(product.sku, product.vehicle))
       .filter(Boolean),
   )].sort();
   const go = (patch: Partial<typeof deps>) => {
@@ -75,7 +75,7 @@ function Catalog() {
               ))}
             </select>
           </label>
-          {deps.line === "Automotive" && (
+          {deps.line !== "" && (
             <>
               <label className="grid gap-1 text-sm">
                 <span className="font-semibold">{t("filterBrand")}</span>
@@ -90,18 +90,22 @@ function Catalog() {
                   ))}
                 </select>
               </label>
-              <label className="grid gap-1 text-sm">
-                <span className="font-semibold">{t("filterModel")}</span>
-                <select className={selectClass} value="" disabled>
-                  <option value="">{t("allModels")}</option>
-                </select>
-              </label>
-              <label className="grid gap-1 text-sm">
-                <span className="font-semibold">{t("filterSeries")}</span>
-                <select className={selectClass} value="" disabled>
-                  <option value="">{t("allSeries")}</option>
-                </select>
-              </label>
+              {deps.line === "Automotive" && (
+                <>
+                  <label className="grid gap-1 text-sm">
+                    <span className="font-semibold">{t("filterModel")}</span>
+                    <select className={selectClass} value="" disabled>
+                      <option value="">{t("allModels")}</option>
+                    </select>
+                  </label>
+                  <label className="grid gap-1 text-sm">
+                    <span className="font-semibold">{t("filterSeries")}</span>
+                    <select className={selectClass} value="" disabled>
+                      <option value="">{t("allSeries")}</option>
+                    </select>
+                  </label>
+                </>
+              )}
             </>
           )}
         </aside>
