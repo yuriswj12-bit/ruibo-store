@@ -1,4 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import arJson from "./locales/ar.json";
+import ruJson from "./locales/ru.json";
 
 /** First review ships in Chinese. Change to "en" after acceptance. */
 export const DEFAULT_LANG = "zh" as const;
@@ -8,6 +10,8 @@ export const LANGS = [
   { id: "en", label: "English" },
   { id: "es", label: "Español" },
   { id: "pt", label: "Português" },
+  { id: "ru", label: "Русский" },
+  { id: "ar", label: "العربية" },
 ] as const;
 
 export type Lang = (typeof LANGS)[number]["id"];
@@ -1070,35 +1074,42 @@ const pt: Record<Key, string> = {
   prefixNote: "Não há um número idêntico. Estas referências só partilham o início do que escreveu.",
 };
 
-const DICT: Record<Lang, Record<Key, string>> = { zh, en, es, pt };
+const DICT: Record<Lang, Record<Key, string>> = {
+  zh,
+  en,
+  es,
+  pt,
+  ru: ruJson as Record<Key, string>,
+  ar: arJson as Record<Key, string>,
+};
 
 const VEHICLES: Record<string, Record<Lang, string>> = {
-  Volkswagen: { zh: "大众", en: "Volkswagen", es: "Volkswagen", pt: "Volkswagen" },
-  Audi: { zh: "奥迪", en: "Audi", es: "Audi", pt: "Audi" },
-  BMW: { zh: "宝马", en: "BMW", es: "BMW", pt: "BMW" },
-  "Mercedes-Benz": { zh: "奔驰", en: "Mercedes-Benz", es: "Mercedes-Benz", pt: "Mercedes-Benz" },
-  "Land Rover": { zh: "路虎", en: "Land Rover", es: "Land Rover", pt: "Land Rover" },
-  Jaguar: { zh: "捷豹", en: "Jaguar", es: "Jaguar", pt: "Jaguar" },
-  Volvo: { zh: "沃尔沃", en: "Volvo", es: "Volvo", pt: "Volvo" },
-  Fiat: { zh: "菲亚特", en: "Fiat", es: "Fiat", pt: "Fiat" },
-  Honda: { zh: "本田", en: "Honda", es: "Honda", pt: "Honda" },
-  Toyota: { zh: "丰田", en: "Toyota", es: "Toyota", pt: "Toyota" },
-  Nissan: { zh: "日产", en: "Nissan", es: "Nissan", pt: "Nissan" },
-  Mazda: { zh: "马自达", en: "Mazda", es: "Mazda", pt: "Mazda" },
-  Suzuki: { zh: "铃木", en: "Suzuki", es: "Suzuki", pt: "Suzuki" },
-  Mitsubishi: { zh: "三菱", en: "Mitsubishi", es: "Mitsubishi", pt: "Mitsubishi" },
-  Hyundai: { zh: "现代", en: "Hyundai", es: "Hyundai", pt: "Hyundai" },
-  Ford: { zh: "福特", en: "Ford", es: "Ford", pt: "Ford" },
-  Chevrolet: { zh: "雪佛兰", en: "Chevrolet", es: "Chevrolet", pt: "Chevrolet" },
-  "Great Wall": { zh: "长城", en: "Great Wall", es: "Great Wall", pt: "Great Wall" },
-  Changan: { zh: "长安", en: "Changan", es: "Changan", pt: "Changan" },
-  BYD: { zh: "比亚迪", en: "BYD", es: "BYD", pt: "BYD" },
-  Chery: { zh: "奇瑞", en: "Chery", es: "Chery", pt: "Chery" },
-  Roewe: { zh: "荣威", en: "Roewe", es: "Roewe", pt: "Roewe" },
-  FAW: { zh: "一汽", en: "FAW", es: "FAW", pt: "FAW" },
-  Changhe: { zh: "昌河", en: "Changhe", es: "Changhe", pt: "Changhe" },
-  Lada: { zh: "拉达", en: "Lada", es: "Lada", pt: "Lada" },
-  Industrial: { zh: "工业", en: "Industrial", es: "Industrial", pt: "Industrial" },
+  Volkswagen: { zh: "大众", en: "Volkswagen", es: "Volkswagen", pt: "Volkswagen", ru: "Фольксваген", ar: "فولكسفاغن" },
+  Audi: { zh: "奥迪", en: "Audi", es: "Audi", pt: "Audi", ru: "Audi", ar: "أودي" },
+  BMW: { zh: "宝马", en: "BMW", es: "BMW", pt: "BMW", ru: "BMW", ar: "بي إم دبليو" },
+  "Mercedes-Benz": { zh: "奔驰", en: "Mercedes-Benz", es: "Mercedes-Benz", pt: "Mercedes-Benz", ru: "Мерседес-Бенц", ar: "مرسيدس-بنز" },
+  "Land Rover": { zh: "路虎", en: "Land Rover", es: "Land Rover", pt: "Land Rover", ru: "Ленд Ровер", ar: "لاند روفر" },
+  Jaguar: { zh: "捷豹", en: "Jaguar", es: "Jaguar", pt: "Jaguar", ru: "Ягуар", ar: "جاكوار" },
+  Volvo: { zh: "沃尔沃", en: "Volvo", es: "Volvo", pt: "Volvo", ru: "Вольво", ar: "فولفو" },
+  Fiat: { zh: "菲亚特", en: "Fiat", es: "Fiat", pt: "Fiat", ru: "Фиат", ar: "فيات" },
+  Honda: { zh: "本田", en: "Honda", es: "Honda", pt: "Honda", ru: "Хонда", ar: "هوندا" },
+  Toyota: { zh: "丰田", en: "Toyota", es: "Toyota", pt: "Toyota", ru: "Тойота", ar: "تويوتا" },
+  Nissan: { zh: "日产", en: "Nissan", es: "Nissan", pt: "Nissan", ru: "Ниссан", ar: "نيسان" },
+  Mazda: { zh: "马自达", en: "Mazda", es: "Mazda", pt: "Mazda", ru: "Мазда", ar: "مازدا" },
+  Suzuki: { zh: "铃木", en: "Suzuki", es: "Suzuki", pt: "Suzuki", ru: "Сузуки", ar: "سوزوكي" },
+  Mitsubishi: { zh: "三菱", en: "Mitsubishi", es: "Mitsubishi", pt: "Mitsubishi", ru: "Мицубиси", ar: "ميتسوبيشي" },
+  Hyundai: { zh: "现代", en: "Hyundai", es: "Hyundai", pt: "Hyundai", ru: "Хёндэ", ar: "هيونداي" },
+  Ford: { zh: "福特", en: "Ford", es: "Ford", pt: "Ford", ru: "Форд", ar: "فورد" },
+  Chevrolet: { zh: "雪佛兰", en: "Chevrolet", es: "Chevrolet", pt: "Chevrolet", ru: "Шевроле", ar: "شيفروليه" },
+  "Great Wall": { zh: "长城", en: "Great Wall", es: "Great Wall", pt: "Great Wall", ru: "Great Wall", ar: "جريت وول" },
+  Changan: { zh: "长安", en: "Changan", es: "Changan", pt: "Changan", ru: "Changan", ar: "شانجان" },
+  BYD: { zh: "比亚迪", en: "BYD", es: "BYD", pt: "BYD", ru: "BYD", ar: "بي واي دي" },
+  Chery: { zh: "奇瑞", en: "Chery", es: "Chery", pt: "Chery", ru: "Chery", ar: "شيري" },
+  Roewe: { zh: "荣威", en: "Roewe", es: "Roewe", pt: "Roewe", ru: "Roewe", ar: "رووي" },
+  FAW: { zh: "一汽", en: "FAW", es: "FAW", pt: "FAW", ru: "FAW", ar: "فاو" },
+  Changhe: { zh: "昌河", en: "Changhe", es: "Changhe", pt: "Changhe", ru: "Changhe", ar: "تشانغخه" },
+  Lada: { zh: "拉达", en: "Lada", es: "Lada", pt: "Lada", ru: "Лада", ar: "لادا" },
+  Industrial: { zh: "工业", en: "Industrial", es: "Industrial", pt: "Industrial", ru: "Промышленность", ar: "صناعي" },
 };
 
 const SPEC_KEYS: Record<string, Key> = {
@@ -1119,7 +1130,7 @@ const LocaleContext = createContext<{
 } | null>(null);
 
 function isLang(value: string | null): value is Lang {
-  return value === "zh" || value === "en" || value === "es" || value === "pt";
+  return value === "zh" || value === "en" || value === "es" || value === "pt" || value === "ru" || value === "ar";
 }
 
 export function LocaleProvider({ children }: { children: React.ReactNode }) {
@@ -1132,6 +1143,7 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     document.documentElement.lang = lang === "zh" ? "zh-CN" : lang;
+    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
   }, [lang]);
 
   function setLang(next: Lang) {
@@ -1161,6 +1173,8 @@ export function sensorTitle(lang: Lang, vehicle: string, sku: string) {
   if (lang === "zh") return `${name}氧传感器 ${sku}`;
   if (lang === "es") return `Sensor de oxígeno ${name} ${sku}`;
   if (lang === "pt") return `Sensor de oxigénio ${name} ${sku}`;
+  if (lang === "ru") return `Датчик кислорода ${name} ${sku}`;
+  if (lang === "ar") return `حساس أكسجين ${name} ${sku}`;
   return `${name} oxygen sensor ${sku}`;
 }
 
