@@ -5,6 +5,7 @@ import { DualAction } from "@/components/store/dual-action";
 import { InquiryForm } from "@/components/store/inquiry-form";
 import { moneyLabel, useI18n, vehicleLabel } from "@/lib/i18n";
 import { lineImage } from "@/components/store/catalog";
+import { skuImage } from "@/components/store/sku-photos";
 import { normalizeOe, shownOem } from "@/lib/oe";
 
 export const Route = createFileRoute("/products/$sku")({
@@ -38,7 +39,7 @@ function ProductPage() {
             playsInline
             className="aspect-square w-full rounded-card border border-line bg-card object-cover"
           />
-          <img src={lineImage(String(product.specs.line || "Automotive"))} alt={displayOe} className="aspect-square w-full rounded-card border border-line object-cover" />
+          <img src={skuImage(product.sku) || lineImage(String(product.specs.line || "Automotive"))} alt={displayOe} className="aspect-square w-full rounded-card border border-line bg-white object-contain" />
           <p className="text-xs text-muted">{t("videoLabel")} · {t("photoLabel")}</p>
         </div>
         <div className="grid gap-4">

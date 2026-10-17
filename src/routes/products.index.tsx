@@ -2,6 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { getStoreHome, searchCatalog } from "@/lib/commerce.functions";
 import { StoreShell } from "@/components/store/shell";
 import { LINES, MAKES, catalogSearch, lineImage, brandFromCabinet } from "@/components/store/catalog";
+import { skuImage } from "@/components/store/sku-photos";
 import { useI18n, vehicleLabel } from "@/lib/i18n";
 import { shownOem } from "@/lib/oe";
 
@@ -139,7 +140,7 @@ function Catalog() {
                   return (
                     <tr key={product.sku} className="border-t border-line align-top">
                       <td className="px-3 py-3">
-                        <img src={lineImage(product.line || "Automotive")} alt="" className="h-14 w-20 rounded object-cover" />
+                        <img src={skuImage(product.sku) || lineImage(product.line || "Automotive")} alt="" className="h-14 w-20 rounded bg-white object-contain" />
                       </td>
                       <td className="px-3 py-3">
                         <Link to="/products/$sku" params={{ sku: product.sku }} search={{ oe: oem }} className="font-semibold text-[#092949] underline">
