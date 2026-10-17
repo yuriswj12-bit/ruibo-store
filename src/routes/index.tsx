@@ -16,7 +16,7 @@ function Home() {
   const store = Route.useLoaderData();
   if (!store) return <main className="wrap py-16">{t("catalogNotReady")}</main>;
   return (
-    <StoreShell name={store.name} email={store.email} whatsapp={store.whatsapp} showSearch={false}>
+    <StoreShell name={store.name} email={store.email} whatsapp={store.whatsapp}>
       <section className="bg-paper">
         <div className="relative overflow-hidden bg-[#071e36] text-white">
           <video

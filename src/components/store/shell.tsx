@@ -2,19 +2,16 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { LANGS, useI18n } from "@/lib/i18n";
 import { LINES, catalogSearch } from "@/components/store/catalog";
-import { OeSearch } from "@/components/store/oe-search";
 
 export function StoreShell({
   name,
   email,
   whatsapp,
-  showSearch = true,
   children,
 }: {
   name: string;
   email?: string;
   whatsapp?: string;
-  showSearch?: boolean;
   children: React.ReactNode;
 }) {
   const { t } = useI18n();
@@ -56,11 +53,6 @@ export function StoreShell({
           <Link to="/about" className="shrink-0 rounded-full border border-line px-3 py-1">{t("navAbout")}</Link>
           <Link to="/contact" className="shrink-0 rounded-full border border-line px-3 py-1">{t("navContact")}</Link>
         </div>
-        {showSearch && (
-          <div className="wrap pb-3">
-            <OeSearch />
-          </div>
-        )}
       </header>
       {children}
       <footer className="bg-[#071e36] text-sm text-white/70">
