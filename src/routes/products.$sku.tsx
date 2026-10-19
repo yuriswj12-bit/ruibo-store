@@ -1,10 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { getProduct, getStoreHome } from "@/lib/commerce.functions";
 import { StoreShell } from "@/components/store/shell";
-import { DualAction } from "@/components/store/dual-action";
 import { InquiryForm } from "@/components/store/inquiry-form";
 import { Reveal } from "@/components/store/reveal";
-import { moneyLabel, useI18n, vehicleLabel } from "@/lib/i18n";
+import { useI18n, vehicleLabel } from "@/lib/i18n";
 import { lineImage } from "@/components/store/catalog";
 import { skuImage } from "@/components/store/sku-photos";
 import { normalizeOe, shownOem } from "@/lib/oe";
@@ -59,28 +58,6 @@ function ProductPage() {
           <section className="grid gap-3 rounded-card border border-line bg-card p-4">
             <h2 className="text-lg">{t("briefTitle")}</h2>
             <p className="leading-7 text-muted">{t("coverNote")}</p>
-            <dl className="grid gap-2 text-sm sm:grid-cols-2">
-              <div>
-                <dt className="text-muted">{t("attrOrigin")}</dt>
-                <dd className="font-medium">{t("originWenzhou")}</dd>
-              </div>
-              <div>
-                <dt className="text-muted">{t("attrSample")}</dt>
-                <dd className="font-medium">${product.samplePrice}</dd>
-              </div>
-              <div>
-                <dt className="text-muted">{t("attrStock")}</dt>
-                <dd className="font-medium">{t("stockPcs", { n: product.sampleStock })}</dd>
-              </div>
-              <div>
-                <dt className="text-muted">{t("attrMoq")}</dt>
-                <dd className="font-medium">{t("stockPcs", { n: product.moq })}</dd>
-              </div>
-              <div>
-                <dt className="text-muted">{t("attrBulk")}</dt>
-                <dd className="font-medium">{moneyLabel(lang, product.priceRange)}</dd>
-              </div>
-            </dl>
           </section>
           <section className="rounded-card border border-line bg-card p-4">
             <h2 className="text-lg">{t("colOem")}</h2>
@@ -92,14 +69,6 @@ function ProductPage() {
               ))}
             </ul>
           </section>
-          <DualAction
-            sku={product.sku}
-            title={displayOe}
-            samplePrice={product.samplePrice}
-            sampleStock={product.sampleStock}
-            matchedOe={displayOe}
-            whatsapp={store.whatsapp}
-          />
           {product.fitments.length > 0 && (
           <section className="overflow-x-auto rounded-card border border-line bg-card">
             <p className="border-b border-line px-4 py-3 text-sm">{t("fitsFor", { oe: displayOe })}</p>
@@ -127,19 +96,22 @@ function ProductPage() {
             </table>
           </section>
           )}
-          <section className="grid gap-3">
-            {([
-              ["secOverview", "detailOverview"],
-              ["secFeatures", "detailFeatures"],
-              ["secAdvantages", "detailAdvantages"],
-              ["secApps", "detailApps"],
-              ["secQa", "detailQa"],
-            ] as const).map(([title, body]) => (
-              <article key={title} className="rounded-card border border-line bg-card p-4">
-                <h2 className="text-xl">{t(title)}</h2>
-                <p className="mt-2 text-sm text-muted">{t(body)}</p>
-              </article>
-            ))}
+          <section className="rounded-card border border-line bg-card p-4">
+            <h2 className="text-lg">{t("productDetails")}</h2>
+            <dl className="mt-4 grid gap-4">
+              {([
+                ["secOverview", "detailOverview"],
+                ["secFeatures", "detailFeatures"],
+                ["secAdvantages", "detailAdvantages"],
+                ["secApps", "detailApps"],
+                ["secQa", "detailQa"],
+              ] as const).map(([title, body]) => (
+                <div key={title}>
+                  <dt className="font-semibold">{t(title)}</dt>
+                  <dd className="mt-1 text-sm leading-6 text-muted">{t(body)}</dd>
+                </div>
+              ))}
+            </dl>
           </section>
           {related.length > 0 && (
           <section>
@@ -159,7 +131,7 @@ function ProductPage() {
           </section>
           )}
           <section className="rounded-card border border-line bg-card p-4">
-            <h2 className="mb-3 text-2xl">{t("quoteTitle")}</h2>
+            <h2 className="mb-3 text-2xl">{t("sendInquiry")}</h2>
             <InquiryForm sku={product.sku} matchedOe={displayOe} />
           </section>
         </Reveal>
