@@ -107,7 +107,7 @@ function Contact() {
                 <iframe
                   title={copy.title}
                   className="h-72 w-full"
-                  src="https://maps.google.com/maps?q=No.59-61%20North%20Fumin%20Road,%20Ruian,%20Wenzhou,%20Zhejiang,%20China&hl=en&z=12&output=embed"
+                  src="https://maps.google.com/maps?q=27.78657,120.67780&hl=en&z=16&output=embed"
                 />
                 <div className="px-5 py-4">
                   <p className="font-semibold">{store.name}</p>
