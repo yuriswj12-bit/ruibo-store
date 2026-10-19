@@ -20,6 +20,17 @@ export const Route = createFileRoute("/products/$sku")({
   component: ProductPage,
 });
 
+const LINE_NAME = {
+  Automotive: "tileAuto",
+  Motorcycle: "tileMoto",
+  Industrial: "tileInd",
+  NOx: "tileNox",
+} as const;
+
+function lineName(line: string) {
+  return LINE_NAME[line as keyof typeof LINE_NAME] ?? "tileAuto";
+}
+
 function ProductPage() {
   const { t, lang } = useI18n();
   const { oe } = Route.useSearch();
@@ -29,34 +40,25 @@ function ProductPage() {
   const typed = normalizeOe(oe);
   const matched = product.oeBrands.find((item) => normalizeOe(item.raw) === typed);
   const displayOe = matched?.raw || shownOem(product.oes, oe);
+  const photo = skuImage(product.sku) || lineImage(String(product.specs.line || "Automotive"));
+  const related = store.products.filter((item) => item.vehicle === vehicle && item.sku !== product.sku).slice(0, 4);
   return (
     <StoreShell name={store.name} email={store.email}>
-      <main className="wrap grid gap-6 py-8 lg:grid-cols-[280px_1fr]">
+      <main className="wrap grid gap-6 py-8 lg:grid-cols-[420px_1fr]">
         <Reveal variant="right" className="grid content-start gap-3">
-          <video
-            src="/sensor.mp4"
-            poster="/auto.jpg"
-            controls
-            playsInline
-            className="aspect-square w-full rounded-card border border-line bg-card object-cover"
-          />
-          <img src={skuImage(product.sku) || lineImage(String(product.specs.line || "Automotive"))} alt={displayOe} className="aspect-square w-full rounded-card border border-line bg-white object-contain" />
-          <p className="text-xs text-muted">{t("videoLabel")} · {t("photoLabel")}</p>
+          <img src={photo} alt={displayOe} className="aspect-square w-full rounded-card border border-line bg-white object-contain" />
         </Reveal>
         <Reveal variant="left" className="grid gap-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-copper">{vehicle ? vehicleLabel(lang, vehicle) : ""}</p>
+          <p className="text-sm font-semibold text-[#071e36]">{t(lineName(product.line))}</p>
           <h1 className="text-4xl leading-tight">{displayOe}</h1>
+          <p className="text-sm text-muted">
+            {vehicle ? vehicleLabel(lang, vehicle) : ""}
+            {vehicle ? " · " : ""}
+            {t("colNumber")} {product.sku}
+          </p>
           <section className="grid gap-3 rounded-card border border-line bg-card p-4">
             <h2 className="text-lg">{t("briefTitle")}</h2>
-            <p>
-              {t("briefBody", {
-                oe: displayOe,
-                vehicle: vehicle ? vehicleLabel(lang, vehicle) : "",
-                price: product.samplePrice,
-                stock: product.sampleStock,
-                moq: product.moq,
-              })}
-            </p>
+            <p className="leading-7 text-muted">{t("coverNote")}</p>
             <dl className="grid gap-2 text-sm sm:grid-cols-2">
               <div>
                 <dt className="text-muted">{t("attrOrigin")}</dt>
@@ -79,6 +81,16 @@ function ProductPage() {
                 <dd className="font-medium">{moneyLabel(lang, product.priceRange)}</dd>
               </div>
             </dl>
+          </section>
+          <section className="rounded-card border border-line bg-card p-4">
+            <h2 className="text-lg">{t("colOem")}</h2>
+            <ul className="mt-3 grid gap-2">
+              {product.oes.map((oe) => (
+                <li key={oe} className={normalizeOe(oe) === normalizeOe(displayOe) ? "font-semibold text-[#071e36]" : "text-sm text-muted"}>
+                  {oe}
+                </li>
+              ))}
+            </ul>
           </section>
           <DualAction
             sku={product.sku}
@@ -129,13 +141,15 @@ function ProductPage() {
               </article>
             ))}
           </section>
+          {related.length > 0 && (
           <section>
             <h2 className="text-2xl">{t("related")}</h2>
-            <div className="mt-3 grid gap-2 sm:grid-cols-2">
-              {store.products.filter((item) => item.vehicle === vehicle && item.sku !== product.sku).slice(0, 4).map((item) => {
+            <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {related.map((item) => {
                 const oem = shownOem(item.oes);
                 return (
                   <Link key={item.sku} to="/products/$sku" params={{ sku: item.sku }} search={{ oe: oem }} className="rounded-card border border-line bg-card p-3">
+                    <img src={skuImage(item.sku) || lineImage(item.line || "Automotive")} alt="" className="mb-2 h-24 w-full rounded bg-white object-contain" />
                     <span className="block font-medium">{oem}</span>
                     <span className="text-sm text-muted">{vehicleLabel(lang, item.vehicle)}</span>
                   </Link>
@@ -143,6 +157,7 @@ function ProductPage() {
               })}
             </div>
           </section>
+          )}
           <section className="rounded-card border border-line bg-card p-4">
             <h2 className="mb-3 text-2xl">{t("quoteTitle")}</h2>
             <InquiryForm sku={product.sku} matchedOe={displayOe} />
