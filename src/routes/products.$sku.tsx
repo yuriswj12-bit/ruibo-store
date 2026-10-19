@@ -1,10 +1,10 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { getProduct, getStoreHome } from "@/lib/commerce.functions";
 import { StoreShell } from "@/components/store/shell";
 import { InquiryForm } from "@/components/store/inquiry-form";
 import { Reveal } from "@/components/store/reveal";
 import { useI18n, vehicleLabel } from "@/lib/i18n";
-import { lineImage } from "@/components/store/catalog";
+import { LINES, MAKES, catalogSearch, lineImage, brandFromCabinet } from "@/components/store/catalog";
 import { skuImage } from "@/components/store/sku-photos";
 import { normalizeOe, shownOem } from "@/lib/oe";
 
@@ -41,10 +41,61 @@ function ProductPage() {
   const displayOe = matched?.raw || shownOem(product.oes, oe);
   const photo = skuImage(product.sku) || lineImage(String(product.specs.line || "Automotive"));
   const related = store.products.filter((item) => item.vehicle === vehicle && item.sku !== product.sku).slice(0, 4);
+  const navigate = useNavigate();
+  const selectClass = "h-11 w-full rounded-lg border border-line bg-card px-3 text-sm";
+  const present = new Set(store.products.map((item) => brandFromCabinet(item.sku, item.vehicle)).filter(Boolean));
+  const brands = [
+    ...MAKES.filter((brand) => present.has(brand)),
+    ...[...present].filter((brand) => !MAKES.includes(brand as (typeof MAKES)[number])).sort(),
+  ];
   return (
     <StoreShell name={store.name} email={store.email}>
-      <main className="wrap grid gap-6 py-8 lg:grid-cols-[420px_1fr]">
-        <Reveal variant="right" className="grid content-start gap-3">
+      <main className="wrap grid gap-8 py-8 lg:grid-cols-[240px_minmax(0,1fr)]">
+        <Reveal variant="right" className="grid content-start gap-4">
+          <form className="grid gap-2" action="/products">
+            <p className="text-sm font-semibold">{t("findOem")}</p>
+            <div className="flex">
+              <input name="q" defaultValue={oe} placeholder={t("oemOrBosch")} className="h-11 min-w-0 flex-1 rounded-l-lg border border-line bg-card px-3" />
+              <button type="submit" className="h-11 rounded-r-lg bg-[#071e36] px-4 text-sm font-semibold text-white">GO</button>
+            </div>
+          </form>
+          <label className="grid gap-1 text-sm">
+            <span className="font-semibold">{t("filterLine")}</span>
+            <select className={selectClass} defaultValue={product.line} onChange={(event) => navigate({ to: "/products", search: catalogSearch({ line: event.target.value }) })}>
+              <option value="">{t("allLines")}</option>
+              {LINES.map((item) => (
+                <option key={item.id} value={item.id}>{t(item.title)}</option>
+              ))}
+            </select>
+          </label>
+          {product.line === "Automotive" && (
+            <>
+              <label className="grid gap-1 text-sm">
+                <span className="font-semibold">{t("filterBrand")}</span>
+                <select className={selectClass} defaultValue={vehicle} onChange={(event) => navigate({ to: "/products", search: catalogSearch({ line: "Automotive", make: event.target.value }) })}>
+                  <option value="">{t("allBrands")}</option>
+                  {brands.map((brand) => (
+                    <option key={brand} value={brand}>{vehicleLabel(lang, brand)}</option>
+                  ))}
+                </select>
+              </label>
+              <label className="grid gap-1 text-sm">
+                <span className="font-semibold">{t("filterModel")}</span>
+                <select className={selectClass} value="" disabled>
+                  <option value="">{t("allModels")}</option>
+                </select>
+              </label>
+              <label className="grid gap-1 text-sm">
+                <span className="font-semibold">{t("filterSeries")}</span>
+                <select className={selectClass} value="" disabled>
+                  <option value="">{t("allSeries")}</option>
+                </select>
+              </label>
+            </>
+          )}
+        </Reveal>
+        <div className="grid min-w-0 content-start gap-6 lg:grid-cols-[320px_minmax(0,1fr)]">
+        <Reveal variant="up" className="grid content-start gap-3">
           <img src={photo} alt={displayOe} className="aspect-square w-full rounded-card border border-line bg-white object-contain" />
         </Reveal>
         <Reveal variant="left" className="grid gap-4">
@@ -96,8 +147,9 @@ function ProductPage() {
             </table>
           </section>
           )}
-          {related.length > 0 && (
-          <section>
+        </Reveal>
+                  {related.length > 0 && (
+          <section className="lg:col-span-2">
             <h2 className="text-2xl">{t("related")}</h2>
             <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {related.map((item) => {
@@ -113,11 +165,11 @@ function ProductPage() {
             </div>
           </section>
           )}
-          <section className="rounded-card border border-line bg-card p-4">
+          <section className="rounded-card border border-line bg-card p-4 lg:col-span-2">
             <h2 className="mb-3 text-2xl">{t("sendInquiry")}</h2>
             <InquiryForm sku={product.sku} matchedOe={displayOe} />
           </section>
-        </Reveal>
+        </div>
       </main>
     </StoreShell>
   );
