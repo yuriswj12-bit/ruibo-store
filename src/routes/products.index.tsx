@@ -136,7 +136,24 @@ function Catalog() {
           {deps.line === "Automotive" && (
             <p className="mt-4 max-w-3xl text-sm leading-7 text-[#3d4d63]">{t("coverNote")}</p>
           )}
-          <div className="mt-4 overflow-x-auto rounded-card border border-line bg-card">
+          <div className="mt-4 grid gap-3 md:hidden">
+            {visible.map((product) => {
+              const oem = shownOem(product.oes, deps.q);
+              return (
+                <article key={product.sku} className="grid grid-cols-[88px_minmax(0,1fr)] gap-3 rounded-card border border-line bg-card p-3">
+                  <img src={skuImage(product.sku) || lineImage(product.line || "Automotive")} alt="" className="h-20 w-full rounded bg-white object-contain" />
+                  <div className="min-w-0">
+                    <p className="text-xs text-muted">{t(lineName(product.line))}</p>
+                    <Link to="/products/$sku" params={{ sku: product.sku }} search={{ oe: oem }} className="mt-1 block truncate font-semibold text-[#092949]">{oem}</Link>
+                    <p className="mt-1 text-xs text-muted">{t("colNumber")} {product.sku}</p>
+                    <Link to="/contact" className="mt-2 inline-block rounded bg-[#071e36] px-3 py-1.5 text-xs font-semibold text-white">{t("inquire")}</Link>
+                  </div>
+                </article>
+              );
+            })}
+            {products.length === 0 && <p className="rounded-card border border-line bg-card px-3 py-8 text-sm text-muted">{deps.line && !deps.q && !deps.make ? t("lineEmpty") : t("noMatch")}</p>}
+          </div>
+          <div className="mt-4 hidden overflow-x-auto rounded-card border border-line bg-card md:block">
             <table className="w-full min-w-[720px] text-left text-sm">
               <thead className="bg-[#f4f6fb] text-xs uppercase tracking-wide text-muted">
                 <tr>

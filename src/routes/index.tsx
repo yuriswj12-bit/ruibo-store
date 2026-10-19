@@ -41,7 +41,7 @@ function Home() {
                   </svg>
                   {t("heroBadge")}
                 </p>
-                <h1 className="mt-6 max-w-2xl text-4xl font-semibold leading-[1.2] tracking-tight sm:text-5xl lg:text-[3.4rem]">
+                <h1 className="mt-6 max-w-2xl text-3xl font-semibold leading-[1.2] tracking-tight sm:text-5xl lg:text-[3.4rem]">
                   <span className="text-white">{t("heroTitle")}</span>
                   <span className="mt-2 block text-[#d6ebff]">{t("heroAccent")}</span>
                 </h1>
@@ -55,14 +55,14 @@ function Home() {
                   </Link>
                 </div>
                 <div className="mt-6 h-px w-full bg-white/35" />
-                <dl className="mt-8 grid w-full justify-between gap-x-8" style={{ gridTemplateColumns: "repeat(4, max-content)" }}>
+                <dl className="mt-8 grid w-full grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-4">
                   {([
                     ["statYears", "statYearsLabel"],
                     ["statCount", "statCountLabel"],
                     ["statCountries", "statCountriesLabel"],
                     ["statRate", "statRateLabel"],
                   ] as const).map(([value, label]) => (
-                    <div key={value} className="min-w-[6.5rem]">
+                    <div key={value} className="min-w-0">
                       <dd className="whitespace-nowrap text-3xl font-semibold leading-none tracking-tight text-white sm:text-4xl">{t(value)}</dd>
                       <dt className="mt-2 text-xs text-white/75 sm:text-sm">{t(label)}</dt>
                     </div>
