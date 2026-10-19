@@ -98,11 +98,13 @@ export const searchCatalog = createServerFn({ method: "GET" })
       sample_stock: number;
       moq: number;
       vehicle: string | null;
+      line: string | null;
       exact: boolean;
     }>`
       with hits as (
         select p.sku, p.title, p.price_range, p.sample_price::text as sample_price, p.sample_stock, p.moq,
                p.specs->>'vehicle' as vehicle,
+               p.specs->>'line' as line,
                bool_or(o.normalized_oe = ${oe}) as exact
         from products p
         left join oe_refs o on o.product_id = p.id
@@ -112,7 +114,7 @@ export const searchCatalog = createServerFn({ method: "GET" })
           and (${line} = '' or p.specs->>'line' = ${line})
         group by p.sku, p.title, p.price_range, p.sample_price, p.sample_stock, p.moq, p.specs
       )
-      select sku, title, price_range, sample_price, sample_stock, moq, vehicle, exact
+      select sku, title, price_range, sample_price, sample_stock, moq, vehicle, line, exact
       from hits
       where ${oe} = '' or exact or not exists (select 1 from hits h where h.exact)
       order by sku
@@ -129,7 +131,7 @@ export const searchCatalog = createServerFn({ method: "GET" })
       sampleStock: product.sample_stock,
       moq: product.moq,
       vehicle: product.vehicle ?? "",
-      line: "",
+      line: product.line ?? "",
       oes: oes.filter((row) => row.sku === product.sku).map((row) => row.raw_oe),
       match: oe === "" ? "all" : matchedExact ? "exact" : "prefix",
     }));

@@ -167,6 +167,7 @@
   "oemOrBosch": "رقم OEM أو Bosch",
   "filter": "تصفية",
   "noMatch": "لا توجد قطعة منشورة تطابق هذا الرقم أو السيارة.",
+  "lineEmpty": "لا توجد أرقام منشورة في هذا الخط بعد.",
   "sampleMeta": "عينة ${price} · حد أدنى {moq} · {range}",
   "notPublished": "هذه القطعة غير منشورة.",
   "bulkLine": "كمية: {range} · حد أدنى {moq} · عينة ${price}",

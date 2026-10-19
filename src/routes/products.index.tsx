@@ -7,6 +7,17 @@ import { Reveal } from "@/components/store/reveal";
 import { useI18n, vehicleLabel } from "@/lib/i18n";
 import { shownOem } from "@/lib/oe";
 
+const LINE_NAME = {
+  Automotive: "tileAuto",
+  Motorcycle: "tileMoto",
+  Industrial: "tileInd",
+  NOx: "tileNox",
+} as const;
+
+function lineName(line: string) {
+  return LINE_NAME[line as keyof typeof LINE_NAME] ?? "tileAuto";
+}
+
 export const Route = createFileRoute("/products/")({
   validateSearch: (search: Record<string, unknown>) => ({
     q: typeof search.q === "string" ? search.q : "",
@@ -148,7 +159,7 @@ function Catalog() {
                           {oem}
                         </Link>
                       </td>
-                      <td className="px-3 py-3">{t("tileAuto").replace("Automotive ", "")}</td>
+                      <td className="px-3 py-3">{t(lineName(product.line))}</td>
                       <td className="px-3 py-3 text-xs leading-5 text-muted">{product.oes.join("\n")}</td>
                       <td className="px-3 py-3">{vehicleLabel(lang, product.vehicle)}</td>
                       <td className="px-3 py-3">
@@ -159,7 +170,7 @@ function Catalog() {
                 })}
                 {products.length === 0 && (
                   <tr>
-                    <td colSpan={6} className="px-3 py-8 text-muted">{t("noMatch")}</td>
+                    <td colSpan={6} className="px-3 py-8 text-muted">{deps.line && !deps.q && !deps.make ? t("lineEmpty") : t("noMatch")}</td>
                   </tr>
                 )}
               </tbody>
