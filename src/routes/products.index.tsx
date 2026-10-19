@@ -157,7 +157,7 @@ function Catalog() {
                       </td>
                       <td className="px-3 py-3">
                         <Link to="/products/$sku" params={{ sku: product.sku }} search={{ oe: oem }} className="font-semibold text-[#092949] underline">
-                          {oem}
+                          {product.sku}
                         </Link>
                       </td>
                       <td className="px-3 py-3">{t(lineName(product.line))}</td>
