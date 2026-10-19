@@ -105,18 +105,6 @@ function ProductPage() {
                     ))}
                   </select>
                 </label>
-                <label className="grid gap-1 text-sm">
-                  <span className="font-semibold">{t("filterModel")}</span>
-                  <select className={selectClass} value="" disabled>
-                    <option value="">{t("allModels")}</option>
-                  </select>
-                </label>
-                <label className="grid gap-1 text-sm">
-                  <span className="font-semibold">{t("filterSeries")}</span>
-                  <select className={selectClass} value="" disabled>
-                    <option value="">{t("allSeries")}</option>
-                  </select>
-                </label>
               </>
             )}
           </div>
