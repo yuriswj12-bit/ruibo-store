@@ -12,11 +12,15 @@ export function InquiryForm({
   matchedOe,
   compact = false,
   hero = false,
+  contact = false,
+  submitLabel,
 }: {
   sku?: string;
   matchedOe?: string;
   compact?: boolean;
   hero?: boolean;
+  contact?: boolean;
+  submitLabel?: string;
 }) {
   const { t } = useI18n();
   const [done, setDone] = useState("");
@@ -63,13 +67,20 @@ export function InquiryForm({
     return <p className="rounded-lg bg-paper px-3 py-3 text-sm">{t("inquirySent", { id: done })}</p>;
   }
 
-  const field = hero
-    ? "h-12 w-full rounded-lg border border-line bg-white px-3 text-sm outline-none placeholder:text-muted/80"
+  const field = hero || contact
+    ? "h-12 w-full rounded-lg border border-[#e6e8ee] bg-white px-3 text-sm outline-none placeholder:text-[#b0b6c0]"
     : "h-11 rounded-lg border border-line px-3";
 
   return (
     <form onSubmit={onSubmit} className="grid gap-3">
-      {hero ? (
+      {contact ? (
+        <>
+          <input name="name" required placeholder={t("phName")} className={field} />
+          <input name="email" type="email" required placeholder={t("phEmail")} className={field} />
+          <input name="phone" required placeholder={t("phPhone")} className={field} />
+          <textarea name="message" required rows={6} placeholder={t("phMessage")} className="w-full rounded-lg border border-[#e6e8ee] px-3 py-3 text-sm outline-none placeholder:text-[#b0b6c0]" />
+        </>
+      ) : hero ? (
         <>
           <input name="name" required placeholder={t("phName")} className={field} />
           <input name="email" type="email" required placeholder={t("phEmail")} className={field} />
@@ -111,18 +122,20 @@ export function InquiryForm({
       <button
         type="submit"
         disabled={pending}
-        className={hero
+        className={contact
+          ? "inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-[#2f6fe0] text-sm font-semibold text-white disabled:opacity-60"
+          : hero
           ? "inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-[#5b2dff] text-sm font-semibold text-white disabled:opacity-60"
           : "h-11 rounded-lg bg-ink px-4 text-copper-ink disabled:opacity-60"}
       >
-        {hero && (
+        {(hero || contact) && (
           <svg viewBox="0 0 24 24" className="size-4" aria-hidden>
             <path d="M3 11.5 21 3l-7.5 18-2.2-7.3L3 11.5Z" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
           </svg>
         )}
-        {pending ? t("inquirySending") : t("inquirySubmit")}
+        {pending ? t("inquirySending") : (submitLabel || t("inquirySubmit"))}
       </button>
-      {hero && <p className="text-center text-xs text-muted">{t("quoteSecure")}</p>}
+      {hero && !contact && <p className="text-center text-xs text-muted">{t("quoteSecure")}</p>}
     </form>
   );
 }
