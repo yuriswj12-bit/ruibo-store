@@ -10,7 +10,6 @@ export const Route = createFileRoute("/manufacturing")({
   component: Manufacturing,
 });
 
-const NAVY = "#092949";
 
 type Copy = {
   kicker: string;
@@ -170,8 +169,10 @@ function Manufacturing() {
   return (
     <StoreShell name={store.name} email={store.email} whatsapp={store.whatsapp}>
       <main>
-        <section className="relative overflow-hidden text-white" style={{ background: NAVY }}>
-          <img src="/sensor.jpg" alt="" className="absolute inset-0 h-full w-full object-cover opacity-25" />
+        <section className="relative overflow-hidden bg-[#071e36] text-white">
+          <img src="/sensor.jpg" alt="" className="pointer-events-none absolute inset-0 h-full w-full object-cover grayscale contrast-125" />
+          <div className="pointer-events-none absolute inset-0 bg-[#092949] mix-blend-multiply" />
+          <div className="pointer-events-none absolute inset-0 bg-[#0e375e]/45" />
           <Reveal variant="fade" className="wrap relative py-20 sm:py-28">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/70">{c.kicker}</p>
             <h1 className="mt-4 max-w-3xl text-4xl font-semibold leading-tight sm:text-5xl">{c.title}</h1>
@@ -285,7 +286,7 @@ function Manufacturing() {
           </Reveal>
         </section>
 
-        <section className="py-14 text-white" style={{ background: NAVY }}>
+        <section className="bg-[#071e36] py-14 text-white">
           <div className="wrap grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {c.tiles.map((tile, i) => (
               <Reveal key={tile.title} variant="up" delay={i * 60} className="rounded-xl bg-white/5 p-6 text-center backdrop-blur-sm">
