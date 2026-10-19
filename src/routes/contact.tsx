@@ -36,7 +36,7 @@ function Contact() {
           <div className="wrap py-20 text-white">
             <Reveal variant="up">
               <p className="text-xs font-semibold tracking-[0.22em] text-white/80">{copy.kicker}</p>
-              <h1 className="mt-3 text-5xl font-semibold tracking-tight sm:text-6xl">{copy.title}</h1>
+              <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-6xl">{copy.title}</h1>
               <p className="mt-4 max-w-xl text-base leading-7 text-white/85">{copy.lede}</p>
             </Reveal>
           </div>

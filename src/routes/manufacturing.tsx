@@ -175,7 +175,7 @@ function Manufacturing() {
           <div className="pointer-events-none absolute inset-0 bg-[#0e375e]/45" />
           <Reveal variant="fade" className="wrap relative py-20 sm:py-28">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/70">{c.kicker}</p>
-            <h1 className="mt-4 max-w-3xl text-4xl font-semibold leading-tight sm:text-5xl">{c.title}</h1>
+            <h1 className="mt-4 max-w-3xl text-3xl font-semibold leading-tight sm:text-5xl">{c.title}</h1>
             <p className="mt-5 max-w-2xl text-base leading-7 text-white/80">{c.lede}</p>
           </Reveal>
         </section>

@@ -59,40 +59,67 @@ function ProductPage() {
               <button type="submit" className="h-11 rounded-r-lg bg-[#071e36] px-4 text-sm font-semibold text-white">GO</button>
             </div>
           </form>
-          <label className="grid gap-1 text-sm">
-            <span className="font-semibold">{t("filterLine")}</span>
-            <select className={selectClass} defaultValue={product.line} onChange={(event) => navigate({ to: "/products", search: catalogSearch({ line: event.target.value }) })}>
-              <option value="">{t("allLines")}</option>
-              {LINES.map((item) => (
-                <option key={item.id} value={item.id}>{t(item.title)}</option>
-              ))}
-            </select>
-          </label>
-          {product.line === "Automotive" && (
-            <>
+          <details className="rounded-lg border border-line bg-card lg:hidden">
+            <summary className="cursor-pointer px-3 py-2 text-sm font-semibold">{t("filterLine")}</summary>
+            <div className="grid gap-3 border-t border-line p-3">
               <label className="grid gap-1 text-sm">
-                <span className="font-semibold">{t("filterBrand")}</span>
-                <select className={selectClass} defaultValue={vehicle} onChange={(event) => navigate({ to: "/products", search: catalogSearch({ line: "Automotive", make: event.target.value }) })}>
-                  <option value="">{t("allBrands")}</option>
-                  {brands.map((brand) => (
-                    <option key={brand} value={brand}>{vehicleLabel(lang, brand)}</option>
+                <span className="font-semibold">{t("filterLine")}</span>
+                <select className={selectClass} defaultValue={product.line} onChange={(event) => navigate({ to: "/products", search: catalogSearch({ line: event.target.value }) })}>
+                  <option value="">{t("allLines")}</option>
+                  {LINES.map((item) => (
+                    <option key={item.id} value={item.id}>{t(item.title)}</option>
                   ))}
                 </select>
               </label>
-              <label className="grid gap-1 text-sm">
-                <span className="font-semibold">{t("filterModel")}</span>
-                <select className={selectClass} value="" disabled>
-                  <option value="">{t("allModels")}</option>
-                </select>
-              </label>
-              <label className="grid gap-1 text-sm">
-                <span className="font-semibold">{t("filterSeries")}</span>
-                <select className={selectClass} value="" disabled>
-                  <option value="">{t("allSeries")}</option>
-                </select>
-              </label>
-            </>
-          )}
+              {product.line === "Automotive" && (
+                <label className="grid gap-1 text-sm">
+                  <span className="font-semibold">{t("filterBrand")}</span>
+                  <select className={selectClass} defaultValue={vehicle} onChange={(event) => navigate({ to: "/products", search: catalogSearch({ line: "Automotive", make: event.target.value }) })}>
+                    <option value="">{t("allBrands")}</option>
+                    {brands.map((brand) => (
+                      <option key={brand} value={brand}>{vehicleLabel(lang, brand)}</option>
+                    ))}
+                  </select>
+                </label>
+              )}
+            </div>
+          </details>
+          <div className="hidden gap-4 lg:grid">
+            <label className="grid gap-1 text-sm">
+              <span className="font-semibold">{t("filterLine")}</span>
+              <select className={selectClass} defaultValue={product.line} onChange={(event) => navigate({ to: "/products", search: catalogSearch({ line: event.target.value }) })}>
+                <option value="">{t("allLines")}</option>
+                {LINES.map((item) => (
+                  <option key={item.id} value={item.id}>{t(item.title)}</option>
+                ))}
+              </select>
+            </label>
+            {product.line === "Automotive" && (
+              <>
+                <label className="grid gap-1 text-sm">
+                  <span className="font-semibold">{t("filterBrand")}</span>
+                  <select className={selectClass} defaultValue={vehicle} onChange={(event) => navigate({ to: "/products", search: catalogSearch({ line: "Automotive", make: event.target.value }) })}>
+                    <option value="">{t("allBrands")}</option>
+                    {brands.map((brand) => (
+                      <option key={brand} value={brand}>{vehicleLabel(lang, brand)}</option>
+                    ))}
+                  </select>
+                </label>
+                <label className="grid gap-1 text-sm">
+                  <span className="font-semibold">{t("filterModel")}</span>
+                  <select className={selectClass} value="" disabled>
+                    <option value="">{t("allModels")}</option>
+                  </select>
+                </label>
+                <label className="grid gap-1 text-sm">
+                  <span className="font-semibold">{t("filterSeries")}</span>
+                  <select className={selectClass} value="" disabled>
+                    <option value="">{t("allSeries")}</option>
+                  </select>
+                </label>
+              </>
+            )}
+          </div>
         </Reveal>
         <div className="grid min-w-0 content-start gap-6 lg:grid-cols-[320px_minmax(0,1fr)]">
         <Reveal variant="up" className="grid content-start gap-3">
@@ -151,7 +178,7 @@ function ProductPage() {
                   {related.length > 0 && (
           <section className="lg:col-span-2">
             <h2 className="text-2xl">{t("related")}</h2>
-            <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-3 grid grid-cols-2 gap-3 lg:grid-cols-4">
               {related.map((item) => {
                 const oem = shownOem(item.oes);
                 return (

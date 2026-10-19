@@ -16,12 +16,13 @@ export function StoreShell({
   children: React.ReactNode;
 }) {
   const { t } = useI18n();
+  const [menu, setMenu] = useState(false);
   return (
     <div className="min-h-screen bg-paper text-ink">
       <header className="sticky top-0 z-30 border-b border-line bg-card">
-        <div className="wrap flex min-h-14 items-center justify-between gap-4">
-          <Link to="/" className="flex shrink-0 items-center">
-            <img src="/rbtc-logo.png" alt={name} className="h-11 w-auto sm:h-12" />
+        <div className="wrap flex min-h-14 items-center justify-between gap-3">
+          <Link to="/" className="flex shrink-0 items-center" onClick={() => setMenu(false)}>
+            <img src="/rbtc-logo.png" alt={name} className="h-9 w-auto sm:h-12" />
           </Link>
           <nav className="hidden items-center gap-4 text-sm lg:flex">
             <Link to="/" className="hover:text-copper">{t("navHome")}</Link>
@@ -42,18 +43,36 @@ export function StoreShell({
             <Link to="/about" className="hover:text-copper">{t("navAbout")}</Link>
             <Link to="/contact" className="hover:text-copper">{t("navContact")}</Link>
           </nav>
-          <div className="flex items-center gap-2 text-sm">
+          <div className="flex items-center gap-1 text-sm">
             <LangMenu />
+            <button
+              type="button"
+              aria-label="Menu"
+              aria-expanded={menu}
+              onClick={() => setMenu((value) => !value)}
+              className="grid size-10 place-items-center rounded-full text-[#1a1a2e] lg:hidden"
+            >
+              <svg viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+                {menu ? <path d="M6 6l12 12M18 6 6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
+              </svg>
+            </button>
           </div>
         </div>
-        <div className="wrap flex gap-2 overflow-x-auto pb-2 text-sm lg:hidden">
-          <Link to="/" className="shrink-0 rounded-full border border-line px-3 py-1">{t("navHome")}</Link>
-          <Link to="/products" search={catalogSearch()} className="shrink-0 rounded-full border border-line px-3 py-1">{t("navProducts")}</Link>
-          <Link to="/manufacturing" className="shrink-0 rounded-full border border-line px-3 py-1">{t("navMfg")}</Link>
-          <Link to="/downloads" className="shrink-0 rounded-full border border-line px-3 py-1">{t("navDownloads")}</Link>
-          <Link to="/about" className="shrink-0 rounded-full border border-line px-3 py-1">{t("navAbout")}</Link>
-          <Link to="/contact" className="shrink-0 rounded-full border border-line px-3 py-1">{t("navContact")}</Link>
-        </div>
+        {menu && (
+          <nav className="wrap grid gap-1 border-t border-line py-3 text-sm lg:hidden">
+            <Link to="/" onClick={() => setMenu(false)} className="rounded-lg px-3 py-2.5 hover:bg-[#f4f6fb]">{t("navHome")}</Link>
+            <Link to="/products" search={catalogSearch()} onClick={() => setMenu(false)} className="rounded-lg px-3 py-2.5 hover:bg-[#f4f6fb]">{t("navProducts")}</Link>
+            {LINES.map((line) => (
+              <Link key={line.id} to="/products" search={catalogSearch({ line: line.id })} onClick={() => setMenu(false)} className="rounded-lg px-6 py-2 text-[#5c6370] hover:bg-[#f4f6fb]">
+                {t(line.title)}
+              </Link>
+            ))}
+            <Link to="/manufacturing" onClick={() => setMenu(false)} className="rounded-lg px-3 py-2.5 hover:bg-[#f4f6fb]">{t("navMfg")}</Link>
+            <Link to="/downloads" onClick={() => setMenu(false)} className="rounded-lg px-3 py-2.5 hover:bg-[#f4f6fb]">{t("navDownloads")}</Link>
+            <Link to="/about" onClick={() => setMenu(false)} className="rounded-lg px-3 py-2.5 hover:bg-[#f4f6fb]">{t("navAbout")}</Link>
+            <Link to="/contact" onClick={() => setMenu(false)} className="rounded-lg px-3 py-2.5 hover:bg-[#f4f6fb]">{t("navContact")}</Link>
+          </nav>
+        )}
       </header>
       {children}
       <footer className="bg-[#071e36] text-sm text-white/70">
