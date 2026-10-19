@@ -29,13 +29,13 @@ export function InquiryForm({
   const [code, setCode] = useState("");
 
   useEffect(() => {
-    if (hero || contact) setCode(makeCode());
-  }, [hero, contact]);
+    if (hero) setCode(makeCode());
+  }, [hero]);
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
-    if ((hero || contact) && String(form.get("code") || "").trim().toUpperCase() !== code) {
+    if (hero && String(form.get("code") || "").trim().toUpperCase() !== code) {
       setError(t("verifyWrong"));
       setCode(makeCode());
       return;
@@ -89,12 +89,6 @@ export function InquiryForm({
           </Field>
           <Field label={t("fieldMessage")} required>
             <textarea name="message" required rows={5} placeholder={t("phMessage")} className="w-full rounded-lg border border-[#e6e8ee] px-3 py-3 text-sm outline-none placeholder:text-[#b0b6c0]" />
-          </Field>
-          <Field label={t("phCode").replace(" *", "")} required>
-            <div className="flex gap-2">
-              <input name="code" required placeholder={t("phCode")} autoComplete="off" className={field} />
-              <span className="inline-flex h-12 w-20 shrink-0 items-center justify-center rounded-lg bg-[#eceff3] text-lg font-semibold tracking-widest text-ink">{code}</span>
-            </div>
           </Field>
         </>
       ) : hero ? (
