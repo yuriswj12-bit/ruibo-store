@@ -180,10 +180,10 @@ function Manufacturing() {
           </Reveal>
         </section>
 
-        <section className="bg-[#f4f6fb] py-16">
+        <section className="bg-white py-16">
           <div className="wrap">
             <Reveal variant="up" className="mx-auto max-w-3xl text-center">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#092949]">{c.divKicker}</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#071e36]">{c.divKicker}</p>
               <h2 className="mt-3 text-3xl font-semibold">{c.divTitle}</h2>
               <p className="mt-4 leading-7 text-muted">{c.divLede}</p>
             </Reveal>
@@ -193,9 +193,10 @@ function Manufacturing() {
                 { k: c.d2, title: c.d2Title, body: c.d2Body, items: c.d2Items, img: "/industrial.jpg" },
               ].map((card, i) => (
                 <Reveal key={card.k} variant={i === 0 ? "right" : "left"} className="overflow-hidden rounded-2xl bg-white shadow-lg">
-                  <div className="relative h-48">
-                    <img src={card.img} alt="" className="absolute inset-0 h-full w-full object-cover" />
-                    <div className="absolute inset-0 bg-[#092949]/60" />
+                  <div className="relative h-48 bg-[#071e36]">
+                    <img src={card.img} alt="" className="absolute inset-0 h-full w-full object-cover grayscale contrast-125" />
+                    <div className="absolute inset-0 bg-[#092949] mix-blend-multiply" />
+                    <div className="absolute inset-0 bg-[#0e375e]/45" />
                     <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
                       <p className="text-sm text-white/80">{card.k}</p>
                       <p className="mt-1 text-2xl font-semibold">{card.title}</p>
@@ -206,7 +207,7 @@ function Manufacturing() {
                     <ul className="mt-5 grid gap-2">
                       {card.items.map((item) => (
                         <li key={item} className="flex items-center gap-3 text-sm">
-                          <span className="size-1.5 rounded-full bg-[#092949]" />
+                          <span className="size-1.5 rounded-full bg-[#071e36]" />
                           {item}
                         </li>
                       ))}
@@ -220,7 +221,7 @@ function Manufacturing() {
 
         <section className="wrap py-16">
           <Reveal variant="up" className="mx-auto max-w-3xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#092949]">{c.capKicker}</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#071e36]">{c.capKicker}</p>
             <h2 className="mt-3 text-3xl font-semibold">{c.capTitle}</h2>
             <p className="mt-4 leading-7 text-muted">{c.capLede}</p>
           </Reveal>
@@ -229,8 +230,12 @@ function Manufacturing() {
               { title: c.cap1Title, body: c.cap1Body, img: "/sensor.jpg" },
               { title: c.cap2Title, body: c.cap2Body, img: "/line-auto-bg.jpg" },
             ].map((card, i) => (
-              <Reveal key={card.title} variant={i === 0 ? "right" : "left"} className="flex h-full flex-col rounded-2xl bg-[#f4f6fb] p-8">
-                <img src={card.img} alt="" className="aspect-[16/9] w-full rounded-xl object-cover" />
+              <Reveal key={card.title} variant={i === 0 ? "right" : "left"} className="flex h-full flex-col rounded-2xl border border-[#d7e2ee] bg-white p-8">
+                <div className="relative aspect-[16/9] overflow-hidden rounded-xl bg-[#071e36]">
+                  <img src={card.img} alt="" className="absolute inset-0 h-full w-full object-cover grayscale contrast-125" />
+                  <div className="absolute inset-0 bg-[#092949] mix-blend-multiply" />
+                  <div className="absolute inset-0 bg-[#0e375e]/45" />
+                </div>
                 <h3 className="mt-5 text-xl font-semibold">{card.title}</h3>
                 <p className="mt-3 leading-7 text-muted">{card.body}</p>
               </Reveal>
@@ -238,17 +243,19 @@ function Manufacturing() {
           </div>
         </section>
 
-        <section className="bg-[#f4f6fb] py-16">
+        <section className="bg-white py-16">
           <div className="wrap">
             <Reveal variant="up" className="mx-auto max-w-3xl text-center">
-              <h2 className="text-3xl font-semibold">{c.vidTitle}</h2>
+              <h2 className="text-3xl font-semibold text-[#071e36]">{c.vidTitle}</h2>
               <p className="mt-4 leading-7 text-muted">{c.vidBody}</p>
             </Reveal>
             <div className="mt-10 grid gap-6 md:grid-cols-2">
               {c.videos.map((video, i) => (
                 <Reveal key={video.title} variant={i % 2 === 0 ? "right" : "left"} className="overflow-hidden rounded-2xl bg-white shadow-sm">
-                  <div className="relative aspect-video bg-[#092949]">
-                    <img src={SHOP[i % SHOP.length]} alt="" className="absolute inset-0 h-full w-full object-cover opacity-40" />
+                  <div className="relative aspect-video bg-[#071e36]">
+                    <img src={SHOP[i % SHOP.length]} alt="" className="absolute inset-0 h-full w-full object-cover grayscale contrast-125" />
+                    <div className="absolute inset-0 bg-[#092949] mix-blend-multiply" />
+                    <div className="absolute inset-0 bg-[#0e375e]/45" />
                     <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
                       <span className="flex size-14 items-center justify-center rounded-full border-2 border-white/80 text-2xl">▶</span>
                       <p className="mt-3 text-sm font-semibold">{c.coming}</p>
@@ -266,13 +273,13 @@ function Manufacturing() {
 
         <section className="wrap grid items-center gap-12 py-16 lg:grid-cols-2">
           <Reveal variant="right">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#092949]">{c.qcKicker}</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#071e36]">{c.qcKicker}</p>
             <h2 className="mt-3 text-3xl font-semibold">{c.qcTitle}</h2>
             <p className="mt-4 leading-7 text-muted">{c.qcLede}</p>
             <ol className="mt-8 grid gap-5">
               {c.stages.map((stage) => (
                 <li key={stage.n} className="flex gap-4">
-                  <span className="mt-0.5 shrink-0 text-xs font-bold text-[#092949]">{stage.n}</span>
+                  <span className="mt-0.5 shrink-0 text-xs font-bold text-[#071e36]">{stage.n}</span>
                   <span>
                     <span className="block font-semibold">{stage.title}</span>
                     <span className="mt-1 block text-sm leading-6 text-muted">{stage.body}</span>
@@ -282,7 +289,11 @@ function Manufacturing() {
             </ol>
           </Reveal>
           <Reveal variant="left">
-            <img src="/line-ind-bg.jpg" alt="" className="aspect-[4/3] w-full rounded-2xl object-cover" />
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-[#071e36]">
+              <img src="/line-ind-bg.jpg" alt="" className="absolute inset-0 h-full w-full object-cover grayscale contrast-125" />
+              <div className="absolute inset-0 bg-[#092949] mix-blend-multiply" />
+              <div className="absolute inset-0 bg-[#0e375e]/45" />
+            </div>
           </Reveal>
         </section>
 
@@ -304,13 +315,13 @@ function Manufacturing() {
           </Reveal>
           <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
             {SHOP.map((src, i) => (
-              <Reveal key={src} variant="up" delay={(i % 5) * 40} className="overflow-hidden rounded-xl bg-[#f4f6fb]">
+              <Reveal key={src} variant="up" delay={(i % 5) * 40} className="overflow-hidden rounded-xl bg-white ring-1 ring-[#d7e2ee]">
                 <img src={src} alt="" className="aspect-[4/3] w-full object-cover" />
               </Reveal>
             ))}
           </div>
           <Reveal variant="up" className="mt-10 text-center">
-            <Link to="/products" search={catalogSearch({ line: "Automotive" })} className="inline-block rounded bg-[#092949] px-6 py-3 text-sm font-semibold text-white">
+            <Link to="/products" search={catalogSearch({ line: "Automotive" })} className="inline-block rounded bg-[#071e36] px-6 py-3 text-sm font-semibold text-white">
               {c.cta}
             </Link>
           </Reveal>
