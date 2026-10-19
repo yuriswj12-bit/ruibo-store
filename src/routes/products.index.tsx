@@ -141,7 +141,6 @@ function Catalog() {
                   <th className="px-3 py-3 font-semibold">{t("colNumber")}</th>
                   <th className="px-3 py-3 font-semibold">{t("colName")}</th>
                   <th className="px-3 py-3 font-semibold">{t("colOem")}</th>
-                  <th className="px-3 py-3 font-semibold">{t("colApps")}</th>
                   <th className="px-3 py-3 font-semibold">{t("colAction")}</th>
                 </tr>
               </thead>
@@ -160,7 +159,6 @@ function Catalog() {
                       </td>
                       <td className="px-3 py-3">{t(lineName(product.line))}</td>
                       <td className="px-3 py-3 text-xs leading-5 text-muted">{product.oes.join("\n")}</td>
-                      <td className="px-3 py-3">{vehicleLabel(lang, product.vehicle)}</td>
                       <td className="px-3 py-3">
                         <Link to="/contact" className="inline-block rounded bg-[#092949] px-3 py-2 text-xs font-semibold text-white">{t("inquire")}</Link>
                       </td>
@@ -169,7 +167,7 @@ function Catalog() {
                 })}
                 {products.length === 0 && (
                   <tr>
-                    <td colSpan={6} className="px-3 py-8 text-muted">{deps.line && !deps.q && !deps.make ? t("lineEmpty") : t("noMatch")}</td>
+                    <td colSpan={5} className="px-3 py-8 text-muted">{deps.line && !deps.q && !deps.make ? t("lineEmpty") : t("noMatch")}</td>
                   </tr>
                 )}
               </tbody>
