@@ -36,7 +36,7 @@ type Copy = {
   vidTitle: string;
   vidBody: string;
   coming: string;
-  videos: { title: string; body: string }[];
+  videos: { title: string; body: string; youtube: string }[];
   qcKicker: string;
   qcTitle: string;
   qcLede: string;
@@ -73,10 +73,10 @@ const zh: Copy = {
   vidBody: "下面这些位置留给工厂自己的影片。拍好之后再嵌进来，现在先占位。",
   coming: "影片即将上线",
   videos: [
-    { title: "产品开箱：氧传感器外观与包装", body: "看外观和包装是否完整。不讲安装，只看货和包。"},
-    { title: "功能检测", body: "出厂前的功能检查。影片会展示实际用的检测方法。"},
-    { title: "接头与线束核对", body: "按 OEM 接口核对插头和线长，避免发错规格。"},
-    { title: "包装与出货", body: "装箱前的最后一次外观和标签检查。"},
+    { title: "产品开箱：氧传感器外观与包装", body: "看外观和包装是否完整。不讲安装，只看货和包。", youtube: "" },
+    { title: "功能检测", body: "出厂前的功能检查。影片会展示实际用的检测方法。", youtube: "" },
+    { title: "接头与线束核对", body: "按 OEM 接口核对插头和线长，避免发错规格。", youtube: "" },
+    { title: "包装与出货", body: "装箱前的最后一次外观和标签检查。", youtube: "" },
   ],
   qcKicker: "质量控制",
   qcTitle: "四段质量保证",
@@ -124,10 +124,10 @@ const en: Copy = {
   vidBody: "These slots are for films shot in our factory. They go in after filming. For now they are placeholders.",
   coming: "Video coming",
   videos: [
-    { title: "Unboxing: appearance and packaging", body: "A look at the sensor and the pack. Appearance and packaging integrity only." },
-    { title: "Function test", body: "The check used before shipment. The film will show the method." },
-    { title: "Connector and harness check", body: "Plug and wire length checked against the OEM interface." },
-    { title: "Packing and dispatch", body: "Final look at appearance and labels before the box is closed." },
+    { title: "Unboxing: appearance and packaging", body: "A look at the sensor and the pack. Appearance and packaging integrity only.", youtube: "" },
+    { title: "Function test", body: "The check used before shipment. The film will show the method.", youtube: "" },
+    { title: "Connector and harness check", body: "Plug and wire length checked against the OEM interface.", youtube: "" },
+    { title: "Packing and dispatch", body: "Final look at appearance and labels before the box is closed.", youtube: "" },
   ],
   qcKicker: "Quality control",
   qcTitle: "Four-stage quality assurance",
@@ -253,13 +253,25 @@ function Manufacturing() {
               {c.videos.map((video, i) => (
                 <Reveal key={video.title} variant={i % 2 === 0 ? "right" : "left"} className="overflow-hidden rounded-2xl bg-white shadow-sm">
                   <div className="relative aspect-video bg-[#071e36]">
-                    <img src={SHOP[i % SHOP.length]} alt="" className="absolute inset-0 h-full w-full object-cover grayscale contrast-125" />
-                    <div className="absolute inset-0 bg-[#092949] mix-blend-multiply" />
-                    <div className="absolute inset-0 bg-[#0e375e]/45" />
-                    <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
-                      <span className="flex size-14 items-center justify-center rounded-full border-2 border-white/80 text-2xl">▶</span>
-                      <p className="mt-3 text-sm font-semibold">{c.coming}</p>
-                    </div>
+                    {video.youtube ? (
+                      <iframe
+                        className="absolute inset-0 h-full w-full"
+                        src={`https://www.youtube.com/embed/${video.youtube}`}
+                        title={video.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                      />
+                    ) : (
+                      <>
+                        <img src={SHOP[i % SHOP.length]} alt="" className="absolute inset-0 h-full w-full object-cover grayscale contrast-125" />
+                        <div className="absolute inset-0 bg-[#092949] mix-blend-multiply" />
+                        <div className="absolute inset-0 bg-[#0e375e]/45" />
+                        <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
+                          <span className="flex size-14 items-center justify-center rounded-full border-2 border-white/80 text-2xl">▶</span>
+                          <p className="mt-3 text-sm font-semibold">{c.coming}</p>
+                        </div>
+                      </>
+                    )}
                   </div>
                   <div className="p-6">
                     <h3 className="text-lg font-semibold">{video.title}</h3>
