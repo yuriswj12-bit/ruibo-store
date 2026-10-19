@@ -19,14 +19,17 @@ function lineName(line: string) {
 }
 
 export const Route = createFileRoute("/products/")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    q: typeof search.q === "string" ? search.q : "",
-    make: typeof search.make === "string" ? search.make : "",
-    line: typeof search.line === "string" ? search.line : "",
-    model: typeof search.model === "string" ? search.model : "",
-    series: typeof search.series === "string" ? search.series : "",
-    page: Math.max(1, Number(search.page) || 1),
-  }),
+  validateSearch: (search: Record<string, unknown>) => {
+    const line = typeof search.line === "string" ? search.line : "";
+    return {
+      q: typeof search.q === "string" ? search.q : "",
+      make: line === "Automotive" && typeof search.make === "string" ? search.make : "",
+      line,
+      model: typeof search.model === "string" ? search.model : "",
+      series: typeof search.series === "string" ? search.series : "",
+      page: Math.max(1, Number(search.page) || 1),
+    };
+  },
   loaderDeps: ({ search }) => search,
   loader: async ({ deps }) => {
     const [store, products] = await Promise.all([
@@ -92,7 +95,7 @@ function Catalog() {
               ))}
             </select>
           </label>
-          {deps.line !== "" && (
+          {deps.line === "Automotive" && (
             <>
               <label className="grid gap-1 text-sm">
                 <span className="font-semibold">{t("filterBrand")}</span>
@@ -107,22 +110,18 @@ function Catalog() {
                   ))}
                 </select>
               </label>
-              {deps.line === "Automotive" && (
-                <>
-                  <label className="grid gap-1 text-sm">
-                    <span className="font-semibold">{t("filterModel")}</span>
-                    <select className={selectClass} value="" disabled>
-                      <option value="">{t("allModels")}</option>
-                    </select>
-                  </label>
-                  <label className="grid gap-1 text-sm">
-                    <span className="font-semibold">{t("filterSeries")}</span>
-                    <select className={selectClass} value="" disabled>
-                      <option value="">{t("allSeries")}</option>
-                    </select>
-                  </label>
-                </>
-              )}
+              <label className="grid gap-1 text-sm">
+                <span className="font-semibold">{t("filterModel")}</span>
+                <select className={selectClass} value="" disabled>
+                  <option value="">{t("allModels")}</option>
+                </select>
+              </label>
+              <label className="grid gap-1 text-sm">
+                <span className="font-semibold">{t("filterSeries")}</span>
+                <select className={selectClass} value="" disabled>
+                  <option value="">{t("allSeries")}</option>
+                </select>
+              </label>
             </>
           )}
         </Reveal>
