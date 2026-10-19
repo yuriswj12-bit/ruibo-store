@@ -21,7 +21,7 @@ export function StoreShell({
       <header className="sticky top-0 z-30 border-b border-line bg-card">
         <div className="wrap flex min-h-14 items-center justify-between gap-4">
           <Link to="/" className="flex shrink-0 items-center">
-            <img src="/rbtc-logo-navy.png" alt={name} className="h-14 w-auto sm:h-16" />
+            <img src="/rbtc-logo.png" alt={name} className="h-11 w-auto sm:h-12" />
           </Link>
           <nav className="hidden items-center gap-4 text-sm lg:flex">
             <Link to="/" className="hover:text-copper">{t("navHome")}</Link>
@@ -59,7 +59,7 @@ export function StoreShell({
       <footer className="bg-[#071e36] text-sm text-white/70">
         <div className="wrap grid gap-10 py-12 lg:grid-cols-[1.4fr_0.8fr_0.8fr]">
           <Reveal variant="right">
-            <img src="/rbtc-logo-navy.png" alt={name} className="h-14 w-auto rounded-md bg-white px-2" />
+            <img src="/rbtc-logo.png" alt={name} className="h-12 w-auto rounded-md bg-white px-2" />
             <p className="mt-4 max-w-sm leading-6">{t("footerBlurb")}</p>
             <ul className="mt-5 grid gap-2">
               <li>{email || "info@cnrbic.com"}</li>
