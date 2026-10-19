@@ -41,7 +41,7 @@ const zh = {
     title: "常见问题",
     lede: "",
     blocks: [
-      { title: "为什么搜某个号没有结果？", body: "画册里没有这个 OEM。可以询价，工厂确认能不能做。开头相同但不是同一个号，不会算作命中。" },
+      { title: "为什么搜某个号没有结果？", body: "网站上并未列出全部编号。把原厂编号、博世编号、电装编号或其他参考号发过来，我们会帮您找到对应的氧传感器。开头相同但不是同一个号，不会算作命中。" },
       { title: "一个号为什么出现两条？", body: "这个 OEM 印在两个柜号上。不是搜错了。下单前对一下车系。" },
       { title: "最小起订和样品？", body: "目录产品样品 32 美元。批量起订一般是 100，以产品页为准。" },
       { title: "货号在哪里？", body: "买家看 OEM。工厂发货看柜号，在后台和订单里。" },
@@ -103,7 +103,7 @@ const en: typeof zh = {
     title: "Questions",
     lede: "",
     blocks: [
-      { title: "Why is a number missing?", body: "That OEM is not in the printed catalog. You can still ask. A shared beginning is not treated as a hit." },
+      { title: "Why is a number missing?", body: "Not every number is listed on this site. Send an OE, Bosch, Denso, or other reference number, and we will match the right oxygen sensor. A shared beginning is not treated as a hit." },
       { title: "Why do two results appear?", body: "That OEM is printed on two factory codes. The search is not wrong. Check the vehicle before ordering." },
       { title: "Sample and minimum order?", body: "Catalog samples are $32. Bulk minimum is usually 100, as shown on the product page." },
       { title: "Where is the factory code?", body: "Buyers see the OEM. The factory ships by its code, which is on the desk and the order." },

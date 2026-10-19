@@ -133,6 +133,9 @@ function Catalog() {
           {deps.q && products[0]?.match === "prefix" && (
             <p className="mt-3 rounded-card border border-line bg-card px-4 py-3 text-sm">{t("prefixNote")}</p>
           )}
+          {deps.line === "Automotive" && (
+            <p className="mt-4 max-w-3xl text-sm leading-7 text-[#3d4d63]">{t("coverNote")}</p>
+          )}
           <div className="mt-4 overflow-x-auto rounded-card border border-line bg-card">
             <table className="w-full min-w-[720px] text-left text-sm">
               <thead className="bg-[#f4f6fb] text-xs uppercase tracking-wide text-muted">

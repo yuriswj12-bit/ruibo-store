@@ -223,7 +223,7 @@ const COPY: Record<Lang, Copy> = {
     faqLede: "关于氧传感器、编号和起订量。",
     faqs: [
       { q: "你们做什么？", a: "汽车、摩托车、工业与家电、氮氧传感器。目录里现在是 302 个柜号、601 个 OEM 号。不做进气歧管或其他零件。" },
-      { q: "目录里没有的号能做吗？", a: "可以问。目录里没有，不等于做不了。工厂会直接说能不能做。" },
+      { q: "网站上没有我的编号怎么办？", a: "网站上并未列出全部型号和编号。把原厂编号（OE）、博世编号（Bosch）、电装编号（Denso）或其他参考编号发过来，我们会帮您找到对应的氧传感器。" },
       { q: "起订量是多少？", a: "目录样品 32 美元。批量起订通常是 100，以产品页为准。批量价格另报，不在页面上标死。" },
       { q: "为什么同一个号会出两条？", a: "这个 OEM 印在两个柜号上。搜索没有错。下单前对一下车型。" },
     ],
@@ -262,7 +262,7 @@ const COPY: Record<Lang, Copy> = {
     faqLede: "Oxygen sensors, numbers, and order quantity.",
     faqs: [
       { q: "What do you make?", a: "Automotive, motorcycle, industrial and household, and NOx oxygen sensors. The catalog holds 302 factory codes and 601 OEM numbers. We do not list intake manifolds or other parts." },
-      { q: "Can you supply a number that is not listed?", a: "Ask. A number missing from the catalog is not the same as a number we cannot make. The factory will say." },
+      { q: "What if my number is not listed?", a: "Not every model and part number is listed on this site. Send an OE, Bosch, Denso, or other reference number, and we will match the right oxygen sensor." },
       { q: "What is the minimum order?", a: "Catalog samples are $32. Bulk minimum is usually 100, as shown on the product page. Bulk price is quoted, not printed as a list price." },
       { q: "Why do two results appear for one number?", a: "That OEM is printed on two factory codes. The search is not wrong. Check the vehicle before ordering." },
     ],
@@ -301,7 +301,7 @@ const COPY: Record<Lang, Copy> = {
     faqLede: "Sensores de oxígeno, números y cantidad mínima.",
     faqs: [
       { q: "¿Qué fabrican?", a: "Sensores de oxígeno para auto, moto, industria y hogar, y NOx. El catálogo tiene 302 códigos y 601 OEM. No listamos colectores ni otras piezas." },
-      { q: "¿Pueden hacer un número que no está?", a: "Pregunte. Que no esté en el catálogo no significa que no se pueda hacer." },
+      { q: "¿Qué hago si mi número no está?", a: "No todos los modelos y números están en este sitio. Envíe el número OE, Bosch, Denso u otra referencia, y encontraremos el sensor correspondiente." },
       { q: "¿Cuál es el pedido mínimo?", a: "La muestra del catálogo cuesta 32 USD. El mínimo de volumen suele ser 100. El precio de volumen se cotiza." },
       { q: "¿Por qué un número da dos resultados?", a: "Ese OEM está impreso en dos códigos de fábrica. La búsqueda no falla. Compruebe el vehículo." },
     ],
@@ -340,7 +340,7 @@ const COPY: Record<Lang, Copy> = {
     faqLede: "Sensores de oxigénio, números e quantidade mínima.",
     faqs: [
       { q: "O que fabricam?", a: "Sensores de oxigénio para automóvel, moto, indústria e casa, e NOx. O catálogo tem 302 códigos e 601 OEM. Não listamos coletores nem outras peças." },
-      { q: "Fazem um número que não está listado?", a: "Pergunte. Não estar no catálogo não significa que não se possa fazer." },
+      { q: "E se o meu número não estiver listado?", a: "Nem todos os modelos e números estão neste site. Envie o número OE, Bosch, Denso ou outra referência, e encontramos o sensor correspondente." },
       { q: "Qual é a encomenda mínima?", a: "A amostra do catálogo custa 32 USD. O mínimo de volume costuma ser 100. O preço de volume é orçamentado." },
       { q: "Porque é que um número dá dois resultados?", a: "Esse OEM está impresso em dois códigos de fábrica. A pesquisa não falhou. Confirme o veículo." },
     ],
@@ -379,7 +379,7 @@ const COPY: Record<Lang, Copy> = {
     faqLede: "Датчики кислорода, номера и минимальный заказ.",
     faqs: [
       { q: "Что вы производите?", a: "Датчики кислорода для авто, мото, промышленности и NOx. В каталоге 302 кода и 601 OEM. Впускные коллекторы и другие детали не указываем." },
-      { q: "Сделаете номер, которого нет в каталоге?", a: "Спросите. Отсутствие в каталоге не значит, что сделать нельзя." },
+      { q: "Что делать, если моего номера нет?", a: "На сайте указаны не все модели и номера. Пришлите номер OE, Bosch, Denso или другой справочный номер — мы подберём нужный датчик." },
       { q: "Какой минимальный заказ?", a: "Образец из каталога — 32 доллара. Опт обычно от 100. Оптовая цена в предложении." },
       { q: "Почему один номер даёт два результата?", a: "Этот OEM напечатан на двух заводских кодах. Поиск не ошибся. Сверьте автомобиль." },
     ],
@@ -418,7 +418,7 @@ const COPY: Record<Lang, Copy> = {
     faqLede: "حساسات الأكسجين والأرقام والحد الأدنى.",
     faqs: [
       { q: "ماذا تصنعون؟", a: "حساسات أكسجين للسيارات والدراجات والصناعة وأكاسيد النيتروجين. الكتالوج فيه 302 رمزًا و601 رقم OEM. لا نعرض مشعبات السحب أو قطعًا أخرى." },
-      { q: "هل تصنعون رقمًا غير موجود؟", a: "اسأل. غيابه عن الكتالوج لا يعني أننا لا نصنعه." },
+      { q: "ماذا لو لم يكن رقمي مدرجًا؟", a: "ليست كل الطرازات والأرقام مدرجة في هذا الموقع. أرسل رقم OE أو Bosch أو Denso أو أي رقم مرجعي آخر، وسنجد الحساس المناسب." },
       { q: "ما الحد الأدنى للطلب؟", a: "عينة الكتالوج 32 دولارًا. حد الكمية عادة 100. سعر الكمية في العرض." },
       { q: "لماذا يظهر الرقم في نتيجتين؟", a: "هذا الـ OEM مطبوع على رمزين للمصنع. البحث ليس خاطئًا. تحقق من السيارة." },
     ],
@@ -457,7 +457,7 @@ const COPY: Record<Lang, Copy> = {
     faqLede: "Хүчилтөрөгчийн мэдрэгч, дугаар, доод захиалга.",
     faqs: [
       { q: "Та юу үйлдвэрлэдэг вэ?", a: "Автомашин, мотоцикл, үйлдвэр ба гэр ахуй, NOx хүчилтөрөгчийн мэдрэгч. Каталогт 302 код, 601 OEM. Оролтын коллектор болон бусад эд ангийг жагсаахгүй." },
-      { q: "Жагсаалтад байхгүй дугаарыг хийх үү?", a: "Асууна уу. Каталогт байхгүй нь хийж чадахгүй гэсэн үг биш." },
+      { q: "Дугаар жагсаалтад байхгүй бол яах вэ?", a: "Бүх загвар, дугаар энэ сайтад байхгүй. OE, Bosch, Denso эсвэл өөр лавлах дугаараа илгээнэ үү. Бид тохирох мэдрэгчийг олно." },
       { q: "Доод захиалга хэд вэ?", a: "Каталогийн дээж 32 ам.доллар. Бөөн захиалга ихэвчлэн 100-аас. Бөөний үнийг тусад нь гаргана." },
       { q: "Яагаад нэг дугаар хоёр үр дүн гаргадаг вэ?", a: "Тэр OEM хоёр үйлдвэрийн код дээр хэвлэгдсэн. Хайлт буруу биш. Захиалахын өмнө машинаа шалгана уу." },
     ],
