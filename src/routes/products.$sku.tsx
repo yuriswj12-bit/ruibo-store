@@ -96,23 +96,6 @@ function ProductPage() {
             </table>
           </section>
           )}
-          <section className="rounded-card border border-line bg-card p-4">
-            <h2 className="text-lg">{t("productDetails")}</h2>
-            <dl className="mt-4 grid gap-4">
-              {([
-                ["secOverview", "detailOverview"],
-                ["secFeatures", "detailFeatures"],
-                ["secAdvantages", "detailAdvantages"],
-                ["secApps", "detailApps"],
-                ["secQa", "detailQa"],
-              ] as const).map(([title, body]) => (
-                <div key={title}>
-                  <dt className="font-semibold">{t(title)}</dt>
-                  <dd className="mt-1 text-sm leading-6 text-muted">{t(body)}</dd>
-                </div>
-              ))}
-            </dl>
-          </section>
           {related.length > 0 && (
           <section>
             <h2 className="text-2xl">{t("related")}</h2>
