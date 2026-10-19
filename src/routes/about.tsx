@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { getStoreHome } from "@/lib/commerce.functions";
 import { StoreShell } from "@/components/store/shell";
 import { catalogSearch } from "@/components/store/catalog";
+import { Reveal } from "@/components/store/reveal";
 import { useI18n, type Lang } from "@/lib/i18n";
 
 export const Route = createFileRoute("/about")({
@@ -18,14 +19,15 @@ function About() {
     <StoreShell name={store.name} email={store.email}>
       <main>
         <section className="bg-[#f3f5f8]">
-          <div className="wrap max-w-3xl py-16 text-center sm:py-20">
+          <Reveal variant="fade" className="wrap max-w-3xl py-16 text-center sm:py-20">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-muted">{copy.eyebrow}</p>
             <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">{copy.title}</h1>
             <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-muted">{copy.lede}</p>
-          </div>
+          </Reveal>
         </section>
 
         <section className="wrap grid items-center gap-10 py-16 lg:grid-cols-2">
+          <Reveal variant="right">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">{copy.whatLabel}</p>
             <h2 className="mt-3 text-3xl font-semibold">{copy.whatTitle}</h2>
@@ -35,6 +37,8 @@ function About() {
               <span aria-hidden>→</span>
             </Link>
           </div>
+          </Reveal>
+          <Reveal variant="left">
           <div className="relative">
             <img src="/sensor.jpg" alt="" className="aspect-[4/3] w-full rounded-2xl object-cover" />
             <div className="absolute bottom-4 left-4 rounded-xl bg-white px-5 py-3 shadow-lg">
@@ -42,10 +46,11 @@ function About() {
               <p className="mt-1 text-sm text-muted">{copy.yearLabel}</p>
             </div>
           </div>
+          </Reveal>
         </section>
 
         <section className="bg-[#f7f8fa]">
-          <div className="wrap py-16">
+          <Reveal variant="up" className="wrap py-16">
             <div className="mx-auto max-w-2xl text-center">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">{copy.journeyLabel}</p>
               <h2 className="mt-3 text-3xl font-semibold">{copy.journeyTitle}</h2>
@@ -69,7 +74,7 @@ function About() {
                 );
               })}
             </ol>
-          </div>
+          </Reveal>
         </section>
 
         <section className="wrap py-16">
@@ -79,13 +84,15 @@ function About() {
           </div>
           <div className="mt-10 grid gap-8 md:grid-cols-3">
             {copy.advantages.map((item, index) => (
-              <article key={item.title}>
+              <Reveal key={item.title} variant="up" delay={index * 80}>
+              <article>
                 <div className="grid size-12 place-items-center rounded-full bg-[#eef2f7] text-[#092949]">
                   <AdvIcon index={index} />
                 </div>
                 <h3 className="mt-4 text-lg font-semibold">{item.title}</h3>
                 <p className="mt-2 text-sm leading-6 text-muted">{item.body}</p>
               </article>
+              </Reveal>
             ))}
           </div>
         </section>
@@ -97,17 +104,20 @@ function About() {
               <h2 className="mt-3 text-3xl font-semibold">{copy.cultureTitle}</h2>
             </div>
             <div className="mt-10 grid gap-4 lg:grid-cols-3">
-              {copy.culture.map((item) => (
-                <article key={item.title} className="rounded-2xl border border-line bg-white p-6">
+              {copy.culture.map((item, index) => (
+                <Reveal key={item.title} variant={index === 1 ? "up" : index === 0 ? "right" : "left"}>
+                <article className="h-full rounded-2xl border border-line bg-white p-6">
                   <h3 className="text-lg font-semibold">{item.title}</h3>
                   <p className="mt-3 text-sm leading-6 text-muted">{item.body}</p>
                 </article>
+                </Reveal>
               ))}
             </div>
           </div>
         </section>
 
         <section className="wrap py-16">
+          <Reveal variant="up">
           <div className="rounded-2xl bg-[#071e36] px-6 py-14 text-center text-white">
             <h2 className="text-3xl font-semibold">{copy.ctaTitle}</h2>
             <p className="mx-auto mt-3 max-w-xl text-white/75">{copy.ctaBody}</p>
@@ -116,6 +126,7 @@ function About() {
               <Link to="/products" search={catalogSearch()} className="rounded-lg border border-white/40 px-5 py-3 text-sm font-semibold text-white">{copy.ctaBrowse}</Link>
             </div>
           </div>
+          </Reveal>
         </section>
       </main>
     </StoreShell>

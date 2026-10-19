@@ -3,6 +3,7 @@ import { getProduct, getStoreHome } from "@/lib/commerce.functions";
 import { StoreShell } from "@/components/store/shell";
 import { DualAction } from "@/components/store/dual-action";
 import { InquiryForm } from "@/components/store/inquiry-form";
+import { Reveal } from "@/components/store/reveal";
 import { moneyLabel, useI18n, vehicleLabel } from "@/lib/i18n";
 import { lineImage } from "@/components/store/catalog";
 import { skuImage } from "@/components/store/sku-photos";
@@ -31,7 +32,7 @@ function ProductPage() {
   return (
     <StoreShell name={store.name} email={store.email}>
       <main className="wrap grid gap-6 py-8 lg:grid-cols-[280px_1fr]">
-        <div className="grid content-start gap-3">
+        <Reveal variant="right" className="grid content-start gap-3">
           <video
             src="/sensor.mp4"
             poster="/auto.jpg"
@@ -41,8 +42,8 @@ function ProductPage() {
           />
           <img src={skuImage(product.sku) || lineImage(String(product.specs.line || "Automotive"))} alt={displayOe} className="aspect-square w-full rounded-card border border-line bg-white object-contain" />
           <p className="text-xs text-muted">{t("videoLabel")} · {t("photoLabel")}</p>
-        </div>
-        <div className="grid gap-4">
+        </Reveal>
+        <Reveal variant="left" className="grid gap-4">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-copper">{vehicle ? vehicleLabel(lang, vehicle) : ""}</p>
           <h1 className="text-4xl leading-tight">{displayOe}</h1>
           <section className="grid gap-3 rounded-card border border-line bg-card p-4">
@@ -146,7 +147,7 @@ function ProductPage() {
             <h2 className="mb-3 text-2xl">{t("quoteTitle")}</h2>
             <InquiryForm sku={product.sku} matchedOe={displayOe} />
           </section>
-        </div>
+        </Reveal>
       </main>
     </StoreShell>
   );

@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { StoreShell } from "@/components/store/shell";
+import { Reveal, type RevealVariant } from "@/components/store/reveal";
 
 export function CompanyPage({
   store,
@@ -18,17 +19,21 @@ export function CompanyPage({
   return (
     <StoreShell name={store.name} email={store.email}>
       <main className="wrap py-10">
-        <h1 className="text-4xl">{title}</h1>
-        {lede ? <p className="mt-3 max-w-2xl text-muted">{lede}</p> : null}
+        <Reveal variant="fade">
+          <h1 className="text-4xl">{title}</h1>
+          {lede ? <p className="mt-3 max-w-2xl text-muted">{lede}</p> : null}
+        </Reveal>
         <div className="mt-8 grid gap-3">
-          {blocks.map((block) => (
-            <article key={block.title} className="rounded-card border border-line bg-card p-4">
-              <h2 className="text-xl">{block.title}</h2>
-              <p className="mt-2 text-sm text-muted">{block.body}</p>
-            </article>
+          {blocks.map((block, index) => (
+            <Reveal key={block.title} variant={(["up", "right", "left", "fade"] as RevealVariant[])[index % 4]} delay={index * 70}>
+              <article className="rounded-card border border-line bg-card p-4">
+                <h2 className="text-xl">{block.title}</h2>
+                <p className="mt-2 text-sm text-muted">{block.body}</p>
+              </article>
+            </Reveal>
           ))}
         </div>
-        {children}
+        {children ? <Reveal variant="up" className="mt-8">{children}</Reveal> : null}
       </main>
     </StoreShell>
   );

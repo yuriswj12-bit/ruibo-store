@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { LANGS, useI18n } from "@/lib/i18n";
 import { LINES, catalogSearch } from "@/components/store/catalog";
+import { Reveal } from "@/components/store/reveal";
 
 export function StoreShell({
   name,
@@ -57,7 +58,7 @@ export function StoreShell({
       {children}
       <footer className="bg-[#071e36] text-sm text-white/70">
         <div className="wrap grid gap-10 py-12 lg:grid-cols-[1.4fr_0.8fr_0.8fr]">
-          <div>
+          <Reveal variant="right">
             <img src="/rbtc-logo-navy.png" alt={name} className="h-14 w-auto rounded-md bg-white px-2" />
             <p className="mt-4 max-w-sm leading-6">{t("footerBlurb")}</p>
             <ul className="mt-5 grid gap-2">
@@ -65,8 +66,8 @@ export function StoreShell({
               <li>{t("footerPhone")}</li>
               <li className="max-w-xs">{t("footerAddress")}</li>
             </ul>
-          </div>
-          <div>
+          </Reveal>
+          <Reveal variant="up" delay={80}>
             <p className="font-semibold text-white">{t("footerProducts")}</p>
             <ul className="mt-3 grid gap-2">
               {LINES.map((line) => (
@@ -75,8 +76,8 @@ export function StoreShell({
                 </li>
               ))}
             </ul>
-          </div>
-          <div>
+          </Reveal>
+          <Reveal variant="left" delay={120}>
             <p className="font-semibold text-white">{t("footerCol")}</p>
             <ul className="mt-3 grid gap-2">
               <li><Link to="/about" className="hover:text-white">{t("navAbout")}</Link></li>
@@ -84,7 +85,7 @@ export function StoreShell({
               <li><Link to="/downloads" className="hover:text-white">{t("navDownloads")}</Link></li>
               <li><Link to="/contact" className="hover:text-white">{t("navContact")}</Link></li>
             </ul>
-          </div>
+          </Reveal>
         </div>
         <div className="border-t border-white/10">
           <div className="wrap flex flex-wrap items-center justify-between gap-3 py-4 text-xs">

@@ -3,6 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { getStoreHome } from "@/lib/commerce.functions";
 import { StoreShell } from "@/components/store/shell";
 import { InquiryForm } from "@/components/store/inquiry-form";
+import { Reveal } from "@/components/store/reveal";
 import { catalogSearch } from "@/components/store/catalog";
 import { useI18n } from "@/lib/i18n";
 
@@ -32,7 +33,7 @@ function Home() {
           <div className="pointer-events-none absolute inset-0 bg-[#0e375e]/45" />
           <div className="relative wrap py-10 sm:py-14">
             <div className="grid items-start gap-8 lg:grid-cols-[1.15fr_0.85fr]">
-              <div>
+              <Reveal variant="right">
                 <p className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-black/20 px-3 py-1.5 text-sm text-white">
                   <svg viewBox="0 0 24 24" className="size-4 shrink-0 text-amber-300" aria-hidden>
                     <circle cx="12" cy="9" r="5.2" fill="none" stroke="currentColor" strokeWidth="1.7" />
@@ -67,29 +68,34 @@ function Home() {
                     </div>
                   ))}
                 </dl>
-              </div>
-              <div className="rounded-3xl bg-white p-6 text-ink shadow-2xl sm:p-7">
+              </Reveal>
+              <Reveal variant="left">
+                <div className="rounded-3xl bg-white p-6 text-ink shadow-2xl sm:p-7">
                 <h2 className="text-2xl font-semibold text-ink">{t("quoteTitle")}</h2>
                 <p className="mt-1 mb-4 text-sm text-muted">{t("quoteHint")}</p>
                 <InquiryForm hero />
-              </div>
+                </div>
+              </Reveal>
             </div>
           </div>
         </div>
       </section>
       <section data-page="2" className="bg-white py-16 sm:py-20">
         <div className="wrap">
+          <Reveal variant="fade">
           <p className="text-center text-sm font-medium text-[#092949]">{t("pillarEyebrow")}</p>
           <h2 className="mx-auto mt-3 max-w-4xl text-center text-3xl font-semibold tracking-tight text-[#1a1a2e] sm:text-4xl">{t("pillarTitle")}</h2>
           <p className="mx-auto mt-5 max-w-4xl text-center text-sm leading-7 text-[#5c6370] sm:text-base">{t("pillarIntro")}</p>
+          </Reveal>
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {([
               ["pillarMake", "pillarMakeBody", "factory"],
               ["pillarCheck", "pillarCheckBody", "shield"],
               ["pillarExport", "pillarExportBody", "globe"],
               ["pillarPerson", "pillarPersonBody", "person"],
-            ] as const).map(([title, body, icon]) => (
-              <article key={title} className="rounded-2xl bg-[#f7f8fc] p-6 shadow-[0_8px_24px_rgba(20,20,40,0.04)]">
+            ] as const).map(([title, body, icon], index) => (
+              <Reveal key={title} variant="up" delay={index * 80}>
+              <article className="h-full rounded-2xl bg-[#f7f8fc] p-6 shadow-[0_8px_24px_rgba(20,20,40,0.04)]">
                 <span className="grid size-12 place-items-center rounded-xl bg-[#e6eef6] text-[#092949]">
                   {icon === "factory" && (
                     <svg viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
@@ -118,12 +124,14 @@ function Home() {
                 <h3 className="mt-8 text-lg font-semibold text-[#1a1a2e]">{t(title)}</h3>
                 <p className="mt-2 text-sm leading-6 text-[#5c6370]">{t(body)}</p>
               </article>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
       <section className="bg-[#f4f6fb] py-14 sm:py-16">
         <div className="wrap">
+          <Reveal variant="up">
           <p className="text-sm font-medium text-[#092949]">{t("svcEyebrow")}</p>
           <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
             <div>
@@ -134,14 +142,16 @@ function Home() {
               {t("svcAll")} <span aria-hidden>→</span>
             </Link>
           </div>
+          </Reveal>
           <div className="mt-8 grid gap-4 lg:grid-cols-2">
             {([
               ["/line-auto-bg.jpg", "Automotive", "tileAuto", "tileAutoBody", "car"],
               ["/line-moto-bg.jpg", "Motorcycle", "tileMoto", "tileMotoBody", "moto"],
               ["/line-ind-bg.jpg", "Industrial", "tileInd", "tileIndBody", "plant"],
               ["/line-nox-bg.jpg", "NOx", "tileNox", "tileNoxBody", "home"],
-            ] as const).map(([src, line, title, body, icon]) => (
-              <Link key={line} to="/products" search={catalogSearch({ line })} className="relative block overflow-hidden rounded-2xl">
+            ] as const).map(([src, line, title, body, icon], index) => (
+              <Reveal key={line} variant={index % 2 ? "left" : "right"} delay={index * 70}>
+              <Link to="/products" search={catalogSearch({ line })} className="relative block overflow-hidden rounded-2xl">
                 <img src={src} alt="" className="aspect-[4/3] w-full object-cover" />
                 <span className="absolute inset-0 bg-[#04182e]/25" />
                 <span className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.75)]">
@@ -150,12 +160,14 @@ function Home() {
                   <span className="mt-2 max-w-lg text-sm leading-6">{t(body)}</span>
                 </span>
               </Link>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
       <section className="bg-white py-16">
         <div className="wrap grid items-center gap-10 lg:grid-cols-2">
+          <Reveal variant="right">
           <div>
             <p className="text-sm font-medium text-[#092949]">{t("advEyebrow")}</p>
             <h2 className="mt-3 text-4xl font-semibold tracking-tight text-[#1a1a2e]">{t("advTitle")}</h2>
@@ -182,12 +194,15 @@ function Home() {
               {t("advMore")} <span aria-hidden>→</span>
             </Link>
           </div>
+          </Reveal>
+          <Reveal variant="left">
           <img src="/moto.jpg" alt="" className="h-80 w-full rounded-3xl object-cover sm:h-[420px]" />
+          </Reveal>
         </div>
       </section>
       <TrustStrip />
       <section className="bg-[#071e36] py-16 text-center text-white">
-        <div className="wrap">
+        <Reveal variant="up" className="wrap">
           <h2 className="mx-auto max-w-3xl text-3xl font-semibold sm:text-5xl">{t("ctaReady")}</h2>
           <p className="mx-auto mt-4 max-w-2xl text-white/85">{t("ctaReadyBody")}</p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
@@ -198,7 +213,7 @@ function Home() {
               {t("heroBrowse")}
             </Link>
           </div>
-        </div>
+        </Reveal>
       </section>
     </StoreShell>
   );
@@ -248,7 +263,7 @@ function TrustStrip() {
   const go = (step: number) => setIndex((current) => (current + step + slides.length) % slides.length);
   return (
     <section className="bg-white py-16">
-      <div className="wrap">
+      <Reveal variant="fade" className="wrap">
         <p className="text-center text-xs font-semibold tracking-[0.18em] text-[#092949]">{t("trustEyebrow")}</p>
         <h2 className="mt-2 text-center text-3xl font-semibold text-[#1a1a2e] sm:text-4xl">{t("trustTitle")}</h2>
         <p className="mx-auto mt-3 max-w-3xl text-center text-sm text-[#5c6370] sm:text-base">{t("trustLead")}</p>
@@ -263,7 +278,7 @@ function TrustStrip() {
             <button key={item.src} type="button" aria-label={t(item.cap)} onClick={() => setIndex(dot)} className={dot === index ? "h-1.5 w-6 rounded-full bg-[#092949]" : "size-1.5 rounded-full bg-[#c5d4e4]"} />
           ))}
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

@@ -29,13 +29,13 @@ export function InquiryForm({
   const [code, setCode] = useState("");
 
   useEffect(() => {
-    if (hero) setCode(makeCode());
-  }, [hero]);
+    if (hero || contact) setCode(makeCode());
+  }, [hero, contact]);
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
-    if (hero && String(form.get("code") || "").trim().toUpperCase() !== code) {
+    if ((hero || contact) && String(form.get("code") || "").trim().toUpperCase() !== code) {
       setError(t("verifyWrong"));
       setCode(makeCode());
       return;
@@ -75,10 +75,27 @@ export function InquiryForm({
     <form onSubmit={onSubmit} className="grid gap-3">
       {contact ? (
         <>
-          <input name="name" required placeholder={t("phName")} className={field} />
-          <input name="email" type="email" required placeholder={t("phEmail")} className={field} />
-          <input name="phone" required placeholder={t("phPhone")} className={field} />
-          <textarea name="message" required rows={6} placeholder={t("phMessage")} className="w-full rounded-lg border border-[#e6e8ee] px-3 py-3 text-sm outline-none placeholder:text-[#b0b6c0]" />
+          <Field label={t("fieldName")} required>
+            <input name="name" required placeholder={t("phName")} className={field} />
+          </Field>
+          <Field label={t("fieldEmail")} required>
+            <input name="email" type="email" required placeholder={t("phEmail")} className={field} />
+          </Field>
+          <Field label={t("fieldCompany")}>
+            <input name="company" placeholder={t("phCompany")} className={field} />
+          </Field>
+          <Field label={t("fieldPhone")}>
+            <input name="phone" placeholder={t("phPhone")} className={field} />
+          </Field>
+          <Field label={t("fieldMessage")} required>
+            <textarea name="message" required rows={5} placeholder={t("phMessage")} className="w-full rounded-lg border border-[#e6e8ee] px-3 py-3 text-sm outline-none placeholder:text-[#b0b6c0]" />
+          </Field>
+          <Field label={t("phCode").replace(" *", "")} required>
+            <div className="flex gap-2">
+              <input name="code" required placeholder={t("phCode")} autoComplete="off" className={field} />
+              <span className="inline-flex h-12 w-20 shrink-0 items-center justify-center rounded-lg bg-[#eceff3] text-lg font-semibold tracking-widest text-ink">{code}</span>
+            </div>
+          </Field>
         </>
       ) : hero ? (
         <>
@@ -123,7 +140,7 @@ export function InquiryForm({
         type="submit"
         disabled={pending}
         className={contact
-          ? "inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-[#2f6fe0] text-sm font-semibold text-white disabled:opacity-60"
+          ? "inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-[#092949] text-sm font-semibold text-white disabled:opacity-60"
           : hero
           ? "inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-[#5b2dff] text-sm font-semibold text-white disabled:opacity-60"
           : "h-11 rounded-lg bg-ink px-4 text-copper-ink disabled:opacity-60"}
@@ -137,5 +154,14 @@ export function InquiryForm({
       </button>
       {hero && !contact && <p className="text-center text-xs text-muted">{t("quoteSecure")}</p>}
     </form>
+  );
+}
+
+function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
+  return (
+    <label className="grid gap-1.5 text-sm font-medium text-[#1a1a2e]">
+      <span>{label}{required ? <span className="text-[#d0121a]"> *</span> : null}</span>
+      {children}
+    </label>
   );
 }

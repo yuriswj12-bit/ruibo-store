@@ -3,6 +3,7 @@ import { getStoreHome, searchCatalog } from "@/lib/commerce.functions";
 import { StoreShell } from "@/components/store/shell";
 import { LINES, MAKES, catalogSearch, lineImage, brandFromCabinet, type CatalogSearch } from "@/components/store/catalog";
 import { skuImage } from "@/components/store/sku-photos";
+import { Reveal } from "@/components/store/reveal";
 import { useI18n, vehicleLabel } from "@/lib/i18n";
 import { shownOem } from "@/lib/oe";
 
@@ -53,11 +54,11 @@ function Catalog() {
   const selectClass = "h-11 w-full rounded-lg border border-line bg-card px-3 text-sm";
   return (
     <StoreShell name={store.name} email={store.email}>
-      <section>
+      <Reveal variant="fade">
         <img src="/product-range-banner.png" alt="Our Product Range" className="h-auto w-full" />
-      </section>
+      </Reveal>
       <main className="wrap grid gap-8 py-8 lg:grid-cols-[240px_minmax(0,1fr)]">
-        <aside className="grid content-start gap-4">
+        <Reveal variant="right" className="grid content-start gap-4">
           <form className="grid gap-2" method="get">
             <p className="text-sm font-semibold">{t("findOem")}</p>
             <div className="flex">
@@ -113,8 +114,8 @@ function Catalog() {
               )}
             </>
           )}
-        </aside>
-        <div className="min-w-0">
+        </Reveal>
+        <Reveal variant="up" className="min-w-0">
           <p className="text-sm text-muted">{t("showing", { from, to, total: products.length })}</p>
           {deps.q && products[0]?.match === "exact" && products.length > 1 && (
             <p className="mt-3 rounded-card border border-line bg-card px-4 py-3 text-sm">{t("multiExact", { n: products.length })}</p>
@@ -183,7 +184,7 @@ function Catalog() {
             <p className="mt-2 text-white/80">{t("cantFindBody")}</p>
             <Link to="/contact" className="mt-4 inline-block rounded-lg bg-copper px-4 py-2 text-sm font-semibold text-white">{t("navContact")}</Link>
           </div>
-        </div>
+        </Reveal>
       </main>
     </StoreShell>
   );
