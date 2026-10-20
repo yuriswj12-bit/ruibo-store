@@ -4,11 +4,11 @@ import { canTransitionInquiry } from "@/lib/inquiry-status";
 
 const nextStatus = ["contacted", "quoted", "closed"];
 
-export function InquiryStatusForm({ id, status, tenantId }: { id: string; status: string; tenantId: string }) {
+export function InquiryStatusForm({ id, status }: { id: string; status: string }) {
   async function update(value: string) {
     await fetch("/api/v1/tenant/inquiries", {
       method: "PATCH",
-      headers: { "Content-Type": "application/json", "x-tenant-id": tenantId },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id, status: value }),
     });
     window.location.reload();

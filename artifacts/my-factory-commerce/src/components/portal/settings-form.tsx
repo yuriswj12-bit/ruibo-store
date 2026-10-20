@@ -3,11 +3,9 @@
 import { useState } from "react";
 
 export function SettingsForm({
-  tenantId,
   settings,
   customDomain,
 }: {
-  tenantId: string;
   settings: Record<string, string>;
   customDomain: string;
 }) {
@@ -16,7 +14,7 @@ export function SettingsForm({
   async function save(formData: FormData) {
     const res = await fetch("/api/v1/tenant/settings", {
       method: "PATCH",
-      headers: { "Content-Type": "application/json", "x-tenant-id": tenantId },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         logoUrl: formData.get("logoUrl"),
         primaryColor: formData.get("primaryColor"),
@@ -31,15 +29,15 @@ export function SettingsForm({
   }
 
   return (
-    <form action={save} className="panel" style={{ padding: 16, display: "grid", gap: 8, maxWidth: 560 }}>
-      <input name="logoUrl" defaultValue={settings.logoUrl || ""} placeholder="Logo URL" />
-      <input name="primaryColor" defaultValue={settings.primaryColor || "#9a3412"} placeholder="#9a3412" />
-      <input name="contactEmail" defaultValue={settings.contactEmail || ""} placeholder="sales@factory.com" />
-      <input name="whatsappNumber" defaultValue={settings.whatsappNumber || ""} placeholder="WhatsApp" />
-      <input name="feishuWebhookUrl" defaultValue={settings.feishuWebhookUrl || ""} placeholder="Feishu webhook" />
-      <input name="customDomain" defaultValue={customDomain} placeholder="www.factory.com" />
-      <button type="submit">保存</button>
-      {message && <p>{message}</p>}
+    <form action={save} className="panel form-grid" style={{ padding: 20 }}>
+      <label>Logo URL<input name="logoUrl" defaultValue={settings.logoUrl || ""} placeholder="https://..." /></label>
+      <label>主色<input name="primaryColor" defaultValue={settings.primaryColor || "#9a3412"} placeholder="#9a3412" /></label>
+      <label>联系邮箱<input name="contactEmail" defaultValue={settings.contactEmail || ""} placeholder="sales@factory.com" /></label>
+      <label>WhatsApp<input name="whatsappNumber" defaultValue={settings.whatsappNumber || ""} placeholder="+86..." /></label>
+      <label>飞书 Webhook<input name="feishuWebhookUrl" defaultValue={settings.feishuWebhookUrl || ""} placeholder="https://open.feishu.cn/..." /></label>
+      <label>独立域名<input name="customDomain" defaultValue={customDomain} placeholder="www.factory.com" /></label>
+      <button type="submit" className="btn btn-primary">保存设置</button>
+      {message && <p className="sku">{message}</p>}
     </form>
   );
 }

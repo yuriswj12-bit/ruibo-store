@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/products?q=&make=&line=&model=&series=&page=1",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "瑞铂传感 RBTC",
+      "hasCanvas": false,
+      "bodyTextLen": 902,
+      "bodyTextHash": "f5f4ba66b3d7445b6da2141ff8066c7b7c9a6eb1f473bf3d6064ab714a748793",
+      "bodyTextPrefix": "首页 产品 制造 下载 关于我们 联系 查找 OEM GO 产品线 全部产品线 汽车 摩托车 工业 氮氧 显示 1–12，共 3",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/products-no-header-search.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "瑞铂传感 RBTC",
+      "hasCanvas": false,
+      "bodyTextLen": 902,
+      "bodyTextHash": "f5f4ba66b3d7445b6da2141ff8066c7b7c9a6eb1f473bf3d6064ab714a748793",
+      "bodyTextPrefix": "首页 产品 制造 下载 关于我们 联系 查找 OEM GO 产品线 全部产品线 汽车 摩托车 工业 氮氧 显示 1–12，共 3",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/products-no-header-search-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/products-no-header-search.json"
+}

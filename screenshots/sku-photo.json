@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/products/RBVW-6262E?oe=8R0906262E",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "瑞铂传感 RBTC",
+      "hasCanvas": false,
+      "bodyTextLen": 709,
+      "bodyTextHash": "9ca55057a054f15396e6f71b1cd75b7736a5a019147762afa323d3145b5d34dd",
+      "bodyTextPrefix": "首页 产品 制造 下载 关于我们 联系 产品视频 · 实物图片 大众 8R0906262E 商品简介 8R0906262E，大众",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/sku-photo.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "瑞铂传感 RBTC",
+      "hasCanvas": false,
+      "bodyTextLen": 709,
+      "bodyTextHash": "9ca55057a054f15396e6f71b1cd75b7736a5a019147762afa323d3145b5d34dd",
+      "bodyTextPrefix": "首页 产品 制造 下载 关于我们 联系 产品视频 · 实物图片 大众 8R0906262E 商品简介 8R0906262E，大众",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/sku-photo-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/sku-photo.json"
+}

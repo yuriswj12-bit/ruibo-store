@@ -8,7 +8,7 @@ export default async function AnalyticsPage() {
   const tenants = await prisma.tenant.findMany({ select: { id: true, name: true } });
   const names = Object.fromEntries(tenants.map((tenant) => [tenant.id, tenant.name]));
   return (
-    <main className="wrap" style={{ padding: 28 }}>
+    <section>
       <h1>全网大盘</h1>
       <table>
         <thead><tr><th>工厂</th><th>事件</th><th>次数</th></tr></thead>
@@ -22,6 +22,6 @@ export default async function AnalyticsPage() {
           ))}
         </tbody>
       </table>
-    </main>
+    </section>
   );
 }

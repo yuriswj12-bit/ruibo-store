@@ -1,0 +1,38 @@
+{
+  "url": "http://127.0.0.1:8080/products?q=&make=&line=Automotive&model=&series=&page=1",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "瑞铂传感 RBTC",
+      "hasCanvas": false,
+      "bodyTextLen": 1013,
+      "bodyTextHash": "6d2a934585b269d59c6493cb6517e9f0cb80eda54ec187ae05d021971551e96d",
+      "bodyTextPrefix": "首页 产品 制造 下载 关于我们 联系 查找 OEM 查找 OEM GO 产品线 全部产品线 汽车 摩托车 工业 氮氧 品牌 全",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/products-catalog.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "瑞铂传感 RBTC",
+      "hasCanvas": false,
+      "bodyTextLen": 1013,
+      "bodyTextHash": "6d2a934585b269d59c6493cb6517e9f0cb80eda54ec187ae05d021971551e96d",
+      "bodyTextPrefix": "首页 产品 制造 下载 关于我们 联系 查找 OEM 查找 OEM GO 产品线 全部产品线 汽车 摩托车 工业 氮氧 品牌 全",
+      "horizontalOverflow": false,
+      "consoleErrors": [
+        "A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\n%s%s https://react.dev/link/hydration-mismatch \n\n  ...\n    <SplitComponent>\n      <OutletImpl>\n        <MatchImpl routeId=\"/products/\">\n          <MatchView router={{...}} match={{id:\"/produ...\", ...}}>\n            <CatchBoundary getResetKey={function getResetKey} errorComponent={function AppErrorComponent} ...>\n              <MatchInnerImpl match={{id:\"/produ...\", ...}}>\n                <Lazy>\n                  <Catalog>\n                    <StoreShell name=\"瑞铂传感 RBTC\" email=\"\">\n                      <div className=\"min-h-scre...\">\n                        <header className=\"sticky top...\">\n                          <div>\n                          <div>\n                          <div className=\"wrap pb-3\">\n                            <OeSearch>\n                              <form onSubmit={function go} className=\"relative\">\n                                <div className={\"flex gap-2 \"}>\n                                  <input\n                                    value=\"\"\n                                    onChange={function onChange}\n                                    onFocus={function onFocus}\n                                    placeholder=\"06A906262EE 或 0258007309\"\n                                    aria-label=\"查找 OEM\"\n                                    className=\"w-full rounded-lg border border-line bg-card px-3 h-11\"\n-                                   style={{caret-color:\"transparent\"}}\n                                  >\n                                  ...\n                        <section>\n                        <main className=\"wrap grid ...\">\n                          <aside className=\"grid conte...\">\n                            <form className=\"grid gap-2\" method=\"get\">\n                              <p>\n                              <div className=\"flex\">\n                                <input\n                                  name=\"q\"\n                                  defaultValue=\"\"\n                                  placeholder=\"OEM 或博世号\"\n                                  className=\"h-11 min-w-0 flex-1 rounded-l-lg border border-line bg-card px-3\"\n-                                 style={{caret-color:\"transparent\"}}\n                                >\n                                ...\n                              <input\n                                type=\"hidden\"\n                                name=\"make\"\n                                value=\"\"\n-                               style={{caret-color:\"transparent\"}}\n                              >\n                              <input\n                                type=\"hidden\"\n                                name=\"line\"\n                                value=\"Automotive\"\n-                               style={{caret-color:\"transparent\"}}\n                              >\n                            ...\n                          ...\n                        ...\n"
+      ],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/products-catalog-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/products-catalog.json"
+}

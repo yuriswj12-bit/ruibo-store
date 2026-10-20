@@ -14,7 +14,7 @@ function parseCsv(text: string): Row[] {
   });
 }
 
-export function ExcelUploader({ tenantId }: { tenantId: string }) {
+export function ExcelUploader() {
   const [message, setMessage] = useState("");
 
   async function onFile(file: File) {
@@ -22,7 +22,7 @@ export function ExcelUploader({ tenantId }: { tenantId: string }) {
     const rows = parseCsv(text);
     const res = await fetch("/api/v1/tenant/products/import", {
       method: "POST",
-      headers: { "Content-Type": "application/json", "x-tenant-id": tenantId },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ rows }),
     });
     const data = await res.json();

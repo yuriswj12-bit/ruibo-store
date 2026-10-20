@@ -8,7 +8,7 @@ export function TenantCreateForm() {
   async function create(formData: FormData) {
     const res = await fetch("/api/v1/super-admin/tenants", {
       method: "POST",
-      headers: { "Content-Type": "application/json", "x-role": "super_admin" },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         name: formData.get("name"),
         slug: formData.get("slug"),

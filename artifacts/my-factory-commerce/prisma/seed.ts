@@ -1,4 +1,5 @@
 import { PrismaClient, Prisma } from "@prisma/client";
+import { hashPassword } from "../src/lib/auth";
 
 const prisma = new PrismaClient();
 
@@ -92,6 +93,40 @@ async function main() {
   await prisma.fitment.deleteMany({ where: { productId: product.id } });
   await prisma.fitment.createMany({
     data: MOCK.fitments.map((fitment) => ({ productId: product.id, ...fitment })),
+  });
+
+  // Super admin (no tenant membership required)
+  const superPassword = process.env.SUPER_ADMIN_PASSWORD || "ChangeMe123!";
+  await prisma.user.upsert({
+    where: { username: "superadmin" },
+    update: {},
+    create: {
+      username: "superadmin",
+      passwordHash: hashPassword(superPassword),
+      role: "super_admin",
+    },
+  });
+
+  // Optional demo tenant admin for the seeded factory
+  const demoPassword = process.env.DEMO_ADMIN_PASSWORD || "Factory123!";
+  const demoUser = await prisma.user.upsert({
+    where: { username: "xinda" },
+    update: {},
+    create: {
+      username: "xinda",
+      passwordHash: hashPassword(demoPassword),
+      role: "tenant_admin",
+    },
+  });
+  await prisma.tenantMember.upsert({
+    where: { tenantId_userId: { tenantId: tenant.id, userId: demoUser.id } },
+    update: {},
+    create: {
+      tenantId: tenant.id,
+      userId: demoUser.id,
+      email: "xinda@xinda-sensor.com",
+      role: "tenant_admin",
+    },
   });
 }
 
