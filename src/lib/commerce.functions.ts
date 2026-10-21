@@ -265,18 +265,40 @@ const inquiryInput = z.object({
   country: z.string().max(60).optional(),
   message: z.string().min(1).max(2000),
   matchedOe: z.string().max(80).optional(),
+  sourcePath: z.string().max(200).optional(),
+  idempotencyKey: z.string().regex(/^[A-Za-z0-9_-]{8,80}$/),
 });
 
 export const submitInquiry = createServerFn({ method: "POST" })
   .validator(inquiryInput)
   .handler(async ({ data }) => {
-    const sql = await getSql();
-    const id = crypto.randomUUID();
-    await sql`
-      insert into inquiries (id, factory_id, product_sku, customer_name, customer_email, whatsapp, quantity, country, message, matched_oe)
-      values (${id}, ${DEMO}, ${data.sku ?? null}, ${data.customerName}, ${data.customerEmail}, ${data.whatsapp ?? null}, ${data.quantity ?? null}, ${data.country ?? null}, ${data.message}, ${data.matchedOe ?? ""})
-    `;
-    return { id };
+    const base = process.env.CENTER_API_URL?.trim().replace(/\/$/, "");
+    const key = process.env.CENTER_SITE_KEY?.trim();
+    if (!base || !key) throw new Error("询盘服务未配置");
+    const response = await fetch(`${base}/api/v1/inquiries`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${key}`,
+        "idempotency-key": data.idempotencyKey,
+      },
+      body: JSON.stringify({
+        productSku: data.sku,
+        customerName: data.customerName,
+        customerEmail: data.customerEmail,
+        customerWhatsapp: data.whatsapp,
+        quantity: data.quantity,
+        country: data.country,
+        message: data.message,
+        matchedOe: data.matchedOe,
+        sourcePath: data.sourcePath,
+        sourceChannel: "ruibo-store",
+      }),
+    });
+    if (!response.ok) throw new Error("询盘提交失败");
+    const payload = (await response.json()) as { id?: string };
+    if (!payload.id) throw new Error("询盘提交失败");
+    return { id: payload.id };
   });
 
 const orderInput = z.object({

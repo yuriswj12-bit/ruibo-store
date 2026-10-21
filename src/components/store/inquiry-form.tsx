@@ -27,6 +27,7 @@ export function InquiryForm({
   const [error, setError] = useState("");
   const [pending, setPending] = useState(false);
   const [code, setCode] = useState("");
+  const [idempotencyKey] = useState(() => crypto.randomUUID().replace(/-/g, ""));
 
   useEffect(() => {
     if (hero) setCode(makeCode());
@@ -52,6 +53,8 @@ export function InquiryForm({
           country: String(form.get("company") || ""),
           whatsapp: String(form.get("phone") || ""),
           message: String(form.get("message") || ""),
+          sourcePath: window.location.pathname,
+          idempotencyKey,
         },
       });
       setDone(result.id.slice(0, 8));

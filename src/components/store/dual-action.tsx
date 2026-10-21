@@ -24,6 +24,7 @@ export function DualAction({
   const [qty, setQty] = useState(1);
   const [done, setDone] = useState(false);
   const [error, setError] = useState("");
+  const [idempotencyKey] = useState(() => crypto.randomUUID().replace(/-/g, ""));
   const cap = Math.max(1, Math.min(5, sampleStock));
   const total = (Number(samplePrice) * qty).toFixed(2);
   const wa = whatsapp.replace(/\D/g, "");
@@ -41,6 +42,8 @@ export function DualAction({
           country: String(formData.get("country") || ""),
           message: String(formData.get("message") || ""),
           matchedOe,
+          sourcePath: window.location.pathname,
+          idempotencyKey,
         },
       });
       setOpen(false);
