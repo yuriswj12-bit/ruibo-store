@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { submitInquiry } from "@/lib/commerce.functions";
 import { useI18n } from "@/lib/i18n";
+import { trackStore } from "@/lib/track-client";
 
 function makeCode() {
   const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ";
@@ -28,6 +29,11 @@ export function InquiryForm({
   const [pending, setPending] = useState(false);
   const [code, setCode] = useState("");
   const [idempotencyKey] = useState(() => crypto.randomUUID().replace(/-/g, ""));
+  const started = useRef(false);
+
+  useEffect(() => {
+    trackStore("inquiry_button_click", { sku });
+  }, [sku]);
 
   useEffect(() => {
     if (hero) setCode(makeCode());
@@ -75,7 +81,15 @@ export function InquiryForm({
     : "h-11 rounded-lg border border-line px-3";
 
   return (
-    <form onSubmit={onSubmit} className="grid gap-3">
+    <form
+      onSubmit={onSubmit}
+      className="grid gap-3"
+      onFocus={() => {
+        if (started.current) return;
+        started.current = true;
+        trackStore("inquiry_form_start", { sku });
+      }}
+    >
       {contact ? (
         <>
           <Field label={t("fieldName")} required>

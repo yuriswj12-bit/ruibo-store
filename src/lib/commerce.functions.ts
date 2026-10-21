@@ -301,6 +301,40 @@ export const submitInquiry = createServerFn({ method: "POST" })
     return { id: payload.id };
   });
 
+const trackInput = z.object({
+  eventName: z.enum(["page_view", "product_view", "inquiry_button_click", "inquiry_form_start", "contact_whatsapp_click", "contact_email_click"]),
+  eventId: z.string().regex(/^[A-Za-z0-9_-]{8,80}$/),
+  pagePath: z.string().min(1).max(200),
+  sessionId: z.string().regex(/^[A-Za-z0-9_-]{8,80}$/),
+  anonymousId: z.string().max(80).optional(),
+  sku: z.string().max(80).optional(),
+  referrer: z.string().max(300).optional(),
+});
+
+export const trackStoreEvent = createServerFn({ method: "POST" })
+  .validator(trackInput)
+  .handler(async ({ data }) => {
+    const base = process.env.CENTER_API_URL?.trim().replace(/\/$/, "");
+    const key = process.env.CENTER_SITE_KEY?.trim();
+    if (!base || !key) return { ok: false as const };
+    const response = await fetch(`${base}/api/v1/analytics/collect`, {
+      method: "POST",
+      headers: { "content-type": "application/json", authorization: `Bearer ${key}` },
+      body: JSON.stringify({
+        eventName: data.eventName,
+        eventId: data.eventId,
+        pagePath: data.pagePath,
+        sessionId: data.sessionId,
+        anonymousId: data.anonymousId,
+        sku: data.sku,
+        referrer: data.referrer,
+        occurredAt: new Date().toISOString(),
+        schemaVersion: 1,
+      }),
+    });
+    return { ok: response.ok };
+  });
+
 const orderInput = z.object({
   sku: z.string(),
   quantity: z.number().int().min(1).max(5),

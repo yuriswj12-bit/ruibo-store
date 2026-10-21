@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { LANGS, useI18n } from "@/lib/i18n";
 import { LINES, catalogSearch } from "@/components/store/catalog";
 import { Reveal } from "@/components/store/reveal";
+import { trackStore } from "@/lib/track-client";
 
 export function StoreShell({
   name,
@@ -17,6 +18,10 @@ export function StoreShell({
 }) {
   const { t } = useI18n();
   const [menu, setMenu] = useState(false);
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  useEffect(() => {
+    trackStore("page_view");
+  }, [pathname]);
   return (
     <div className="min-h-screen bg-paper text-ink">
       <header className="sticky top-0 z-30 border-b border-line bg-card">
@@ -189,6 +194,7 @@ function SideDock({ email, whatsapp }: { email?: string; whatsapp?: string }) {
         target="_blank"
         rel="noreferrer"
         aria-label="WhatsApp"
+        onClick={() => trackStore("contact_whatsapp_click")}
         className="grid size-12 place-items-center rounded-full bg-[#25D366] text-white shadow-lg"
       >
         <svg viewBox="0 0 24 24" className="size-6" fill="currentColor" aria-hidden>
@@ -198,6 +204,7 @@ function SideDock({ email, whatsapp }: { email?: string; whatsapp?: string }) {
       <a
         href={`mailto:${mail}`}
         aria-label="Email"
+        onClick={() => trackStore("contact_email_click")}
         className="grid size-12 place-items-center rounded-full bg-[#092949] text-white shadow-lg"
       >
         <svg viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
