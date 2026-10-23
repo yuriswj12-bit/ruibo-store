@@ -89,14 +89,17 @@ function Home() {
           </Reveal>
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {([
-              ["pillarMake", "pillarMakeBody", "factory"],
-              ["pillarCheck", "pillarCheckBody", "shield"],
-              ["pillarExport", "pillarExportBody", "globe"],
-              ["pillarPerson", "pillarPersonBody", "person"],
-            ] as const).map(([title, body, icon], index) => (
+              ["pillarMake", "pillarMakeBody", "factory", "/pillars/make.jpg"],
+              ["pillarCheck", "pillarCheckBody", "shield", "/pillars/check.jpg"],
+              ["pillarExport", "pillarExportBody", "globe", "/pillars/export.jpg"],
+              ["pillarPerson", "pillarPersonBody", "person", "/pillars/person.jpg"],
+            ] as const).map(([title, body, icon, photo], index) => (
               <Reveal key={title} variant="up" delay={index * 80}>
-              <article className="h-full rounded-2xl bg-[#f7f8fc] p-6 shadow-[0_8px_24px_rgba(20,20,40,0.04)]">
-                <span className="grid size-12 place-items-center rounded-xl bg-[#e6eef6] text-[#092949]">
+              <article className="relative h-full overflow-hidden rounded-2xl bg-[#f7f8fc] p-6 shadow-[0_8px_24px_rgba(20,20,40,0.04)]">
+                <img src={photo} alt="" className="absolute inset-0 h-full w-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-b from-white/62 via-white/86 to-white/95" />
+                <div className="relative">
+                <span className="grid size-12 place-items-center rounded-xl bg-white/90 text-[#092949] shadow-sm">
                   {icon === "factory" && (
                     <svg viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
                       <path d="M3 21V10l6 3V10l6 3V8l6 3v10" strokeLinejoin="round" />
@@ -123,6 +126,7 @@ function Home() {
                 </span>
                 <h3 className="mt-8 text-lg font-semibold text-[#1a1a2e]">{t(title)}</h3>
                 <p className="mt-2 text-sm leading-6 text-[#5c6370]">{t(body)}</p>
+                </div>
               </article>
               </Reveal>
             ))}
