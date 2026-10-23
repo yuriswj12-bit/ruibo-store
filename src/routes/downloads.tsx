@@ -180,8 +180,8 @@ function Downloads() {
       </section>
       <main className="wrap py-12">
         <Reveal variant="up">
-          <article className="grid overflow-hidden rounded-2xl border border-line bg-card lg:grid-cols-[280px_minmax(0,1fr)]">
-            <img src="/downloads/catalog-cover.jpg" alt="" className="h-56 w-full object-cover lg:h-full" />
+          <article className="grid overflow-hidden rounded-2xl border border-line bg-card lg:grid-cols-[220px_minmax(0,1fr)]">
+            <img src="/downloads/catalog-cover.jpg" alt="RBIC oxygen sensor catalog cover" className="h-auto w-full bg-white object-contain" />
             <div className="p-6 sm:p-8">
               <p className="text-xs font-semibold uppercase tracking-wider text-[#092949]">{c.recommend}</p>
               <h2 className="mt-2 text-2xl font-semibold">{c.name}</h2>
