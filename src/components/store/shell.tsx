@@ -182,21 +182,31 @@ function SideDock({ email, whatsapp }: { email?: string; whatsapp?: string }) {
   const [show, setShow] = useState(false);
   const [wechat, setWechat] = useState(false);
   const [copied, setCopied] = useState("");
+  const dock = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const onScroll = () => setShow(window.scrollY > window.innerHeight * 0.72);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+  useEffect(() => {
+    if (!wechat) return;
+    const close = (event: MouseEvent) => {
+      if (dock.current && !dock.current.contains(event.target as Node)) setWechat(false);
+    };
+    document.addEventListener("mousedown", close);
+    return () => document.removeEventListener("mousedown", close);
+  }, [wechat]);
   if (!show) return null;
   const mail = email || "info@cnrbic.com";
   const wa = (whatsapp || "8613706647066").replace(/\D/g, "");
   const copy = (value: string) => {
     navigator.clipboard?.writeText(value);
     setCopied(value);
+    window.setTimeout(() => setWechat(false), 600);
   };
   return (
-    <div className="fixed bottom-6 right-4 z-40 flex flex-col gap-3">
+    <div ref={dock} className="fixed bottom-6 right-4 z-40 flex flex-col gap-3">
       <div className="relative">
         <button
           type="button"
