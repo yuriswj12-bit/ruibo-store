@@ -155,8 +155,7 @@ function Home() {
             ] as const).map(([src, line, title, body, icon], index) => (
               <Reveal key={line} variant={index % 2 ? "left" : "right"} delay={index * 70}>
               <Link to="/products" search={catalogSearch({ line })} className="relative block overflow-hidden rounded-2xl">
-                <img src={src} alt="" className="aspect-[4/3] w-full object-cover grayscale contrast-110" />
-                <span className="absolute inset-0 bg-gradient-to-t from-[#e60013]/80 via-[#ff5a67]/55 to-[#ffb3ba]/35" />
+                <img src={src} alt="" className="aspect-[4/3] w-full object-cover" />
                 <span className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.75)]">
                   <TileIcon name={icon} />
                   <span className="mt-3 text-2xl font-bold leading-tight">{t(title)}</span>
