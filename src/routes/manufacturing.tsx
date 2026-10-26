@@ -170,9 +170,8 @@ function Manufacturing() {
     <StoreShell name={store.name} email={store.email} whatsapp={store.whatsapp}>
       <main>
         <section className="relative overflow-hidden bg-gradient-to-r from-[#ff6b78] to-[#e60013] text-white">
-          <img src="/sensor.jpg" alt="" className="pointer-events-none absolute inset-0 h-full w-full object-cover grayscale contrast-125" />
-          <div className="pointer-events-none absolute inset-0 bg-[#e60013] mix-blend-multiply" />
-          <div className="pointer-events-none absolute inset-0 bg-[#e60013]/35" />
+          <img src="/sensor.jpg" alt="" className="pointer-events-none absolute inset-0 h-full w-full object-cover" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/75 via-[#ff8a94]/45 to-[#e60013]/55" />
           <Reveal variant="fade" className="wrap relative py-20 sm:py-28">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/70">{c.kicker}</p>
             <h1 className="mt-4 max-w-3xl text-3xl font-semibold leading-tight sm:text-5xl">{c.title}</h1>
@@ -194,9 +193,8 @@ function Manufacturing() {
               ].map((card, i) => (
                 <Reveal key={card.k} variant={i === 0 ? "right" : "left"} className="overflow-hidden rounded-2xl bg-white shadow-lg">
                   <div className="relative h-48 bg-gradient-to-r from-[#ff6b78] to-[#e60013]">
-                    <img src={card.img} alt="" className="absolute inset-0 h-full w-full object-cover grayscale contrast-125" />
-                    <div className="absolute inset-0 bg-[#e60013] mix-blend-multiply" />
-                    <div className="absolute inset-0 bg-[#e60013]/35" />
+                    <img src={card.img} alt="" className="absolute inset-0 h-full w-full object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#e60013]/55 via-[#ff6b78]/35 to-white/40" />
                     <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
                       <p className="text-sm text-white/80">{card.k}</p>
                       <p className="mt-1 text-2xl font-semibold">{card.title}</p>
@@ -232,9 +230,8 @@ function Manufacturing() {
             ].map((card, i) => (
               <Reveal key={card.title} variant={i === 0 ? "right" : "left"} className="flex h-full flex-col rounded-2xl border border-[#f3c5c8] bg-white p-8">
                 <div className="relative aspect-[16/9] overflow-hidden rounded-xl bg-gradient-to-r from-[#ff6b78] to-[#e60013]">
-                  <img src={card.img} alt="" className="absolute inset-0 h-full w-full object-cover grayscale contrast-125" />
-                  <div className="absolute inset-0 bg-[#e60013] mix-blend-multiply" />
-                  <div className="absolute inset-0 bg-[#e60013]/35" />
+                  <img src={card.img} alt="" className="absolute inset-0 h-full w-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#e60013]/50 via-[#ff6b78]/30 to-white/35" />
                 </div>
                 <h3 className="mt-5 text-xl font-semibold">{card.title}</h3>
                 <p className="mt-3 leading-7 text-muted">{card.body}</p>
@@ -263,9 +260,8 @@ function Manufacturing() {
                       />
                     ) : (
                       <>
-                        <img src={SHOP[i % SHOP.length]} alt="" className="absolute inset-0 h-full w-full object-cover grayscale contrast-125" />
-                        <div className="absolute inset-0 bg-[#e60013] mix-blend-multiply" />
-                        <div className="absolute inset-0 bg-[#e60013]/35" />
+                        <img src={SHOP[i % SHOP.length]} alt="" className="absolute inset-0 h-full w-full object-cover" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#e60013]/50 via-[#ff6b78]/30 to-white/35" />
                         <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
                           <span className="flex size-14 items-center justify-center rounded-full border-2 border-white/80 text-2xl">▶</span>
                           <p className="mt-3 text-sm font-semibold">{c.coming}</p>
@@ -302,9 +298,8 @@ function Manufacturing() {
           </Reveal>
           <Reveal variant="left">
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gradient-to-r from-[#ff6b78] to-[#e60013]">
-              <img src="/line-ind-bg.jpg" alt="" className="absolute inset-0 h-full w-full object-cover grayscale contrast-125" />
-              <div className="absolute inset-0 bg-[#e60013] mix-blend-multiply" />
-              <div className="absolute inset-0 bg-[#e60013]/35" />
+              <img src="/line-ind-bg.jpg" alt="" className="absolute inset-0 h-full w-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#e60013]/50 via-[#ff6b78]/30 to-white/35" />
             </div>
           </Reveal>
         </section>
