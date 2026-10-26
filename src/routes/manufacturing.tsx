@@ -149,6 +149,19 @@ const en: Copy = {
   cta: "Browse products",
 };
 
+const PROCESS = [
+  { img: "/process/01.jpg", zh: "陶瓷元件制备", en: "Ceramic element forming" },
+  { img: "/process/02.jpg", zh: "铂电极涂覆", en: "Platinum electrode coating" },
+  { img: "/process/03.jpg", zh: "高温烧结", en: "High-temperature sintering" },
+  { img: "/process/04.jpg", zh: "加热器组装", en: "Heater assembly" },
+  { img: "/process/05.jpg", zh: "金属外壳加工", en: "Metal housing machining" },
+  { img: "/process/06.jpg", zh: "传感元件装配", en: "Sensing element assembly" },
+  { img: "/process/07.jpg", zh: "线束接头装配", en: "Harness and connector" },
+  { img: "/process/08.jpg", zh: "焊接密封", en: "Welding and sealing" },
+  { img: "/process/09.jpg", zh: "功能检测标定", en: "Functional test and calibration" },
+  { img: "/process/10.jpg", zh: "包装出货", en: "Packing and shipment" },
+];
+
 const COPY: Record<Lang, Copy> = {
   zh,
   en,
@@ -332,6 +345,28 @@ function Manufacturing() {
               {c.cta}
             </Link>
           </Reveal>
+        </section>
+
+        <section className="bg-[#f6f7fb] py-16">
+          <div className="wrap">
+            <Reveal variant="up" className="mx-auto max-w-3xl text-center">
+              <h2 className="text-3xl font-semibold text-[#1a1a2e]">{lang === "zh" ? "工艺与生产" : "Process and production"}</h2>
+              <p className="mt-4 leading-7 text-muted">{lang === "zh"
+                ? "从陶瓷元件制备、电极涂覆到烧结、装配、检测和包装，每一个环节都对最终成品有所贡献。"
+                : "From ceramic forming and electrode coating to sintering, assembly, testing and packing, every step contributes to the finished sensor."}</p>
+            </Reveal>
+            <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
+              {PROCESS.map((step, i) => (
+                <Reveal key={step.img} variant="up" delay={(i % 5) * 40} className="overflow-hidden rounded-xl bg-white shadow-sm">
+                  <img src={step.img} alt="" className="aspect-[4/3] w-full object-cover" />
+                  <p className="px-3 py-3 text-sm font-semibold text-[#e60013]">
+                    <span className="mr-2 text-[#1a1a2e]">{String(i + 1).padStart(2, "0")}</span>
+                    {lang === "zh" ? step.zh : step.en}
+                  </p>
+                </Reveal>
+              ))}
+            </div>
+          </div>
         </section>
       </main>
     </StoreShell>
