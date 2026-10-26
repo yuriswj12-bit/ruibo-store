@@ -171,7 +171,7 @@ function Downloads() {
   if (!store) return <main className="wrap py-16">…</main>;
   return (
     <StoreShell name={store.name} email={store.email}>
-      <section className="bg-[#071e36] text-white">
+      <section className="bg-[#8c0010] text-white">
         <Reveal variant="fade" className="wrap py-16 sm:py-20">
           <p className="text-sm font-medium tracking-[0.18em] text-white/70">{c.eyebrow}</p>
           <h1 className="mt-3 max-w-3xl text-4xl font-semibold sm:text-5xl">{c.title}</h1>
@@ -183,7 +183,7 @@ function Downloads() {
           <article className="grid overflow-hidden rounded-2xl border border-line bg-card lg:grid-cols-[220px_minmax(0,1fr)]">
             <img src="/downloads/catalog-cover.jpg" alt="RBIC oxygen sensor catalog cover" className="h-auto w-full bg-white object-contain" />
             <div className="p-6 sm:p-8">
-              <p className="text-xs font-semibold uppercase tracking-wider text-[#092949]">{c.recommend}</p>
+              <p className="text-xs font-semibold uppercase tracking-wider text-[#e60013]">{c.recommend}</p>
               <h2 className="mt-2 text-2xl font-semibold">{c.name}</h2>
               <p className="mt-3 max-w-xl text-sm leading-6 text-muted">{c.body}</p>
               <dl className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm">
@@ -192,7 +192,7 @@ function Downloads() {
                 <div><dt className="text-muted">Products</dt><dd className="font-semibold">{c.products}</dd></div>
                 <div><dt className="text-muted">OEM</dt><dd className="font-semibold">{c.oems}</dd></div>
               </dl>
-              <a href="/downloads/ruibo-oxygen-sensors.pdf" download className="mt-6 inline-flex items-center gap-2 rounded-lg bg-[#092949] px-5 py-3 text-sm font-semibold text-white">
+              <a href="/downloads/ruibo-oxygen-sensors.pdf" download className="mt-6 inline-flex items-center gap-2 rounded-lg bg-[#e60013] px-5 py-3 text-sm font-semibold text-white">
                 {c.download} <span aria-hidden>↓</span>
               </a>
             </div>
@@ -201,7 +201,7 @@ function Downloads() {
         <div className="mt-8 grid gap-4 sm:grid-cols-3">
           {([c.pages, c.products, c.oems] as const).map((item, index) => (
             <Reveal key={item} variant="up" delay={index * 60} className="rounded-2xl bg-[#f7f8fc] p-6 text-center">
-              <p className="text-2xl font-semibold text-[#092949]">{item}</p>
+              <p className="text-2xl font-semibold text-[#e60013]">{item}</p>
             </Reveal>
           ))}
         </div>
@@ -209,14 +209,14 @@ function Downloads() {
           <Reveal variant="right" className="rounded-2xl border border-line bg-card p-6">
             <h3 className="text-lg font-semibold">{c.searchTitle}</h3>
             <p className="mt-2 text-sm leading-6 text-muted">{c.searchBody}</p>
-            <Link to="/products" search={catalogSearch()} className="mt-4 inline-block rounded-lg border border-[#092949] px-4 py-2 text-sm font-semibold text-[#092949]">
+            <Link to="/products" search={catalogSearch()} className="mt-4 inline-block rounded-lg border border-[#e60013] px-4 py-2 text-sm font-semibold text-[#e60013]">
               {c.searchCta}
             </Link>
           </Reveal>
           <Reveal variant="left" className="rounded-2xl border border-line bg-card p-6">
             <h3 className="text-lg font-semibold">{c.quote}</h3>
             <p className="mt-2 text-sm leading-6 text-muted">{c.quoteBody}</p>
-            <Link to="/contact" className="mt-4 inline-block rounded-lg bg-[#092949] px-4 py-2 text-sm font-semibold text-white">
+            <Link to="/contact" className="mt-4 inline-block rounded-lg bg-[#e60013] px-4 py-2 text-sm font-semibold text-white">
               {c.contact}
             </Link>
           </Reveal>

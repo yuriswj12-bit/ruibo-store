@@ -151,9 +151,9 @@ export function InquiryForm({
         type="submit"
         disabled={pending}
         className={contact
-          ? "inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-[#092949] text-sm font-semibold text-white disabled:opacity-60"
+          ? "inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-[#e60013] text-sm font-semibold text-white disabled:opacity-60"
           : hero
-          ? "inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-[#5b2dff] text-sm font-semibold text-white disabled:opacity-60"
+          ? "inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-[#e60013] text-sm font-semibold text-white disabled:opacity-60"
           : "h-11 rounded-lg bg-ink px-4 text-copper-ink disabled:opacity-60"}
       >
         {(hero || contact) && (
@@ -171,7 +171,7 @@ export function InquiryForm({
 function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
   return (
     <label className="grid gap-1.5 text-sm font-medium text-[#1a1a2e]">
-      <span>{label}{required ? <span className="text-[#d0121a]"> *</span> : null}</span>
+      <span>{label}{required ? <span className="text-[#e60013]"> *</span> : null}</span>
       {children}
     </label>
   );

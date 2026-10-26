@@ -164,7 +164,7 @@ function FakeQr({ seed, label }: { seed: string; label: string }) {
               y={Math.floor(index / cells.size)}
               width="1"
               height="1"
-              fill="#0c2340"
+              fill="#e60013"
             />
           ) : null,
         )}

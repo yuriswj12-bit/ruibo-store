@@ -30,7 +30,7 @@ function Contact() {
     <StoreShell name={store.name} email={store.email} whatsapp={store.whatsapp}>
       <main>
         <section
-          className="relative grid min-h-[380px] items-center bg-[#10243c] bg-cover bg-center"
+          className="relative grid min-h-[380px] items-center bg-[#8c0010] bg-cover bg-center"
           style={{ backgroundImage: "linear-gradient(rgba(8,22,40,.72), rgba(8,22,40,.72)), url(/industrial.jpg)" }}
         >
           <div className="wrap py-20 text-white">
@@ -46,14 +46,14 @@ function Contact() {
           {cards.map((card, index) => (
             <Reveal key={card.title} variant={index % 2 === 0 ? "up" : "fade"} delay={index * 80}>
               <article className="h-full rounded-2xl bg-[#f6f7fb] p-6">
-                <span className="grid size-11 place-items-center rounded-xl bg-[#ece8fb] text-[#092949]">
+                <span className="grid size-11 place-items-center rounded-xl bg-[#ece8fb] text-[#e60013]">
                   <CardIcon name={card.icon} />
                 </span>
                 <h2 className="mt-8 text-lg font-semibold">{card.title}</h2>
                 {card.href ? (
-                  <a href={card.href} className="mt-2 block text-sm font-medium text-[#3a2f86] underline-offset-2 hover:underline" target={card.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">{card.value}</a>
+                  <a href={card.href} className="mt-2 block text-sm font-medium text-[#e60013] underline-offset-2 hover:underline" target={card.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">{card.value}</a>
                 ) : (
-                  <p className="mt-2 text-sm font-medium leading-6 text-[#3a2f86]">{card.value}</p>
+                  <p className="mt-2 text-sm font-medium leading-6 text-[#e60013]">{card.value}</p>
                 )}
                 <p className="mt-3 text-sm leading-6 text-[#667085]">{card.hint}</p>
               </article>
@@ -80,7 +80,7 @@ function Contact() {
               <h2 className="mt-2 text-4xl font-semibold">{copy.when}</h2>
               <div className="mt-6 rounded-2xl bg-white p-6 shadow-[0_10px_30px_rgba(16,24,40,.04)]">
                 <div className="flex items-center gap-3">
-                  <span className="grid size-9 place-items-center rounded-full border border-line text-[#092949]">
+                  <span className="grid size-9 place-items-center rounded-full border border-line text-[#e60013]">
                     <CardIcon name="clock" />
                   </span>
                   <h3 className="text-lg font-semibold">{copy.replyTitle}</h3>
@@ -95,7 +95,7 @@ function Contact() {
                 </ul>
                 <div className="mt-5 border-t border-line pt-5">
                   <div className="flex items-center gap-3">
-                    <span className="grid size-9 place-items-center rounded-full border border-line text-[#092949]">
+                    <span className="grid size-9 place-items-center rounded-full border border-line text-[#e60013]">
                       <CardIcon name="globe" />
                     </span>
                     <h3 className="text-lg font-semibold">{copy.support}</h3>
@@ -139,7 +139,7 @@ function Contact() {
         <section className="wrap pb-16 text-center">
           <Reveal variant="up">
             <p className="text-[#1a1a2e]">{copy.still}</p>
-            <a href={`mailto:${email}`} className="mt-4 inline-flex items-center gap-2 rounded-lg bg-[#092949] px-5 py-3 text-sm font-semibold text-white">
+            <a href={`mailto:${email}`} className="mt-4 inline-flex items-center gap-2 rounded-lg bg-[#e60013] px-5 py-3 text-sm font-semibold text-white">
               {copy.mailCta} <span aria-hidden>→</span>
             </a>
           </Reveal>

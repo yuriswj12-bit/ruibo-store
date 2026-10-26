@@ -32,7 +32,7 @@ function About() {
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">{copy.whatLabel}</p>
             <h2 className="mt-3 text-3xl font-semibold">{copy.whatTitle}</h2>
             <p className="mt-4 leading-7 text-muted">{copy.whatBody}</p>
-            <Link to="/manufacturing" className="mt-6 inline-flex items-center gap-2 font-semibold text-[#092949]">
+            <Link to="/manufacturing" className="mt-6 inline-flex items-center gap-2 font-semibold text-[#e60013]">
               {copy.whatLink}
               <span aria-hidden>→</span>
             </Link>
@@ -42,7 +42,7 @@ function About() {
           <div className="relative">
             <img src="/sensor.jpg" alt="" className="aspect-[4/3] w-full rounded-2xl object-cover" />
             <div className="absolute bottom-4 left-4 rounded-xl bg-white px-5 py-3 shadow-lg">
-              <p className="text-3xl font-semibold leading-none text-[#092949]">{copy.year}</p>
+              <p className="text-3xl font-semibold leading-none text-[#e60013]">{copy.year}</p>
               <p className="mt-1 text-sm text-muted">{copy.yearLabel}</p>
             </div>
           </div>
@@ -62,11 +62,11 @@ function About() {
                 const onLeft = index % 2 === 0;
                 return (
                   <li key={step.year} className="relative py-5 md:grid md:grid-cols-2">
-                    <span className="absolute left-4 top-8 size-3 -translate-x-1/2 rounded-full border-2 border-white bg-[#092949] md:left-1/2" />
+                    <span className="absolute left-4 top-8 size-3 -translate-x-1/2 rounded-full border-2 border-white bg-[#e60013] md:left-1/2" />
                     <div className={onLeft
                       ? "pl-10 md:pr-12 md:text-right"
                       : "pl-10 md:col-start-2 md:pl-12"}>
-                      <p className="text-sm font-semibold text-[#092949]">{step.year}</p>
+                      <p className="text-sm font-semibold text-[#e60013]">{step.year}</p>
                       <h3 className="mt-1 text-xl font-semibold">{step.title}</h3>
                       <p className="mt-2 text-sm leading-6 text-muted">{step.body}</p>
                     </div>
@@ -86,7 +86,7 @@ function About() {
             {copy.advantages.map((item, index) => (
               <Reveal key={item.title} variant="up" delay={index * 80}>
               <article>
-                <div className="grid size-12 place-items-center rounded-full bg-[#eef2f7] text-[#092949]">
+                <div className="grid size-12 place-items-center rounded-full bg-[#eef2f7] text-[#e60013]">
                   <AdvIcon index={index} />
                 </div>
                 <h3 className="mt-4 text-lg font-semibold">{item.title}</h3>
@@ -118,11 +118,11 @@ function About() {
 
         <section className="wrap py-16">
           <Reveal variant="up">
-          <div className="rounded-2xl bg-[#071e36] px-6 py-14 text-center text-white">
+          <div className="rounded-2xl bg-[#8c0010] px-6 py-14 text-center text-white">
             <h2 className="text-3xl font-semibold">{copy.ctaTitle}</h2>
             <p className="mx-auto mt-3 max-w-xl text-white/75">{copy.ctaBody}</p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <Link to="/contact" className="rounded-lg bg-white px-5 py-3 text-sm font-semibold text-[#092949]">{copy.ctaContact}</Link>
+              <Link to="/contact" className="rounded-lg bg-white px-5 py-3 text-sm font-semibold text-[#e60013]">{copy.ctaContact}</Link>
               <Link to="/products" search={catalogSearch()} className="rounded-lg border border-white/40 px-5 py-3 text-sm font-semibold text-white">{copy.ctaBrowse}</Link>
             </div>
           </div>

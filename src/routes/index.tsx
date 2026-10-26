@@ -19,7 +19,7 @@ function Home() {
   return (
     <StoreShell name={store.name} email={store.email} whatsapp={store.whatsapp}>
       <section className="bg-paper">
-        <div className="relative overflow-hidden bg-[#071e36] text-white">
+        <div className="relative overflow-hidden bg-[#8c0010] text-white">
           <video
             className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[30%_center] grayscale contrast-125"
             src="/sensor.mp4"
@@ -29,8 +29,8 @@ function Home() {
             loop
             playsInline
           />
-          <div className="pointer-events-none absolute inset-0 bg-[#092949] mix-blend-multiply" />
-          <div className="pointer-events-none absolute inset-0 bg-[#0e375e]/45" />
+          <div className="pointer-events-none absolute inset-0 bg-[#e60013] mix-blend-multiply" />
+          <div className="pointer-events-none absolute inset-0 bg-[#c40012]/45" />
           <div className="relative wrap py-10 sm:py-14">
             <div className="grid items-start gap-8 lg:grid-cols-[1.15fr_0.85fr]">
               <Reveal variant="right">
@@ -43,7 +43,7 @@ function Home() {
                 </p>
                 <h1 className="mt-6 max-w-2xl text-3xl font-semibold leading-[1.2] tracking-tight sm:text-5xl lg:text-[3.4rem]">
                   <span className="text-white">{t("heroTitle")}</span>
-                  <span className="mt-2 block text-[#d6ebff]">{t("heroAccent")}</span>
+                  <span className="mt-2 block text-[#ffd6da]">{t("heroAccent")}</span>
                 </h1>
                 <p className="mt-6 max-w-xl text-base leading-relaxed text-white/90 sm:text-lg">{t("heroBody")}</p>
                 <div className="mt-8 flex flex-wrap gap-3">
@@ -83,7 +83,7 @@ function Home() {
       <section data-page="2" className="bg-white py-16 sm:py-20">
         <div className="wrap">
           <Reveal variant="fade">
-          <p className="text-center text-sm font-medium text-[#092949]">{t("pillarEyebrow")}</p>
+          <p className="text-center text-sm font-medium text-[#e60013]">{t("pillarEyebrow")}</p>
           <h2 className="mx-auto mt-3 max-w-4xl text-center text-3xl font-semibold tracking-tight text-[#1a1a2e] sm:text-4xl">{t("pillarTitle")}</h2>
           <p className="mx-auto mt-5 max-w-4xl text-center text-sm leading-7 text-[#5c6370] sm:text-base">{t("pillarIntro")}</p>
           </Reveal>
@@ -99,7 +99,7 @@ function Home() {
                 <img src={photo} alt="" className="absolute inset-0 h-full w-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-b from-white/62 via-white/86 to-white/95" />
                 <div className="relative">
-                <span className="grid size-12 place-items-center rounded-xl bg-white/90 text-[#092949] shadow-sm">
+                <span className="grid size-12 place-items-center rounded-xl bg-white/90 text-[#e60013] shadow-sm">
                   {icon === "factory" && (
                     <svg viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
                       <path d="M3 21V10l6 3V10l6 3V8l6 3v10" strokeLinejoin="round" />
@@ -136,13 +136,13 @@ function Home() {
       <section className="bg-[#f4f6fb] py-14 sm:py-16">
         <div className="wrap">
           <Reveal variant="up">
-          <p className="text-sm font-medium text-[#092949]">{t("svcEyebrow")}</p>
+          <p className="text-sm font-medium text-[#e60013]">{t("svcEyebrow")}</p>
           <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
             <div>
               <h2 className="text-3xl font-semibold tracking-tight text-[#1a1a2e] sm:text-4xl">{t("svcTitle")}</h2>
               <p className="mt-3 max-w-xl text-sm text-[#5c6370] sm:text-base">{t("svcLead")}</p>
             </div>
-            <Link to="/products" search={catalogSearch()} className="inline-flex items-center gap-2 rounded-lg bg-[#092949] px-5 py-3 text-sm font-semibold text-white">
+            <Link to="/products" search={catalogSearch()} className="inline-flex items-center gap-2 rounded-lg bg-[#e60013] px-5 py-3 text-sm font-semibold text-white">
               {t("svcAll")} <span aria-hidden>→</span>
             </Link>
           </div>
@@ -157,7 +157,7 @@ function Home() {
               <Reveal key={line} variant={index % 2 ? "left" : "right"} delay={index * 70}>
               <Link to="/products" search={catalogSearch({ line })} className="relative block overflow-hidden rounded-2xl">
                 <img src={src} alt="" className="aspect-[4/3] w-full object-cover" />
-                <span className="absolute inset-0 bg-[#04182e]/25" />
+                <span className="absolute inset-0 bg-[#6a000c]/25" />
                 <span className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.75)]">
                   <TileIcon name={icon} />
                   <span className="mt-3 text-2xl font-bold leading-tight">{t(title)}</span>
@@ -173,7 +173,7 @@ function Home() {
         <div className="wrap grid items-center gap-10 lg:grid-cols-2">
           <Reveal variant="right">
           <div>
-            <p className="text-sm font-medium text-[#092949]">{t("advEyebrow")}</p>
+            <p className="text-sm font-medium text-[#e60013]">{t("advEyebrow")}</p>
             <h2 className="mt-3 text-4xl font-semibold tracking-tight text-[#1a1a2e]">{t("advTitle")}</h2>
             <ul className="mt-8 grid gap-6">
               {([
@@ -182,7 +182,7 @@ function Home() {
                 ["adv3", "adv3Body"],
               ] as const).map(([title, body]) => (
                 <li key={title} className="flex gap-4">
-                  <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-[#e6eef6] text-[#092949]">
+                  <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-[#fde8ea] text-[#e60013]">
                     <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
                       <circle cx="12" cy="12" r="8" />
                     </svg>
@@ -194,7 +194,7 @@ function Home() {
                 </li>
               ))}
             </ul>
-            <Link to="/about" className="mt-8 inline-flex items-center gap-2 rounded-lg bg-[#092949] px-5 py-3 text-sm font-semibold text-white">
+            <Link to="/about" className="mt-8 inline-flex items-center gap-2 rounded-lg bg-[#e60013] px-5 py-3 text-sm font-semibold text-white">
               {t("advMore")} <span aria-hidden>→</span>
             </Link>
           </div>
@@ -205,7 +205,7 @@ function Home() {
         </div>
       </section>
       <TrustStrip />
-      <section className="bg-[#071e36] py-16 text-center text-white">
+      <section className="bg-[#8c0010] py-16 text-center text-white">
         <Reveal variant="up" className="wrap">
           <h2 className="mx-auto max-w-3xl text-3xl font-semibold sm:text-5xl">{t("ctaReady")}</h2>
           <p className="mx-auto mt-4 max-w-2xl text-white/85">{t("ctaReadyBody")}</p>
@@ -268,7 +268,7 @@ function TrustStrip() {
   return (
     <section className="bg-white py-16">
       <Reveal variant="fade" className="wrap">
-        <p className="text-center text-xs font-semibold tracking-[0.18em] text-[#092949]">{t("trustEyebrow")}</p>
+        <p className="text-center text-xs font-semibold tracking-[0.18em] text-[#e60013]">{t("trustEyebrow")}</p>
         <h2 className="mt-2 text-center text-3xl font-semibold text-[#1a1a2e] sm:text-4xl">{t("trustTitle")}</h2>
         <p className="mx-auto mt-3 max-w-3xl text-center text-sm text-[#5c6370] sm:text-base">{t("trustLead")}</p>
         <div className="relative mt-8 overflow-hidden rounded-3xl">
@@ -279,7 +279,7 @@ function TrustStrip() {
         </div>
         <div className="mt-4 flex justify-center gap-2">
           {slides.map((item, dot) => (
-            <button key={item.src} type="button" aria-label={t(item.cap)} onClick={() => setIndex(dot)} className={dot === index ? "h-1.5 w-6 rounded-full bg-[#092949]" : "size-1.5 rounded-full bg-[#c5d4e4]"} />
+            <button key={item.src} type="button" aria-label={t(item.cap)} onClick={() => setIndex(dot)} className={dot === index ? "h-1.5 w-6 rounded-full bg-[#e60013]" : "size-1.5 rounded-full bg-[#f3c5c8]"} />
           ))}
         </div>
       </Reveal>

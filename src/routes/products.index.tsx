@@ -77,7 +77,7 @@ function Catalog() {
             <p className="text-sm font-semibold">{t("findOem")}</p>
             <div className="flex">
               <input name="q" defaultValue={deps.q} placeholder={t("oemOrBosch")} className="h-11 min-w-0 flex-1 rounded-l-lg border border-line bg-card px-3" />
-              <button type="submit" className="h-11 rounded-r-lg bg-[#071e36] px-4 text-sm font-semibold text-white">GO</button>
+              <button type="submit" className="h-11 rounded-r-lg bg-[#8c0010] px-4 text-sm font-semibold text-white">GO</button>
             </div>
             <input type="hidden" name="make" value={deps.make} />
             <input type="hidden" name="line" value={deps.line} />
@@ -151,9 +151,9 @@ function Catalog() {
                   <img src={skuImage(product.sku) || lineImage(product.line || "Automotive")} alt="" className="h-20 w-full rounded bg-white object-contain" />
                   <div className="min-w-0">
                     <p className="text-xs text-muted">{t(lineName(product.line))}</p>
-                    <Link to="/products/$sku" params={{ sku: product.sku }} search={{ oe: oem }} className="mt-1 block truncate font-semibold text-[#092949]">{oem}</Link>
+                    <Link to="/products/$sku" params={{ sku: product.sku }} search={{ oe: oem }} className="mt-1 block truncate font-semibold text-[#e60013]">{oem}</Link>
                     <p className="mt-1 text-xs text-muted">{t("colNumber")} {product.sku}</p>
-                    <Link to="/contact" className="mt-2 inline-block rounded bg-[#071e36] px-3 py-1.5 text-xs font-semibold text-white">{t("inquire")}</Link>
+                    <Link to="/contact" className="mt-2 inline-block rounded bg-[#8c0010] px-3 py-1.5 text-xs font-semibold text-white">{t("inquire")}</Link>
                   </div>
                 </article>
               );
@@ -180,14 +180,14 @@ function Catalog() {
                         <img src={skuImage(product.sku) || lineImage(product.line || "Automotive")} alt="" className="h-14 w-20 rounded bg-white object-contain" />
                       </td>
                       <td className="px-3 py-3">
-                        <Link to="/products/$sku" params={{ sku: product.sku }} search={{ oe: oem }} className="font-semibold text-[#092949] underline">
+                        <Link to="/products/$sku" params={{ sku: product.sku }} search={{ oe: oem }} className="font-semibold text-[#e60013] underline">
                           {product.sku}
                         </Link>
                       </td>
                       <td className="px-3 py-3">{t(lineName(product.line))}</td>
                       <td className="px-3 py-3 text-xs leading-5 text-muted">{product.oes.join("\n")}</td>
                       <td className="px-3 py-3">
-                        <Link to="/contact" className="inline-block rounded bg-[#092949] px-3 py-2 text-xs font-semibold text-white">{t("inquire")}</Link>
+                        <Link to="/contact" className="inline-block rounded bg-[#e60013] px-3 py-2 text-xs font-semibold text-white">{t("inquire")}</Link>
                       </td>
                     </tr>
                   );
@@ -244,8 +244,8 @@ function PageBtn({
   children: React.ReactNode;
 }) {
   const className = current
-    ? "grid h-9 min-w-9 place-items-center rounded-lg bg-[#092949] px-2 text-sm font-semibold text-white"
-    : "grid h-9 min-w-9 place-items-center rounded-lg border border-line bg-white px-2 text-sm text-ink hover:border-[#092949]";
+    ? "grid h-9 min-w-9 place-items-center rounded-lg bg-[#e60013] px-2 text-sm font-semibold text-white"
+    : "grid h-9 min-w-9 place-items-center rounded-lg border border-line bg-white px-2 text-sm text-ink hover:border-[#e60013]";
   if (disabled) {
     return <span className="grid h-9 min-w-9 place-items-center rounded-lg border border-line bg-white px-2 text-sm text-muted opacity-40">{children}</span>;
   }

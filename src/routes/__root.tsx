@@ -11,7 +11,7 @@ export const Route = createRootRoute({
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "瑞铂传感 RBIC" },
       { name: "description", content: "温州瑞铂传感。按 OEM 号查找氧传感器，提交大宗询盘，或先订样品。" },
-      { name: "theme-color", content: "#0c2340" },
+      { name: "theme-color", content: "#e60013" },
     ],
     links: [
       { rel: "icon", type: "image/png", href: "/favicon-32.png" },
