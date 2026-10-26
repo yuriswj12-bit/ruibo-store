@@ -180,6 +180,8 @@ function LangMenu() {
 
 function SideDock({ email, whatsapp }: { email?: string; whatsapp?: string }) {
   const [show, setShow] = useState(false);
+  const [wechat, setWechat] = useState(false);
+  const [copied, setCopied] = useState("");
   useEffect(() => {
     const onScroll = () => setShow(window.scrollY > window.innerHeight * 0.72);
     onScroll();
@@ -189,8 +191,40 @@ function SideDock({ email, whatsapp }: { email?: string; whatsapp?: string }) {
   if (!show) return null;
   const mail = email || "info@cnrbic.com";
   const wa = (whatsapp || "8613706647066").replace(/\D/g, "");
+  const copy = (value: string) => {
+    navigator.clipboard?.writeText(value);
+    setCopied(value);
+  };
   return (
     <div className="fixed bottom-6 right-4 z-40 flex flex-col gap-3">
+      <div className="relative">
+        <button
+          type="button"
+          aria-label="WeChat"
+          onClick={() => setWechat((value) => !value)}
+          className="grid size-12 place-items-center rounded-full bg-[#07C160] text-white shadow-lg"
+        >
+          <svg viewBox="0 0 24 24" className="size-6" fill="currentColor" aria-hidden>
+            <path d="M9.5 4C5.4 4 2 6.9 2 10.4c0 2 .1 3.8 2.7 5.1L4 18l2.6-1.3c.9.3 1.8.4 2.9.4.3 0 .6 0 .9-.1-.2-.6-.3-1.2-.3-1.8 0-3.3 3-6 6.7-6 .2 0 .5 0 .7.1C16.4 6.1 13.3 4 9.5 4Zm-2.2 4.3a.9.9 0 1 1 0-1.8.9.9 0 0 1 0 1.8Zm4.4 0a.9.9 0 1 1 0-1.8.9.9 0 0 1 0 1.8Z" />
+            <path d="M22 14.2c0-2.7-2.7-4.9-6-4.9s-6 2.2-6 4.9 2.7 4.9 6 4.9c.7 0 1.3-.1 1.9-.3L20.5 20l-.6-1.8c1.3-.9 2.1-2.3 2.1-3.9Zm-7.8-.8a.7.7 0 1 1 0-1.4.7.7 0 0 1 0 1.4Zm3.6 0a.7.7 0 1 1 0-1.4.7.7 0 0 1 0 1.4Z" />
+          </svg>
+        </button>
+        {wechat && (
+          <div className="absolute bottom-0 right-14 w-56 rounded-xl bg-white p-4 text-sm text-[#1a1a2e] shadow-xl">
+            <p className="font-semibold">WeChat</p>
+            <button type="button" onClick={() => copy("rb7066")} className="mt-2 block w-full rounded-lg bg-[#f6f7fb] px-3 py-2 text-left">
+              <span className="block text-xs text-[#667085]">ID</span>
+              <span className="font-semibold">rb7066</span>
+              <span className="ml-2 text-xs text-[#e60013]">{copied === "rb7066" ? "已复制" : "复制"}</span>
+            </button>
+            <button type="button" onClick={() => copy("13706647066")} className="mt-2 block w-full rounded-lg bg-[#f6f7fb] px-3 py-2 text-left">
+              <span className="block text-xs text-[#667085]">手机号</span>
+              <span className="font-semibold">13706647066</span>
+              <span className="ml-2 text-xs text-[#e60013]">{copied === "13706647066" ? "已复制" : "复制"}</span>
+            </button>
+          </div>
+        )}
+      </div>
       <a
         href={`https://wa.me/${wa}`}
         target="_blank"

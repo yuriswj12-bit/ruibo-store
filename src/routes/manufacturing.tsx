@@ -56,7 +56,7 @@ const zh: Copy = {
   divLede: "制造资源分成两个分部，各自对应固定的产品类别和产线。",
   d1: "分部 1",
   d1Title: "汽车氧传感器",
-  d1Body: "自 2003 年开始生产。面向全球售后市场，重点是可靠性和一致性。",
+  d1Body: "自 2009 年开始生产。面向全球售后市场，重点是可靠性和一致性。",
   d1Items: ["加热型氧传感器", "前氧 / 后氧", "线束与接头匹配", "按 OEM 号对照"],
   d2: "分部 2",
   d2Title: "摩托车、工业与氮氧",
@@ -94,7 +94,7 @@ const zh: Copy = {
     { title: "批量出口", body: "面向全球售后客户的批量供货。" },
   ],
   shopTitle: "车间一览",
-  shopLede: "自 2003 年开始制造。把稳定的生产能力对接给全球售后客户。",
+  shopLede: "自 2009 年开始制造。把稳定的生产能力对接给全球售后客户。",
   cta: "浏览产品",
 };
 
@@ -107,7 +107,7 @@ const en: Copy = {
   divLede: "Manufacturing is organized into two divisions, each with its own product category and production line.",
   d1: "Division 1",
   d1Title: "Automotive oxygen sensors",
-  d1Body: "In production since 2003. Built for reliability and consistent performance in the global aftermarket.",
+  d1Body: "In production since 2009. Built for reliability and consistent performance in the global aftermarket.",
   d1Items: ["Heated oxygen sensors", "Upstream and downstream", "Wire and connector match", "OEM cross-reference"],
   d2: "Division 2",
   d2Title: "Motorcycle, industrial, and NOx",
@@ -145,7 +145,7 @@ const en: Copy = {
     { title: "Bulk export orders", body: "Volume supply for global aftermarket customers." },
   ],
   shopTitle: "Inside our workshop",
-  shopLede: "Manufacturing since 2003. Connecting stable production with global aftermarket customers.",
+  shopLede: "Manufacturing since 2009. Connecting stable production with global aftermarket customers.",
   cta: "Browse products",
 };
 
