@@ -77,7 +77,7 @@ function Catalog() {
             <p className="text-sm font-semibold">{t("findOem")}</p>
             <div className="flex">
               <input name="q" defaultValue={deps.q} placeholder={t("oemOrBosch")} className="h-11 min-w-0 flex-1 rounded-l-lg border border-line bg-card px-3" />
-              <button type="submit" className="h-11 rounded-r-lg bg-[#8c0010] px-4 text-sm font-semibold text-white">GO</button>
+              <button type="submit" className="h-11 rounded-r-lg bg-gradient-to-r from-[#ff6b78] to-[#e60013] px-4 text-sm font-semibold text-white">GO</button>
             </div>
             <input type="hidden" name="make" value={deps.make} />
             <input type="hidden" name="line" value={deps.line} />
@@ -153,7 +153,7 @@ function Catalog() {
                     <p className="text-xs text-muted">{t(lineName(product.line))}</p>
                     <Link to="/products/$sku" params={{ sku: product.sku }} search={{ oe: oem }} className="mt-1 block truncate font-semibold text-[#e60013]">{oem}</Link>
                     <p className="mt-1 text-xs text-muted">{t("colNumber")} {product.sku}</p>
-                    <Link to="/contact" className="mt-2 inline-block rounded bg-[#8c0010] px-3 py-1.5 text-xs font-semibold text-white">{t("inquire")}</Link>
+                    <Link to="/contact" className="mt-2 inline-block rounded bg-gradient-to-r from-[#ff6b78] to-[#e60013] px-3 py-1.5 text-xs font-semibold text-white">{t("inquire")}</Link>
                   </div>
                 </article>
               );

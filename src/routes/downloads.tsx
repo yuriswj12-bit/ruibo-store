@@ -171,7 +171,7 @@ function Downloads() {
   if (!store) return <main className="wrap py-16">…</main>;
   return (
     <StoreShell name={store.name} email={store.email}>
-      <section className="bg-[#8c0010] text-white">
+      <section className="bg-gradient-to-r from-[#ff6b78] to-[#e60013] text-white">
         <Reveal variant="fade" className="wrap py-16 sm:py-20">
           <p className="text-sm font-medium tracking-[0.18em] text-white/70">{c.eyebrow}</p>
           <h1 className="mt-3 max-w-3xl text-4xl font-semibold sm:text-5xl">{c.title}</h1>

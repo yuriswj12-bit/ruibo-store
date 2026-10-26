@@ -118,7 +118,7 @@ function About() {
 
         <section className="wrap py-16">
           <Reveal variant="up">
-          <div className="rounded-2xl bg-[#8c0010] px-6 py-14 text-center text-white">
+          <div className="rounded-2xl bg-gradient-to-r from-[#ff6b78] to-[#e60013] px-6 py-14 text-center text-white">
             <h2 className="text-3xl font-semibold">{copy.ctaTitle}</h2>
             <p className="mx-auto mt-3 max-w-xl text-white/75">{copy.ctaBody}</p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">

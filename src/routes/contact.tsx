@@ -30,8 +30,8 @@ function Contact() {
     <StoreShell name={store.name} email={store.email} whatsapp={store.whatsapp}>
       <main>
         <section
-          className="relative grid min-h-[380px] items-center bg-[#8c0010] bg-cover bg-center"
-          style={{ backgroundImage: "linear-gradient(rgba(8,22,40,.72), rgba(8,22,40,.72)), url(/industrial.jpg)" }}
+          className="relative grid min-h-[380px] items-center bg-gradient-to-r from-[#ff6b78] to-[#e60013] bg-cover bg-center"
+          style={{ backgroundImage: "linear-gradient(90deg, rgba(255,107,120,.55), rgba(230,0,19,.72)), url(/industrial.jpg)" }}
         >
           <div className="wrap py-20 text-white">
             <Reveal variant="up">

@@ -56,7 +56,7 @@ function ProductPage() {
             <p className="text-sm font-semibold">{t("findOem")}</p>
             <div className="flex">
               <input name="q" defaultValue={oe} placeholder={t("oemOrBosch")} className="h-11 min-w-0 flex-1 rounded-l-lg border border-line bg-card px-3" />
-              <button type="submit" className="h-11 rounded-r-lg bg-[#8c0010] px-4 text-sm font-semibold text-white">GO</button>
+              <button type="submit" className="h-11 rounded-r-lg bg-gradient-to-r from-[#ff6b78] to-[#e60013] px-4 text-sm font-semibold text-white">GO</button>
             </div>
           </form>
           <details className="rounded-lg border border-line bg-card lg:hidden">
@@ -114,7 +114,7 @@ function ProductPage() {
           <img src={photo} alt={displayOe} className="aspect-square w-full rounded-card border border-line bg-white object-contain" />
         </Reveal>
         <Reveal variant="left" className="grid gap-4">
-          <p className="text-sm font-semibold text-[#8c0010]">{t(lineName(product.line))}</p>
+          <p className="text-sm font-semibold text-[#e60013]">{t(lineName(product.line))}</p>
           <h1 className="text-4xl leading-tight">{displayOe}</h1>
           <p className="text-sm text-muted">
             {vehicle ? vehicleLabel(lang, vehicle) : ""}
@@ -129,7 +129,7 @@ function ProductPage() {
             <h2 className="text-lg">{t("colOem")}</h2>
             <ul className="mt-3 grid gap-2">
               {product.oes.map((oe) => (
-                <li key={oe} className={normalizeOe(oe) === normalizeOe(displayOe) ? "font-semibold text-[#8c0010]" : "text-sm text-muted"}>
+                <li key={oe} className={normalizeOe(oe) === normalizeOe(displayOe) ? "font-semibold text-[#e60013]" : "text-sm text-muted"}>
                   {oe}
                 </li>
               ))}

@@ -19,9 +19,9 @@ function Home() {
   return (
     <StoreShell name={store.name} email={store.email} whatsapp={store.whatsapp}>
       <section className="bg-paper">
-        <div className="relative overflow-hidden bg-[#8c0010] text-white">
+        <div className="relative overflow-hidden bg-gradient-to-r from-[#fff1f2] via-[#ff8a94] to-[#e60013] text-white">
           <video
-            className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[30%_center] grayscale contrast-125"
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[30%_center] grayscale contrast-125 opacity-30"
             src="/sensor.mp4"
             poster="/auto.jpg"
             autoPlay
@@ -29,32 +29,31 @@ function Home() {
             loop
             playsInline
           />
-          <div className="pointer-events-none absolute inset-0 bg-[#e60013] mix-blend-multiply" />
-          <div className="pointer-events-none absolute inset-0 bg-[#c40012]/45" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/75 via-[#ff6b78]/45 to-[#e60013]/55" />
           <div className="relative wrap py-10 sm:py-14">
             <div className="grid items-start gap-8 lg:grid-cols-[1.15fr_0.85fr]">
               <Reveal variant="right">
-                <p className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-black/20 px-3 py-1.5 text-sm text-white">
-                  <svg viewBox="0 0 24 24" className="size-4 shrink-0 text-amber-300" aria-hidden>
+                <p className="inline-flex items-center gap-2 rounded-full border border-[#e60013]/30 bg-white/70 px-3 py-1.5 text-sm text-[#e60013]">
+                  <svg viewBox="0 0 24 24" className="size-4 shrink-0 text-[#e60013]" aria-hidden>
                     <circle cx="12" cy="9" r="5.2" fill="none" stroke="currentColor" strokeWidth="1.7" />
                     <path d="M9.2 13.2 8 20.5l4-2.1 4 2.1-1.2-7.3" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
                   </svg>
                   {t("heroBadge")}
                 </p>
                 <h1 className="mt-6 max-w-2xl text-3xl font-semibold leading-[1.2] tracking-tight sm:text-5xl lg:text-[3.4rem]">
-                  <span className="text-white">{t("heroTitle")}</span>
-                  <span className="mt-2 block text-[#ffd6da]">{t("heroAccent")}</span>
+                  <span className="text-[#1a1a2e]">{t("heroTitle")}</span>
+                  <span className="mt-2 block text-[#e60013]">{t("heroAccent")}</span>
                 </h1>
-                <p className="mt-6 max-w-xl text-base leading-relaxed text-white/90 sm:text-lg">{t("heroBody")}</p>
+                <p className="mt-6 max-w-xl text-base leading-relaxed text-[#3d4d63] sm:text-lg">{t("heroBody")}</p>
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <Link to="/products" search={catalogSearch()} className="inline-flex items-center gap-2 rounded-md bg-[#f5a623] px-6 py-3.5 text-base font-semibold text-white">
+                  <Link to="/products" search={catalogSearch()} className="inline-flex items-center gap-2 rounded-md bg-[#e60013] px-6 py-3.5 text-base font-semibold text-white">
                     {t("heroBrowse")} <span aria-hidden>→</span>
                   </Link>
-                  <Link to="/downloads" className="rounded-md border border-white/60 px-6 py-3.5 text-base font-semibold text-white">
+                  <Link to="/downloads" className="rounded-md border border-[#e60013] bg-white/70 px-6 py-3.5 text-base font-semibold text-[#e60013]">
                     {t("heroCatalog")}
                   </Link>
                 </div>
-                <div className="mt-6 h-px w-full bg-white/35" />
+                <div className="mt-6 h-px w-full bg-[#e60013]/25" />
                 <dl className="mt-8 grid w-full grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-4">
                   {([
                     ["statYears", "statYearsLabel"],
@@ -63,8 +62,8 @@ function Home() {
                     ["statRate", "statRateLabel"],
                   ] as const).map(([value, label]) => (
                     <div key={value} className="min-w-0">
-                      <dd className="whitespace-nowrap text-3xl font-semibold leading-none tracking-tight text-white sm:text-4xl">{t(value)}</dd>
-                      <dt className="mt-2 text-xs text-white/75 sm:text-sm">{t(label)}</dt>
+                      <dd className="whitespace-nowrap text-3xl font-semibold leading-none tracking-tight text-[#e60013] sm:text-4xl">{t(value)}</dd>
+                      <dt className="mt-2 text-xs text-[#3d4d63] sm:text-sm">{t(label)}</dt>
                     </div>
                   ))}
                 </dl>
@@ -157,7 +156,7 @@ function Home() {
               <Reveal key={line} variant={index % 2 ? "left" : "right"} delay={index * 70}>
               <Link to="/products" search={catalogSearch({ line })} className="relative block overflow-hidden rounded-2xl">
                 <img src={src} alt="" className="aspect-[4/3] w-full object-cover" />
-                <span className="absolute inset-0 bg-[#6a000c]/25" />
+                <span className="absolute inset-0 bg-gradient-to-t from-[#e60013]/35 to-transparent" />
                 <span className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.75)]">
                   <TileIcon name={icon} />
                   <span className="mt-3 text-2xl font-bold leading-tight">{t(title)}</span>
@@ -205,7 +204,7 @@ function Home() {
         </div>
       </section>
       <TrustStrip />
-      <section className="bg-[#8c0010] py-16 text-center text-white">
+      <section className="bg-gradient-to-r from-[#ff6b78] to-[#e60013] py-16 text-center text-white">
         <Reveal variant="up" className="wrap">
           <h2 className="mx-auto max-w-3xl text-3xl font-semibold sm:text-5xl">{t("ctaReady")}</h2>
           <p className="mx-auto mt-4 max-w-2xl text-white/85">{t("ctaReadyBody")}</p>

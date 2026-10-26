@@ -24,30 +24,11 @@ export function StoreShell({
   }, [pathname]);
   return (
     <div className="min-h-screen bg-paper text-ink">
-      <header className="sticky top-0 z-30 border-b border-line bg-card">
+      <header className="sticky top-0 z-30 bg-card">
         <div className="wrap flex min-h-14 items-center justify-between gap-3">
           <Link to="/" className="flex shrink-0 items-center" onClick={() => setMenu(false)}>
             <img src="/rbtc-logo.png" alt={name} className="h-9 w-auto sm:h-12" />
           </Link>
-          <nav className="hidden items-center gap-4 text-sm lg:flex">
-            <Link to="/" className="hover:text-copper">{t("navHome")}</Link>
-            <span className="group relative">
-              <Link to="/products" search={catalogSearch()} className="hover:text-copper">{t("navProducts")}</Link>
-              <div className="absolute left-0 top-full z-40 hidden pt-2 group-hover:block">
-                <div className="grid w-52 gap-1 rounded-card border border-line bg-card p-2 text-ink shadow-lg">
-                  {LINES.map((line) => (
-                    <Link key={line.id} to="/products" search={catalogSearch({ line: line.id })} className="rounded-md px-2 py-2 hover:bg-paper">
-                      {t(line.title)}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </span>
-            <Link to="/manufacturing" className="hover:text-copper">{t("navMfg")}</Link>
-            <Link to="/downloads" className="hover:text-copper">{t("navDownloads")}</Link>
-            <Link to="/about" className="hover:text-copper">{t("navAbout")}</Link>
-            <Link to="/contact" className="hover:text-copper">{t("navContact")}</Link>
-          </nav>
           <div className="flex items-center gap-1 text-sm">
             <LangMenu />
             <button
@@ -63,6 +44,27 @@ export function StoreShell({
             </button>
           </div>
         </div>
+        <nav className="hidden bg-gradient-to-r from-[#ff5a67] to-[#e60013] text-sm text-white lg:block">
+          <div className="wrap flex items-center gap-6 py-2.5">
+            <Link to="/" className="hover:text-white/80">{t("navHome")}</Link>
+            <span className="group relative">
+              <Link to="/products" search={catalogSearch()} className="hover:text-white/80">{t("navProducts")}</Link>
+              <div className="absolute left-0 top-full z-40 hidden pt-2 group-hover:block">
+                <div className="grid w-52 gap-1 rounded-card border border-line bg-card p-2 text-ink shadow-lg">
+                  {LINES.map((line) => (
+                    <Link key={line.id} to="/products" search={catalogSearch({ line: line.id })} className="rounded-md px-2 py-2 hover:bg-paper">
+                      {t(line.title)}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </span>
+            <Link to="/manufacturing" className="hover:text-white/80">{t("navMfg")}</Link>
+            <Link to="/downloads" className="hover:text-white/80">{t("navDownloads")}</Link>
+            <Link to="/about" className="hover:text-white/80">{t("navAbout")}</Link>
+            <Link to="/contact" className="hover:text-white/80">{t("navContact")}</Link>
+          </div>
+        </nav>
         {menu && (
           <nav className="wrap grid gap-1 border-t border-line py-3 text-sm lg:hidden">
             <Link to="/" onClick={() => setMenu(false)} className="rounded-lg px-3 py-2.5 hover:bg-[#f4f6fb]">{t("navHome")}</Link>
@@ -80,7 +82,7 @@ export function StoreShell({
         )}
       </header>
       {children}
-      <footer className="bg-[#8c0010] text-sm text-white/70">
+      <footer className="bg-gradient-to-r from-[#ff6b78] to-[#e60013] text-sm text-white/85">
         <div className="wrap grid gap-10 py-12 lg:grid-cols-[1.4fr_0.8fr_0.8fr]">
           <Reveal variant="right">
             <img src="/rbtc-logo.png" alt={name} className="h-12 w-auto rounded-md bg-white px-2" />
