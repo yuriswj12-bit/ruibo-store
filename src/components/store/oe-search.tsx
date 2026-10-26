@@ -46,7 +46,7 @@ export function OeSearch({ large = false }: { large?: boolean }) {
           aria-label={t("findOem")}
           className={`w-full rounded-lg border border-line bg-card px-3 ${large ? "h-14 text-base" : "h-11"}`}
         />
-        <button type="submit" className={`shrink-0 rounded-lg bg-ink px-4 text-copper-ink ${large ? "h-14" : "h-11"}`}>
+        <button type="submit" className={`shrink-0 rounded-lg bg-[#e60013] px-4 text-white ${large ? "h-14" : "h-11"}`}>
           {t("findOem")}
         </button>
       </div>

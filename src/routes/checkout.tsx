@@ -106,7 +106,7 @@ function PayPanel({ title, hint, onClick }: { title: string; hint: string; onCli
       <p className="mt-1 text-sm text-muted">{hint}</p>
       <button
         type="button"
-        className="mt-3 h-11 rounded-lg bg-ink px-4 text-copper-ink"
+        className="mt-3 h-11 rounded-lg bg-[#e60013] px-4 text-white"
         onClick={(event) => {
           const form = new FormData((event.currentTarget.form as HTMLFormElement));
           if (!form.get("name") || !form.get("country")) return;

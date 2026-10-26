@@ -58,7 +58,7 @@ export function DualAction({
       <div className="flex flex-col gap-3 md:border-r md:border-line md:pr-4">
         <h2 className="text-lg">{t("requestQuote")}</h2>
         <p className="text-sm text-muted">{t("requestQuoteHint")}</p>
-        <button type="button" className="h-11 rounded-lg bg-ink px-4 text-copper-ink" onClick={() => setOpen(true)}>
+        <button type="button" className="h-11 rounded-lg bg-[#e60013] px-4 text-white" onClick={() => setOpen(true)}>
           {t("requestQuote")}
         </button>
       </div>
@@ -105,7 +105,7 @@ export function DualAction({
             <textarea name="message" required placeholder={t("requirements")} rows={4} className="rounded-lg border border-line px-3 py-2" />
             <div className="flex justify-end gap-2">
               <button type="button" className="h-11 rounded-lg border border-line px-4" onClick={() => setOpen(false)}>{t("cancel")}</button>
-              <button type="submit" className="h-11 rounded-lg bg-ink px-4 text-copper-ink">{t("submitRfq")}</button>
+              <button type="submit" className="h-11 rounded-lg bg-[#e60013] px-4 text-white">{t("submitRfq")}</button>
             </div>
           </form>
         </div>

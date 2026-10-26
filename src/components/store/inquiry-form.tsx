@@ -154,7 +154,7 @@ export function InquiryForm({
           ? "inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-[#e60013] text-sm font-semibold text-white disabled:opacity-60"
           : hero
           ? "inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-[#e60013] text-sm font-semibold text-white disabled:opacity-60"
-          : "h-11 rounded-lg bg-ink px-4 text-copper-ink disabled:opacity-60"}
+          : "h-11 rounded-lg bg-[#e60013] px-4 text-white disabled:opacity-60"}
       >
         {(hero || contact) && (
           <svg viewBox="0 0 24 24" className="size-4" aria-hidden>

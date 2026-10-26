@@ -214,7 +214,7 @@ function Catalog() {
             </div>
             <p className="text-sm text-muted">{t("pageOf", { page, pages })}</p>
           </nav>
-          <div className="mt-10 rounded-card bg-ink px-5 py-6 text-white">
+          <div className="mt-10 rounded-card bg-gradient-to-r from-[#ff6b78] to-[#e60013] px-5 py-6 text-white">
             <h2 className="text-2xl">{t("cantFind")}</h2>
             <p className="mt-2 text-white/80">{t("cantFindBody")}</p>
             <Link to="/contact" className="mt-4 inline-block rounded-lg bg-copper px-4 py-2 text-sm font-semibold text-white">{t("navContact")}</Link>

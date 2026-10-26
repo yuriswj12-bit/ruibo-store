@@ -58,7 +58,7 @@ export function UsdtCashier({
             key={item.id}
             type="button"
             onClick={() => setNetworkId(item.id)}
-            className={`rounded-lg border px-3 py-2 text-left ${item.id === networkId ? "border-ink bg-ink text-copper-ink" : "border-line"}`}
+            className={`rounded-lg border px-3 py-2 text-left ${item.id === networkId ? "border-ink bg-[#e60013] text-white" : "border-line"}`}
           >
             <span className="block font-medium">{item.name}</span>
             <span className={`block text-sm ${item.id === networkId ? "text-copper-ink/80" : "text-muted"}`}>
@@ -110,7 +110,7 @@ export function UsdtCashier({
             <button
               type="button"
               disabled={checking || left === 0}
-              className="h-11 rounded-lg bg-ink px-4 text-copper-ink disabled:opacity-50"
+              className="h-11 rounded-lg bg-[#e60013] px-4 text-white disabled:opacity-50"
               onClick={confirm}
             >
               {checking ? t("simChecking") : t("iPaid")}

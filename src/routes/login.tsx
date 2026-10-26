@@ -7,7 +7,7 @@ export const Route = createFileRoute("/login")({ component: Login });
 
 function Login() {
   return (
-    <main className="grid min-h-screen place-items-center bg-ink p-6 text-ink">
+    <main className="grid min-h-screen place-items-center bg-gradient-to-br from-[#ff6b78] to-[#e60013] p-6 text-ink">
       <div className="w-full max-w-sm rounded-card bg-card p-6">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-copper">Factory desk</p>
         <h1 className="mt-1 text-3xl">工厂账号</h1>

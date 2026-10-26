@@ -10,7 +10,7 @@ function PortalLayout() {
   if (!user) return <RedirectToSignIn />;
   return (
     <div className="grid min-h-screen bg-paper text-ink md:grid-cols-[220px_1fr]">
-      <aside className="bg-ink p-5 text-copper-ink">
+      <aside className="bg-gradient-to-b from-[#ff6b78] to-[#e60013] p-5 text-white">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-brass">Factory desk</p>
         <p className="mt-2 font-medium">{user.displayName || user.primaryEmail}</p>
         <nav className="mt-6 grid gap-1 text-sm">
