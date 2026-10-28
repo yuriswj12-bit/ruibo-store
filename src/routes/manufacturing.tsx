@@ -290,29 +290,24 @@ function Manufacturing() {
           </div>
         </section>
 
-        <section className="wrap grid items-center gap-12 py-16 lg:grid-cols-2">
-          <Reveal variant="right">
+        <section className="wrap py-16">
+          <Reveal variant="up" className="mx-auto max-w-3xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#e60013]">{c.qcKicker}</p>
             <h2 className="mt-3 text-3xl font-semibold">{c.qcTitle}</h2>
             <p className="mt-4 leading-7 text-muted">{c.qcLede}</p>
-            <ol className="mt-8 grid gap-5">
-              {c.stages.map((stage) => (
-                <li key={stage.n} className="flex gap-4">
-                  <span className="mt-0.5 shrink-0 text-xs font-bold text-[#e60013]">{stage.n}</span>
-                  <span>
-                    <span className="block font-semibold">{stage.title}</span>
-                    <span className="mt-1 block text-sm leading-6 text-muted">{stage.body}</span>
-                  </span>
-                </li>
-              ))}
-            </ol>
           </Reveal>
-          <Reveal variant="left">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gradient-to-r from-[#ff6b78] to-[#e60013]">
-              <img src="/line-ind-bg.jpg" alt="" className="absolute inset-0 h-full w-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#e60013]/50 via-[#ff6b78]/30 to-white/35" />
-            </div>
-          </Reveal>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2">
+            {c.stages.map((stage, i) => (
+              <Reveal key={stage.n} variant="up" delay={i * 40} className="overflow-hidden rounded-2xl bg-white shadow-sm">
+                <img src={["/qc/incoming.jpg", "/qc/process.jpg", "/qc/test.jpg", "/qc/ship.jpg"][i]} alt="" className="aspect-[16/10] w-full object-cover" />
+                <div className="p-5">
+                  <p className="text-xs font-bold text-[#e60013]">{stage.n}</p>
+                  <p className="mt-1 font-semibold">{stage.title}</p>
+                  <p className="mt-1 text-sm leading-6 text-muted">{stage.body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </section>
 
         <section className="bg-gradient-to-r from-[#ff6b78] to-[#e60013] py-14 text-white">
