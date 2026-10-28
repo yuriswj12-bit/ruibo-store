@@ -1,5 +1,5 @@
 update factories
-set name = '瑞铂传感 RBTC',
+set name = '瑞铂传感 RBIC',
     slug = 'ruibo',
     contact_email = '',
     whatsapp = '',
