@@ -371,19 +371,14 @@ export const placeSample = createServerFn({ method: "POST" })
 
 async function ownedFactory(userId: string) {
   const sql = await getSql();
+  const demo = await sql<{ id: string; name: string; slug: string; contact_email: string; whatsapp: string; primary_color: string }>`
+    select id, name, slug, contact_email, whatsapp, primary_color from factories where id = ${DEMO} limit 1
+  `;
+  if (demo[0]) return demo[0];
   const mine = await sql<{ id: string; name: string; slug: string; contact_email: string; whatsapp: string; primary_color: string }>`
     select id, name, slug, contact_email, whatsapp, primary_color from factories where owner_user_id = ${userId} limit 1
   `;
   if (mine[0]) return mine[0];
-  const claimed = await sql`
-    update factories set owner_user_id = ${userId}
-    where id = ${DEMO} and owner_user_id is null
-    returning id, name, slug, contact_email, whatsapp, primary_color
-  `;
-  const row = claimed[0] as
-    | { id: string; name: string; slug: string; contact_email: string; whatsapp: string; primary_color: string }
-    | undefined;
-  if (row) return row;
   const id = crypto.randomUUID();
   const created = await sql<{ id: string; name: string; slug: string; contact_email: string; whatsapp: string; primary_color: string }>`
     insert into factories (id, owner_user_id, name, slug, contact_email)
@@ -515,7 +510,42 @@ export const saveSettings = createServerFn({ method: "POST" })
     const sql = await getSql();
     await sql`
       update factories set contact_email = ${data.contactEmail}, whatsapp = ${data.whatsapp}, primary_color = ${data.primaryColor}
-      where id = ${factory.id} and owner_user_id = ${context.userId}
+      where id = ${factory.id}
     `;
     return { ok: true };
+  });
+
+function deskEmail(username: string) {
+  return `${username.trim().toLowerCase()}@desk.cnrbic.com`;
+}
+
+function padPassword(password: string) {
+  return password.length >= 8 ? password : password + "!".repeat(8 - password.length);
+}
+
+export const listDeskManagers = createServerFn({ method: "GET" })
+  .middleware([authMiddleware])
+  .handler(async () => {
+    const sql = await getSql();
+    return sql<{ name: string; email: string }>`
+      select name, email from "user" order by "createdAt"
+    `;
+  });
+
+export const addDeskManager = createServerFn({ method: "POST" })
+  .middleware([authMiddleware])
+  .validator(z.object({ username: z.string().trim().min(1).max(40), password: z.string().min(1).max(72) }))
+  .handler(async ({ data }) => {
+    const email = deskEmail(data.username);
+    const { auth } = await import("@/lib/auth/server");
+    try {
+      await auth.api.signUpEmail({
+        body: { email, password: padPassword(data.password), name: data.username.trim() },
+      });
+      return { ok: true as const };
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "";
+      if (/exist/i.test(message)) return { ok: false as const, error: "这个用户名已经有了。" };
+      return { ok: false as const, error: "添加失败。" };
+    }
   });

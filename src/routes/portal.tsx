@@ -18,6 +18,7 @@ function PortalLayout() {
           <Link to="/portal/products" className="rounded-lg px-3 py-2 hover:bg-white/10">产品</Link>
           <Link to="/portal/inquiries" className="rounded-lg px-3 py-2 hover:bg-white/10">询盘</Link>
           <Link to="/portal/settings" className="rounded-lg px-3 py-2 hover:bg-white/10">站点</Link>
+          <Link to="/portal/managers" className="rounded-lg px-3 py-2 hover:bg-white/10">管理人</Link>
           <Link to="/" className="rounded-lg px-3 py-2 hover:bg-white/10">看前台</Link>
         </nav>
         <div className="mt-8"><UserButton /></div>

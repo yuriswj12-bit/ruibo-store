@@ -16,6 +16,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DownloadsRouteImport } from './routes/downloads'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as LoginloginloginRouteImport } from './routes/loginloginlogin'
 import { Route as ManufacturingRouteImport } from './routes/manufacturing'
 import { Route as PortalRouteImport } from './routes/portal'
 import { Route as PrivacyRouteImport } from './routes/privacy'
@@ -23,6 +24,7 @@ import { Route as ProductsRouteImport } from './routes/products'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as PortalIndexRouteImport } from './routes/portal.index'
 import { Route as PortalInquiriesRouteImport } from './routes/portal.inquiries'
+import { Route as PortalManagersRouteImport } from './routes/portal.managers'
 import { Route as PortalProductsRouteImport } from './routes/portal.products'
 import { Route as PortalSettingsRouteImport } from './routes/portal.settings'
 import { Route as ProductsIndexRouteImport } from './routes/products.index'
@@ -64,6 +66,11 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LoginloginloginRoute = LoginloginloginRouteImport.update({
+  id: '/loginloginlogin',
+  path: '/loginloginlogin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ManufacturingRoute = ManufacturingRouteImport.update({
   id: '/manufacturing',
   path: '/manufacturing',
@@ -97,6 +104,11 @@ const PortalIndexRoute = PortalIndexRouteImport.update({
 const PortalInquiriesRoute = PortalInquiriesRouteImport.update({
   id: '/inquiries',
   path: '/inquiries',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalManagersRoute = PortalManagersRouteImport.update({
+  id: '/managers',
+  path: '/managers',
   getParentRoute: () => PortalRoute,
 } as any)
 const PortalProductsRoute = PortalProductsRouteImport.update({
@@ -133,12 +145,14 @@ export interface FileRoutesByFullPath {
   '/downloads': typeof DownloadsRoute
   '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
+  '/loginloginlogin': typeof LoginloginloginRoute
   '/manufacturing': typeof ManufacturingRoute
   '/portal': typeof PortalRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/products': typeof ProductsRouteWithChildren
   '/terms': typeof TermsRoute
   '/portal/inquiries': typeof PortalInquiriesRoute
+  '/portal/managers': typeof PortalManagersRoute
   '/portal/products': typeof PortalProductsRoute
   '/portal/settings': typeof PortalSettingsRoute
   '/products/$sku': typeof ProductsSkuRoute
@@ -154,10 +168,12 @@ export interface FileRoutesByTo {
   '/downloads': typeof DownloadsRoute
   '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
+  '/loginloginlogin': typeof LoginloginloginRoute
   '/manufacturing': typeof ManufacturingRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
   '/portal/inquiries': typeof PortalInquiriesRoute
+  '/portal/managers': typeof PortalManagersRoute
   '/portal/products': typeof PortalProductsRoute
   '/portal/settings': typeof PortalSettingsRoute
   '/products/$sku': typeof ProductsSkuRoute
@@ -174,12 +190,14 @@ export interface FileRoutesById {
   '/downloads': typeof DownloadsRoute
   '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
+  '/loginloginlogin': typeof LoginloginloginRoute
   '/manufacturing': typeof ManufacturingRoute
   '/portal': typeof PortalRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/products': typeof ProductsRouteWithChildren
   '/terms': typeof TermsRoute
   '/portal/inquiries': typeof PortalInquiriesRoute
+  '/portal/managers': typeof PortalManagersRoute
   '/portal/products': typeof PortalProductsRoute
   '/portal/settings': typeof PortalSettingsRoute
   '/products/$sku': typeof ProductsSkuRoute
@@ -197,12 +215,14 @@ export interface FileRouteTypes {
     | '/downloads'
     | '/faq'
     | '/login'
+    | '/loginloginlogin'
     | '/manufacturing'
     | '/portal'
     | '/privacy'
     | '/products'
     | '/terms'
     | '/portal/inquiries'
+    | '/portal/managers'
     | '/portal/products'
     | '/portal/settings'
     | '/products/$sku'
@@ -218,10 +238,12 @@ export interface FileRouteTypes {
     | '/downloads'
     | '/faq'
     | '/login'
+    | '/loginloginlogin'
     | '/manufacturing'
     | '/privacy'
     | '/terms'
     | '/portal/inquiries'
+    | '/portal/managers'
     | '/portal/products'
     | '/portal/settings'
     | '/products/$sku'
@@ -237,12 +259,14 @@ export interface FileRouteTypes {
     | '/downloads'
     | '/faq'
     | '/login'
+    | '/loginloginlogin'
     | '/manufacturing'
     | '/portal'
     | '/privacy'
     | '/products'
     | '/terms'
     | '/portal/inquiries'
+    | '/portal/managers'
     | '/portal/products'
     | '/portal/settings'
     | '/products/$sku'
@@ -259,6 +283,7 @@ export interface RootRouteChildren {
   DownloadsRoute: typeof DownloadsRoute
   FaqRoute: typeof FaqRoute
   LoginRoute: typeof LoginRoute
+  LoginloginloginRoute: typeof LoginloginloginRoute
   ManufacturingRoute: typeof ManufacturingRoute
   PortalRoute: typeof PortalRouteWithChildren
   PrivacyRoute: typeof PrivacyRoute
@@ -318,6 +343,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/loginloginlogin': {
+      id: '/loginloginlogin'
+      path: '/loginloginlogin'
+      fullPath: '/loginloginlogin'
+      preLoaderRoute: typeof LoginloginloginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/manufacturing': {
       id: '/manufacturing'
       path: '/manufacturing'
@@ -367,6 +399,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortalInquiriesRouteImport
       parentRoute: typeof PortalRoute
     }
+    '/portal/managers': {
+      id: '/portal/managers'
+      path: '/managers'
+      fullPath: '/portal/managers'
+      preLoaderRoute: typeof PortalManagersRouteImport
+      parentRoute: typeof PortalRoute
+    }
     '/portal/products': {
       id: '/portal/products'
       path: '/products'
@@ -406,6 +445,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface PortalRouteChildren {
+  PortalManagersRoute: typeof PortalManagersRoute
   PortalInquiriesRoute: typeof PortalInquiriesRoute
   PortalProductsRoute: typeof PortalProductsRoute
   PortalSettingsRoute: typeof PortalSettingsRoute
@@ -413,6 +453,7 @@ interface PortalRouteChildren {
 }
 
 const PortalRouteChildren: PortalRouteChildren = {
+  PortalManagersRoute: PortalManagersRoute,
   PortalInquiriesRoute: PortalInquiriesRoute,
   PortalProductsRoute: PortalProductsRoute,
   PortalSettingsRoute: PortalSettingsRoute,
@@ -444,6 +485,7 @@ const rootRouteChildren: RootRouteChildren = {
   DownloadsRoute: DownloadsRoute,
   FaqRoute: FaqRoute,
   LoginRoute: LoginRoute,
+  LoginloginloginRoute: LoginloginloginRoute,
   ManufacturingRoute: ManufacturingRoute,
   PortalRoute: PortalRouteWithChildren,
   PrivacyRoute: PrivacyRoute,
