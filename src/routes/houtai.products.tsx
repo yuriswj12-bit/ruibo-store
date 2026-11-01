@@ -2,8 +2,15 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { importProducts, portalProducts } from "@/lib/commerce.functions";
 
-export const Route = createFileRoute("/portal/products")({
-  loader: () => portalProducts(),
+export const Route = createFileRoute("/houtai/products")({
+  loader: async () => {
+    try {
+      return await portalProducts();
+    } catch (error) {
+      if (error instanceof Error && error.message.includes("Unauthorized")) return null;
+      throw error;
+    }
+  },
   component: ProductsDesk,
 });
 
@@ -19,6 +26,7 @@ function parseCsv(text: string) {
 
 function ProductsDesk() {
   const products = Route.useLoaderData();
+  if (!products) return null;
   const [message, setMessage] = useState("");
 
   return (

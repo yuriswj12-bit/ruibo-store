@@ -2,13 +2,22 @@ import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useState } from "react";
 import { portalSnapshot, saveSettings } from "@/lib/commerce.functions";
 
-export const Route = createFileRoute("/portal/settings")({
-  loader: () => portalSnapshot(),
+export const Route = createFileRoute("/houtai/settings")({
+  loader: async () => {
+    try {
+      return await portalSnapshot();
+    } catch (error) {
+      if (error instanceof Error && error.message.includes("Unauthorized")) return null;
+      throw error;
+    }
+  },
   component: Settings,
 });
 
 function Settings() {
-  const { factory } = Route.useLoaderData();
+  const data = Route.useLoaderData();
+  if (!data) return null;
+  const { factory } = data;
   const router = useRouter();
   const [message, setMessage] = useState("");
   return (

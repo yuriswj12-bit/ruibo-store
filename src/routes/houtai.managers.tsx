@@ -2,13 +2,21 @@ import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useState } from "react";
 import { addDeskManager, listDeskManagers } from "@/lib/commerce.functions";
 
-export const Route = createFileRoute("/portal/managers")({
-  loader: () => listDeskManagers(),
+export const Route = createFileRoute("/houtai/managers")({
+  loader: async () => {
+    try {
+      return await listDeskManagers();
+    } catch (error) {
+      if (error instanceof Error && error.message.includes("Unauthorized")) return null;
+      throw error;
+    }
+  },
   component: ManagersPage,
 });
 
 function ManagersPage() {
   const rows = Route.useLoaderData();
+  if (!rows) return null;
   const router = useRouter();
   const [error, setError] = useState("");
   const [pending, setPending] = useState(false);

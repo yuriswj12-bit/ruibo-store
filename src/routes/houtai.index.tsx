@@ -1,13 +1,21 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { portalSnapshot } from "@/lib/commerce.functions";
 
-export const Route = createFileRoute("/portal/")({
-  loader: () => portalSnapshot(),
+export const Route = createFileRoute("/houtai/")({
+  loader: async () => {
+    try {
+      return await portalSnapshot();
+    } catch (error) {
+      if (error instanceof Error && error.message.includes("Unauthorized")) return null;
+      throw error;
+    }
+  },
   component: Dashboard,
 });
 
 function Dashboard() {
   const data = Route.useLoaderData();
+  if (!data) return null;
   const cards = [
     ["近 7 日访问", data.counts.views, `${data.counts.visitors} 个访客`],
     ["近 7 日点击", data.counts.clicks, "询盘、WhatsApp、邮箱"],
@@ -48,7 +56,7 @@ function Dashboard() {
       <div className="mt-6">
         <div className="flex items-center justify-between">
           <h2 className="text-xl">最新询盘</h2>
-          <Link to="/portal/inquiries" className="text-sm text-copper">全部</Link>
+          <Link to="/houtai/inquiries" className="text-sm text-copper">全部</Link>
         </div>
         <div className="mt-3 grid gap-2">
           {data.recent.length === 0 && <p className="text-sm text-muted">还没有询盘。前台提交后会出现在这里。</p>}

@@ -2,8 +2,15 @@ import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { moveInquiry, portalInquiries } from "@/lib/commerce.functions";
 import { canMoveInquiry } from "@/lib/oe";
 
-export const Route = createFileRoute("/portal/inquiries")({
-  loader: () => portalInquiries(),
+export const Route = createFileRoute("/houtai/inquiries")({
+  loader: async () => {
+    try {
+      return await portalInquiries();
+    } catch (error) {
+      if (error instanceof Error && error.message.includes("Unauthorized")) return null;
+      throw error;
+    }
+  },
   component: Inquiries,
 });
 
@@ -22,6 +29,7 @@ const NOTIFY_LABEL: Record<string, string> = {
 
 function Inquiries() {
   const rows = Route.useLoaderData();
+  if (!rows) return null;
   const router = useRouter();
   return (
     <section>
