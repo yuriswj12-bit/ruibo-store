@@ -3,6 +3,7 @@ import { z } from "zod";
 import { getSql } from "@/lib/db";
 import { authMiddleware } from "@/lib/auth/middleware";
 import { canMoveInquiry, normalizeOe } from "@/lib/oe";
+import { bossPhone, inquiryText, sendBossWhatsapp } from "@/lib/notify-boss";
 
 const DEMO = "fac_xinda";
 
@@ -272,33 +273,63 @@ const inquiryInput = z.object({
 export const submitInquiry = createServerFn({ method: "POST" })
   .validator(inquiryInput)
   .handler(async ({ data }) => {
+    const sql = await getSql();
+    const id = data.idempotencyKey;
+    await sql`
+      insert into inquiries (
+        id, factory_id, product_sku, customer_name, customer_email, whatsapp, quantity, country, message, matched_oe, source_path, status
+      ) values (
+        ${id}, ${DEMO}, ${data.sku || null}, ${data.customerName}, ${data.customerEmail}, ${data.whatsapp || ""},
+        ${data.quantity ?? null}, ${data.country || ""}, ${data.message}, ${data.matchedOe || ""}, ${data.sourcePath || ""}, 'new'
+      )
+      on conflict (id) do nothing
+    `;
+    const factory = await sql<{ whatsapp: string }>`select whatsapp from factories where id = ${DEMO} limit 1`;
+    const phone = bossPhone(factory[0]?.whatsapp);
+    const text = inquiryText({
+      customerName: data.customerName,
+      customerEmail: data.customerEmail,
+      whatsapp: data.whatsapp,
+      country: data.country,
+      sku: data.sku,
+      message: data.message,
+    });
+    let sent = { status: "waiting" as string, error: "", channel: "whatsapp" };
+    try {
+      sent = await sendBossWhatsapp(phone, text);
+    } catch (error) {
+      sent = { status: "failed", error: error instanceof Error ? error.message : "发送失败", channel: "whatsapp" };
+    }
+    await sql`
+      insert into outbound_messages (id, factory_id, inquiry_id, channel, destination, body, status, error)
+      values (${crypto.randomUUID()}, ${DEMO}, ${id}, ${sent.channel}, ${phone}, ${text}, ${sent.status}, ${sent.error})
+      on conflict (id) do nothing
+    `;
     const base = process.env.CENTER_API_URL?.trim().replace(/\/$/, "");
     const key = process.env.CENTER_SITE_KEY?.trim();
-    if (!base || !key) throw new Error("询盘服务未配置");
-    const response = await fetch(`${base}/api/v1/inquiries`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${key}`,
-        "idempotency-key": data.idempotencyKey,
-      },
-      body: JSON.stringify({
-        productSku: data.sku,
-        customerName: data.customerName,
-        customerEmail: data.customerEmail,
-        customerWhatsapp: data.whatsapp,
-        quantity: data.quantity,
-        country: data.country,
-        message: data.message,
-        matchedOe: data.matchedOe,
-        sourcePath: data.sourcePath,
-        sourceChannel: "ruibo-store",
-      }),
-    });
-    if (!response.ok) throw new Error("询盘提交失败");
-    const payload = (await response.json()) as { id?: string };
-    if (!payload.id) throw new Error("询盘提交失败");
-    return { id: payload.id };
+    if (base && key) {
+      await fetch(`${base}/api/v1/inquiries`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${key}`,
+          "idempotency-key": data.idempotencyKey,
+        },
+        body: JSON.stringify({
+          productSku: data.sku,
+          customerName: data.customerName,
+          customerEmail: data.customerEmail,
+          customerWhatsapp: data.whatsapp,
+          quantity: data.quantity,
+          country: data.country,
+          message: data.message,
+          matchedOe: data.matchedOe,
+          sourcePath: data.sourcePath,
+          sourceChannel: "ruibo-store",
+        }),
+      }).catch(() => undefined);
+    }
+    return { id };
   });
 
 const trackInput = z.object({
@@ -314,25 +345,32 @@ const trackInput = z.object({
 export const trackStoreEvent = createServerFn({ method: "POST" })
   .validator(trackInput)
   .handler(async ({ data }) => {
+    const sql = await getSql();
+    await sql`
+      insert into store_events (id, factory_id, event_name, page_path, session_id, anonymous_id, sku, referrer)
+      values (${data.eventId}, ${DEMO}, ${data.eventName}, ${data.pagePath}, ${data.sessionId}, ${data.anonymousId || null}, ${data.sku || null}, ${data.referrer || null})
+      on conflict (id) do nothing
+    `;
     const base = process.env.CENTER_API_URL?.trim().replace(/\/$/, "");
     const key = process.env.CENTER_SITE_KEY?.trim();
-    if (!base || !key) return { ok: false as const };
-    const response = await fetch(`${base}/api/v1/analytics/collect`, {
-      method: "POST",
-      headers: { "content-type": "application/json", authorization: `Bearer ${key}` },
-      body: JSON.stringify({
-        eventName: data.eventName,
-        eventId: data.eventId,
-        pagePath: data.pagePath,
-        sessionId: data.sessionId,
-        anonymousId: data.anonymousId,
-        sku: data.sku,
-        referrer: data.referrer,
-        occurredAt: new Date().toISOString(),
-        schemaVersion: 1,
-      }),
-    });
-    return { ok: response.ok };
+    if (base && key) {
+      await fetch(`${base}/api/v1/analytics/collect`, {
+        method: "POST",
+        headers: { "content-type": "application/json", authorization: `Bearer ${key}` },
+        body: JSON.stringify({
+          eventName: data.eventName,
+          eventId: data.eventId,
+          pagePath: data.pagePath,
+          sessionId: data.sessionId,
+          anonymousId: data.anonymousId,
+          sku: data.sku,
+          referrer: data.referrer,
+          occurredAt: new Date().toISOString(),
+          schemaVersion: 1,
+        }),
+      }).catch(() => undefined);
+    }
+    return { ok: true as const };
   });
 
 const orderInput = z.object({
@@ -393,14 +431,62 @@ export const portalSnapshot = createServerFn({ method: "GET" })
   .handler(async ({ context }) => {
     const factory = await ownedFactory(context.userId);
     const sql = await getSql();
-    const [inquiries, paid, products] = await Promise.all([
-      sql<{ n: number }>`select count(*)::int as n from inquiries where factory_id = ${factory.id}`,
-      sql<{ n: number }>`select count(*)::int as n from sample_orders where factory_id = ${factory.id} and status = 'paid'`,
+    const [views, visitors, clicks, inquiries, sent, waiting, products, days, recent] = await Promise.all([
+      sql<{ n: number }>`select count(*)::int as n from store_events where factory_id = ${factory.id} and event_name in ('page_view', 'product_view') and created_at > now() - interval '7 days'`,
+      sql<{ n: number }>`select count(distinct session_id)::int as n from store_events where factory_id = ${factory.id} and event_name in ('page_view', 'product_view') and created_at > now() - interval '7 days'`,
+      sql<{ n: number }>`select count(*)::int as n from store_events where factory_id = ${factory.id} and event_name in ('inquiry_button_click', 'inquiry_form_start', 'contact_whatsapp_click', 'contact_email_click') and created_at > now() - interval '7 days'`,
+      sql<{ n: number }>`select count(*)::int as n from inquiries where factory_id = ${factory.id} and created_at > now() - interval '7 days'`,
+      sql<{ n: number }>`select count(*)::int as n from outbound_messages where factory_id = ${factory.id} and status = 'sent' and created_at > now() - interval '7 days'`,
+      sql<{ n: number }>`select count(*)::int as n from outbound_messages where factory_id = ${factory.id} and status <> 'sent'`,
       sql<{ n: number }>`select count(*)::int as n from products where factory_id = ${factory.id}`,
+      sql<{ day: string; views: number; clicks: number; inquiries: number; sent: number }>`
+        select to_char(d::date, 'MM-DD') as day,
+          coalesce(v.views, 0)::int as views,
+          coalesce(v.clicks, 0)::int as clicks,
+          coalesce(q.inquiries, 0)::int as inquiries,
+          coalesce(m.sent, 0)::int as sent
+        from generate_series((now() at time zone 'Asia/Shanghai')::date - 6, (now() at time zone 'Asia/Shanghai')::date, interval '1 day') d
+        left join (
+          select (created_at at time zone 'Asia/Shanghai')::date as day,
+            count(*) filter (where event_name in ('page_view', 'product_view'))::int as views,
+            count(*) filter (where event_name in ('inquiry_button_click', 'inquiry_form_start', 'contact_whatsapp_click', 'contact_email_click'))::int as clicks
+          from store_events
+          where factory_id = ${factory.id} and created_at > now() - interval '8 days'
+          group by 1
+        ) v on v.day = d::date
+        left join (
+          select (created_at at time zone 'Asia/Shanghai')::date as day, count(*)::int as inquiries
+          from inquiries
+          where factory_id = ${factory.id} and created_at > now() - interval '8 days'
+          group by 1
+        ) q on q.day = d::date
+        left join (
+          select (created_at at time zone 'Asia/Shanghai')::date as day, count(*) filter (where status = 'sent')::int as sent
+          from outbound_messages
+          where factory_id = ${factory.id} and created_at > now() - interval '8 days'
+          group by 1
+        ) m on m.day = d::date
+        order by d
+      `,
+      sql<{ id: string; customer_name: string; customer_email: string; message: string; created_at: string; status: string }>`
+        select id, customer_name, customer_email, message, created_at::text, status
+        from inquiries where factory_id = ${factory.id}
+        order by created_at desc limit 5
+      `,
     ]);
     return {
-      factory,
-      counts: { inquiries: inquiries[0]?.n ?? 0, paid: paid[0]?.n ?? 0, products: products[0]?.n ?? 0 },
+      factory: { ...factory, whatsapp: bossPhone(factory.whatsapp) },
+      counts: {
+        views: views[0]?.n ?? 0,
+        visitors: visitors[0]?.n ?? 0,
+        clicks: clicks[0]?.n ?? 0,
+        inquiries: inquiries[0]?.n ?? 0,
+        sent: sent[0]?.n ?? 0,
+        waiting: waiting[0]?.n ?? 0,
+        products: products[0]?.n ?? 0,
+      },
+      days,
+      recent,
     };
   });
 
@@ -469,7 +555,9 @@ export const portalInquiries = createServerFn({ method: "GET" })
       id: string;
       customer_name: string;
       customer_email: string;
+      whatsapp: string | null;
       country: string | null;
+      notify_status: string;
       product_sku: string | null;
       matched_oe: string | null;
       quantity: number | null;
@@ -477,8 +565,13 @@ export const portalInquiries = createServerFn({ method: "GET" })
       message: string;
       created_at: string;
     }>`
-      select id, customer_name, customer_email, country, product_sku, matched_oe, quantity, status, message, created_at::text
-      from inquiries where factory_id = ${factory.id} order by created_at desc
+      select i.id, i.customer_name, i.customer_email, i.whatsapp, i.country, i.product_sku, i.matched_oe, i.quantity, i.status, i.message, i.created_at::text,
+             coalesce(n.status, '') as notify_status
+      from inquiries i
+      left join lateral (
+        select status from outbound_messages where inquiry_id = i.id order by created_at desc limit 1
+      ) n on true
+      where i.factory_id = ${factory.id} order by i.created_at desc
     `;
   });
 
