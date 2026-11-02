@@ -17,7 +17,7 @@
   "fieldMessage": "ما الذي تحتاجه",
   "inquirySubmit": "إرسال الاستفسار",
   "inquirySending": "جارٍ الإرسال",
-  "inquirySent": "تم الاستلام. المرجع {id}. سيرد المصنع على هذا الطلب.",
+  "inquirySent": "تم الاستلام. المرجع {id}.",
   "inquiryFail": "لم يُرسل. حاول مرة أخرى.",
   "quoteTitle": "اطلب عرض سعر",
   "sendInquiry": "إرسال استفسار",

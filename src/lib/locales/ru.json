@@ -17,7 +17,7 @@
   "fieldMessage": "Что нужно",
   "inquirySubmit": "Отправить запрос",
   "inquirySending": "Отправка",
-  "inquirySent": "Получено. Номер {id}. Завод ответит по этому обращению.",
+  "inquirySent": "Получено. Номер {id}.",
   "inquiryFail": "Не отправилось. Попробуйте ещё раз.",
   "quoteTitle": "Бесплатный расчёт",
   "sendInquiry": "Отправить запрос",
