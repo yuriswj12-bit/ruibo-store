@@ -30,10 +30,10 @@ function Contact() {
     <StoreShell name={store.name} email={store.email} whatsapp={store.whatsapp}>
       <main>
         <section
-          className="relative grid min-h-[380px] items-center bg-gradient-to-r from-[#ff6b78] to-[#e60013] bg-cover bg-center"
-          style={{ backgroundImage: "linear-gradient(90deg, rgba(230,0,19,.62), rgba(255,107,120,.45)), url(/handshake.jpg)" }}
+          className="relative grid min-h-[380px] items-center bg-[#d9dde3] bg-cover bg-center"
+          style={{ backgroundImage: "url(/handshake.jpg)" }}
         >
-          <div className="wrap py-20 text-white">
+          <div className="wrap py-20 text-white" style={{ textShadow: "0 1px 2px rgba(0,0,0,.55), 0 10px 28px rgba(0,0,0,.35)" }}>
             <Reveal variant="up">
               <p className="text-xs font-semibold tracking-[0.22em] text-white/80">{copy.kicker}</p>
               <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-6xl">{copy.title}</h1>
