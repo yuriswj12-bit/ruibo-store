@@ -18,6 +18,7 @@
   "inquirySubmit": "إرسال الاستفسار",
   "inquirySending": "جارٍ الإرسال",
   "inquirySent": "تم الاستلام. المرجع {id}.",
+  "inquiryAgain": "حدّث الصفحة لإرسال طلب آخر.",
   "inquiryFail": "لم يُرسل. حاول مرة أخرى.",
   "quoteTitle": "اطلب عرض سعر",
   "sendInquiry": "إرسال استفسار",

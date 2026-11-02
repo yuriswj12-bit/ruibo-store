@@ -73,7 +73,13 @@ export function InquiryForm({
   }
 
   if (done) {
-    return <p className="rounded-lg bg-paper px-3 py-3 text-sm">{t("inquirySent", { id: done })}</p>;
+    return (
+      <p className="rounded-lg bg-paper px-3 py-3 text-sm">
+        {t("inquirySent", { id: done })}
+        <br />
+        {t("inquiryAgain")}
+      </p>
+    );
   }
 
   const field = hero || contact
