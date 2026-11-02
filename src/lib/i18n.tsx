@@ -3,17 +3,17 @@ import arJson from "./locales/ar.json";
 import mnJson from "./locales/mn.json";
 import ruJson from "./locales/ru.json";
 
-/** First review ships in Chinese. Change to "en" after acceptance. */
-export const DEFAULT_LANG = "zh" as const;
+/** Public site opens in English. Chinese stays available at the bottom of the menu. */
+export const DEFAULT_LANG = "en" as const;
 
 export const LANGS = [
-  { id: "zh", label: "中文" },
   { id: "en", label: "English" },
   { id: "es", label: "Español" },
   { id: "pt", label: "Português" },
   { id: "ru", label: "Русский" },
   { id: "mn", label: "Монгол" },
   { id: "ar", label: "العربية" },
+  { id: "zh", label: "中文" },
 ] as const;
 
 export type Lang = (typeof LANGS)[number]["id"];
