@@ -23,7 +23,7 @@ function Home() {
           <video
             className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[30%_center] grayscale contrast-125 opacity-30"
             src="/sensor.mp4"
-            poster="/auto.jpg"
+            poster="/shop/line.jpg"
             autoPlay
             muted
             loop
@@ -148,14 +148,15 @@ function Home() {
           </Reveal>
           <div className="mt-8 grid gap-4 lg:grid-cols-2">
             {([
-              ["/line-auto-bg.jpg", "Automotive", "tileAuto", "tileAutoBody", "car"],
-              ["/line-moto-bg.jpg", "Motorcycle", "tileMoto", "tileMotoBody", "moto"],
-              ["/line-ind-bg.jpg", "Industrial", "tileInd", "tileIndBody", "plant"],
-              ["/line-nox-bg.jpg", "NOx", "tileNox", "tileNoxBody", "home"],
+              ["/shop/line.jpg", "Automotive", "tileAuto", "tileAutoBody", "car"],
+              ["/shop/stations.jpg", "Motorcycle", "tileMoto", "tileMotoBody", "moto"],
+              ["/shop/weld.jpg", "Industrial", "tileInd", "tileIndBody", "plant"],
+              ["/pillars/export.jpg", "NOx", "tileNox", "tileNoxBody", "home"],
             ] as const).map(([src, line, title, body, icon], index) => (
               <Reveal key={line} variant={index % 2 ? "left" : "right"} delay={index * 70}>
               <Link to="/products" search={catalogSearch({ line })} className="relative block overflow-hidden rounded-2xl">
                 <img src={src} alt="" className="aspect-[4/3] w-full object-cover" />
+                <span className="absolute inset-0 bg-gradient-to-b from-[#1a1a2e]/25 via-[#9b0010]/50 to-[#1a1a2e]/70" />
                 <span className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.75)]">
                   <TileIcon name={icon} />
                   <span className="mt-3 text-2xl font-bold leading-tight">{t(title)}</span>
@@ -198,7 +199,7 @@ function Home() {
           </div>
           </Reveal>
           <Reveal variant="left">
-          <img src="/moto.jpg" alt="" className="h-80 w-full rounded-3xl object-cover sm:h-[420px]" />
+          <img src="/shop/assemble.jpg" alt="" className="h-80 w-full rounded-3xl object-cover sm:h-[420px]" />
           </Reveal>
         </div>
       </section>
@@ -256,9 +257,9 @@ function TileIcon({ name }: { name: "car" | "moto" | "plant" | "home" }) {
 function TrustStrip() {
   const { t } = useI18n();
   const slides = [
-    { src: "/industrial.jpg", cap: "trustCap1" },
-    { src: "/sensor.jpg", cap: "trustCap2" },
-    { src: "/auto.jpg", cap: "trustCap3" },
+    { src: "/shop/line.jpg", cap: "trustCap1" },
+    { src: "/shop/finished.jpg", cap: "trustCap2" },
+    { src: "/qc/ship.jpg", cap: "trustCap3" },
   ] as const;
   const [index, setIndex] = useState(0);
   const slide = slides[index];

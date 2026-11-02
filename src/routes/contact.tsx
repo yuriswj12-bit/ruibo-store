@@ -31,7 +31,7 @@ function Contact() {
       <main>
         <section
           className="relative grid min-h-[380px] items-center bg-gradient-to-r from-[#ff6b78] to-[#e60013] bg-cover bg-center"
-          style={{ backgroundImage: "linear-gradient(90deg, rgba(230,0,19,.62), rgba(255,107,120,.45)), url(/handshake.jpg)" }}
+          style={{ backgroundImage: "linear-gradient(90deg, rgba(230,0,19,.72), rgba(26,26,46,.45)), url(/shop/assemble.jpg)" }}
         >
           <div className="wrap py-20 text-white">
             <Reveal variant="up">

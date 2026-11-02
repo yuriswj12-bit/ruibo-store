@@ -181,7 +181,7 @@ function Manufacturing() {
     <StoreShell name={store.name} email={store.email} whatsapp={store.whatsapp}>
       <main>
         <section className="relative overflow-hidden bg-gradient-to-r from-[#ff6b78] to-[#e60013] text-white">
-          <img src="/sensor.jpg" alt="" className="pointer-events-none absolute inset-0 h-full w-full object-cover" />
+          <img src="/shop/line.jpg" alt="" className="pointer-events-none absolute inset-0 h-full w-full object-cover" />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/75 via-[#ff8a94]/45 to-[#e60013]/55" />
           <Reveal variant="fade" className="wrap relative py-20 sm:py-28">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/70">{c.kicker}</p>
@@ -199,8 +199,8 @@ function Manufacturing() {
             </Reveal>
             <div className="mt-10 grid gap-8 md:grid-cols-2">
               {[
-                { k: c.d1, title: c.d1Title, body: c.d1Body, items: c.d1Items, img: "/auto.jpg" },
-                { k: c.d2, title: c.d2Title, body: c.d2Body, items: c.d2Items, img: "/industrial.jpg" },
+                { k: c.d1, title: c.d1Title, body: c.d1Body, items: c.d1Items, img: "/shop/line.jpg" },
+                { k: c.d2, title: c.d2Title, body: c.d2Body, items: c.d2Items, img: "/shop/parts.jpg" },
               ].map((card, i) => (
                 <Reveal key={card.k} variant={i === 0 ? "right" : "left"} className="overflow-hidden rounded-2xl bg-white shadow-lg">
                   <div className="relative h-48 bg-gradient-to-r from-[#ff6b78] to-[#e60013]">
@@ -236,8 +236,8 @@ function Manufacturing() {
           </Reveal>
           <div className="mt-10 grid gap-8 md:grid-cols-2">
             {[
-              { title: c.cap1Title, body: c.cap1Body, img: "/sensor.jpg" },
-              { title: c.cap2Title, body: c.cap2Body, img: "/line-auto-bg.jpg" },
+              { title: c.cap1Title, body: c.cap1Body, img: "/shop/assemble.jpg" },
+              { title: c.cap2Title, body: c.cap2Body, img: "/shop/finished.jpg" },
             ].map((card, i) => (
               <Reveal key={card.title} variant={i === 0 ? "right" : "left"} className="flex h-full flex-col rounded-2xl border border-[#f3c5c8] bg-white p-8">
                 <div className="relative aspect-[16/9] overflow-hidden rounded-xl bg-gradient-to-r from-[#ff6b78] to-[#e60013]">
@@ -299,7 +299,7 @@ function Manufacturing() {
           <div className="mt-10 grid gap-4 sm:grid-cols-2">
             {c.stages.map((stage, i) => (
               <Reveal key={stage.n} variant="up" delay={i * 40} className="overflow-hidden rounded-2xl bg-white shadow-sm">
-                <img src={["/qc/incoming.jpg", "/qc/process.jpg", "/qc/test.jpg", "/qc/ship.jpg"][i]} alt="" className="aspect-[16/10] w-full object-cover" />
+                <img src={["/shop/parts.jpg", "/shop/stations.jpg", "/pillars/check.jpg", "/qc/ship.jpg"][i]} alt="" className="aspect-[16/10] w-full object-cover" />
                 <div className="p-5">
                   <p className="text-xs font-bold text-[#e60013]">{stage.n}</p>
                   <p className="mt-1 font-semibold">{stage.title}</p>
