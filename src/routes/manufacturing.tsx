@@ -169,7 +169,6 @@ const SHOP = [
   "/shop/spools.jpg",
   "/shop/finished.jpg",
   "/shop/spools2.jpg",
-  "/shop/materials.jpg",
 ];
 
 function Manufacturing() {
@@ -181,7 +180,7 @@ function Manufacturing() {
     <StoreShell name={store.name} email={store.email} whatsapp={store.whatsapp}>
       <main>
         <section className="relative overflow-hidden bg-gradient-to-r from-[#ff6b78] to-[#e60013] text-white">
-          <img src="/shop/line.jpg" alt="" className="pointer-events-none absolute inset-0 h-full w-full object-cover" />
+          <img src="/sensor.jpg" alt="" className="pointer-events-none absolute inset-0 h-full w-full object-cover" />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/75 via-[#ff8a94]/45 to-[#e60013]/55" />
           <Reveal variant="fade" className="wrap relative py-20 sm:py-28">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/70">{c.kicker}</p>
@@ -299,7 +298,7 @@ function Manufacturing() {
           <div className="mt-10 grid gap-4 sm:grid-cols-2">
             {c.stages.map((stage, i) => (
               <Reveal key={stage.n} variant="up" delay={i * 40} className="overflow-hidden rounded-2xl bg-white shadow-sm">
-                <img src={["/shop/parts.jpg", "/shop/stations.jpg", "/pillars/check.jpg", "/qc/ship.jpg"][i]} alt="" className="aspect-[16/10] w-full object-cover" />
+                <img src={["/shop/parts.jpg", "/shop/stations.jpg", "/pillars/check.jpg", "/shop/materials.jpg"][i]} alt="" className="aspect-[16/10] w-full object-cover" />
                 <div className="p-5">
                   <p className="text-xs font-bold text-[#e60013]">{stage.n}</p>
                   <p className="mt-1 font-semibold">{stage.title}</p>

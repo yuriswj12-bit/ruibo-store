@@ -40,7 +40,7 @@ function About() {
           </Reveal>
           <Reveal variant="left">
           <div className="relative">
-            <img src="/shop/line.jpg" alt="" className="aspect-[4/3] w-full rounded-2xl object-cover" />
+            <img src="/shop/connectors.jpg" alt="" className="aspect-[4/3] w-full rounded-2xl object-cover" />
             <div className="absolute bottom-4 left-4 rounded-xl bg-white px-5 py-3 shadow-lg">
               <p className="text-3xl font-semibold leading-none text-[#e60013]">{copy.year}</p>
               <p className="mt-1 text-sm text-muted">{copy.yearLabel}</p>

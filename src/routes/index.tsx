@@ -148,15 +148,14 @@ function Home() {
           </Reveal>
           <div className="mt-8 grid gap-4 lg:grid-cols-2">
             {([
-              ["/shop/line.jpg", "Automotive", "tileAuto", "tileAutoBody", "car"],
-              ["/shop/stations.jpg", "Motorcycle", "tileMoto", "tileMotoBody", "moto"],
-              ["/shop/weld.jpg", "Industrial", "tileInd", "tileIndBody", "plant"],
-              ["/pillars/export.jpg", "NOx", "tileNox", "tileNoxBody", "home"],
+              ["/line-auto-bg.jpg", "Automotive", "tileAuto", "tileAutoBody", "car"],
+              ["/line-moto-bg.jpg", "Motorcycle", "tileMoto", "tileMotoBody", "moto"],
+              ["/line-ind-bg.jpg", "Industrial", "tileInd", "tileIndBody", "plant"],
+              ["/line-nox-bg.jpg", "NOx", "tileNox", "tileNoxBody", "home"],
             ] as const).map(([src, line, title, body, icon], index) => (
               <Reveal key={line} variant={index % 2 ? "left" : "right"} delay={index * 70}>
               <Link to="/products" search={catalogSearch({ line })} className="relative block overflow-hidden rounded-2xl">
                 <img src={src} alt="" className="aspect-[4/3] w-full object-cover" />
-                <span className="absolute inset-0 bg-gradient-to-b from-[#1a1a2e]/25 via-[#9b0010]/50 to-[#1a1a2e]/70" />
                 <span className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.75)]">
                   <TileIcon name={icon} />
                   <span className="mt-3 text-2xl font-bold leading-tight">{t(title)}</span>
