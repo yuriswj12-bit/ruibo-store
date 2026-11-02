@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { submitInquiry } from "@/lib/commerce.functions";
 import { useI18n } from "@/lib/i18n";
 import { trackStore } from "@/lib/track-client";
+import { PhoneField } from "@/components/store/phone-field";
 
 function makeCode() {
   const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ";
@@ -107,9 +108,10 @@ export function InquiryForm({
           <Field label={t("fieldCompany")}>
             <input name="company" placeholder={t("phCompany")} className={field} />
           </Field>
-          <Field label={t("fieldPhone")}>
-            <input name="phone" placeholder={t("phPhone")} className={field} />
-          </Field>
+          <div className="grid gap-1.5 text-sm font-medium text-[#1a1a2e]">
+            <span>{t("fieldPhone")}</span>
+            <PhoneField card placeholder={t("phPhone")} />
+          </div>
           <Field label={t("fieldMessage")} required>
             <textarea name="message" required rows={5} placeholder={t("phMessage")} className="w-full rounded-lg border border-[#e6e8ee] px-3 py-3 text-sm outline-none placeholder:text-[#b0b6c0]" />
           </Field>
@@ -119,7 +121,7 @@ export function InquiryForm({
           <input name="name" required placeholder={t("phName")} className={field} />
           <input name="email" type="email" required placeholder={t("phEmail")} className={field} />
           <input name="company" placeholder={t("phCompany")} className={field} />
-          <input name="phone" placeholder={t("phPhone")} className={field} />
+          <PhoneField card placeholder={t("phPhone")} />
           <textarea name="message" required rows={4} placeholder={t("phMessage")} className="w-full rounded-lg border border-line px-3 py-3 text-sm outline-none placeholder:text-muted/80" />
           <div className="flex gap-2">
             <input name="code" required placeholder={t("phCode")} autoComplete="off" className={field} />
@@ -142,10 +144,10 @@ export function InquiryForm({
               <input name="company" className={field} />
             </label>
           )}
-          <label className="grid gap-1 text-sm">
-            {t("fieldPhone")}
-            <input name="phone" className={field} />
-          </label>
+          <div className="grid gap-1 text-sm">
+            <span>{t("fieldPhone")}</span>
+            <PhoneField />
+          </div>
           <label className="grid gap-1 text-sm">
             {t("fieldMessage")}
             <textarea name="message" required rows={compact ? 3 : 4} className="rounded-lg border border-line px-3 py-2" />
