@@ -66,6 +66,7 @@ function About() {
                     <div className={onLeft
                       ? "pl-10 md:pr-12 md:text-right"
                       : "pl-10 md:col-start-2 md:pl-12"}>
+                      <img src={step.img} alt="" className={"mb-3 aspect-[16/9] w-full rounded-xl object-cover " + (onLeft ? "md:ml-auto" : "")} />
                       <p className="text-sm font-semibold text-[#e60013]">{step.year}</p>
                       <h3 className="mt-1 text-xl font-semibold">{step.title}</h3>
                       <p className="mt-2 text-sm leading-6 text-muted">{step.body}</p>
@@ -173,7 +174,7 @@ type AboutCopy = {
   journeyLabel: string;
   journeyTitle: string;
   journeySub: string;
-  steps: { year: string; title: string; body: string }[];
+  steps: { year: string; title: string; body: string; img: string }[];
   advLabel: string;
   advTitle: string;
   advantages: { title: string; body: string }[];
@@ -199,10 +200,13 @@ const ABOUT: Record<Lang, AboutCopy> = {
     yearLabel: "开始生产",
     journeyLabel: "我们的历程",
     journeyTitle: "从制造到出口",
-    journeySub: "2009 年开始生产氧传感器。2021 年起通过 RBIC 向全球出口。",
+    journeySub: "从 2009 年第一条产线，到现在海外买家可以直接搜 OEM 号。",
     steps: [
-      { year: "2009", title: "开始生产氧传感器", body: "在温州做氧传感器的研发和制造，供给汽车售后替换。" },
-      { year: "2021", title: "通过 RBIC 向全球出口", body: "海外买家可以用 OEM 号查目录、询价和订样品。工厂仍按确认的产品发货。" },
+      { year: "2009", title: "开始生产氧传感器", body: "在温州做氧传感器的研发和制造，供给汽车售后替换。", img: "/shop/line.jpg" },
+      { year: "2014", title: "多品牌 OEM 对照成型", body: "按品牌整理柜号和 OEM 对照，覆盖更多车系，方便买家对号找件。", img: "/shop/parts.jpg" },
+      { year: "2018", title: "产线与检测升级", body: "装配和出厂检查按固定工序走，减少只靠经验判断的环节。", img: "/shop/stations.jpg" },
+      { year: "2021", title: "通过 RBIC 向全球出口", body: "海外买家可以用 OEM 号查目录、询价和订样品。工厂仍按确认的产品发货。", img: "/shop/finished.jpg" },
+      { year: "2025", title: "独立站开放 OEM 搜索", body: "买家在网站上直接搜 OEM 号，对上工厂货号后再询价。", img: "/shop/assemble.jpg" },
     ],
     advLabel: "我们的优势",
     advTitle: "为什么是这家工厂",
@@ -235,10 +239,13 @@ const ABOUT: Record<Lang, AboutCopy> = {
     yearLabel: "Production begins",
     journeyLabel: "Our journey",
     journeyTitle: "From the workshop to export",
-    journeySub: "Oxygen sensor production started in 2009. Worldwide export through RBIC started in 2021.",
+    journeySub: "From the first production line in 2009 to OEM search for overseas buyers.",
     steps: [
-      { year: "2009", title: "Oxygen sensor production starts", body: "Development and manufacturing of oxygen sensors in Wenzhou, for automotive replacement." },
-      { year: "2021", title: "Export through RBIC", body: "Overseas buyers can search an OEM number, ask, and order a sample. The factory still ships the confirmed part." },
+      { year: "2009", title: "Oxygen sensor production starts", body: "Development and manufacturing of oxygen sensors in Wenzhou, for automotive replacement.", img: "/shop/line.jpg" },
+      { year: "2014", title: "Multi-brand OEM range takes shape", body: "Factory part numbers and OEM cross-references are organised by brand, covering more applications.", img: "/shop/parts.jpg" },
+      { year: "2018", title: "Line and inspection upgrade", body: "Assembly and the check before shipment follow a fixed process, not only experience on the bench.", img: "/shop/stations.jpg" },
+      { year: "2021", title: "Export through RBIC", body: "Overseas buyers can search an OEM number, ask, and order a sample. The factory still ships the confirmed part.", img: "/shop/finished.jpg" },
+      { year: "2025", title: "OEM search goes online", body: "Buyers search the OEM number on the site, match it to the factory part, then inquire.", img: "/shop/assemble.jpg" },
     ],
     advLabel: "Our advantage",
     advTitle: "Why this factory",
@@ -273,8 +280,11 @@ const ABOUT: Record<Lang, AboutCopy> = {
     journeyTitle: "Del taller a la exportación",
     journeySub: "La producción de sensores empezó en 2009. La exportación mundial con RBIC empezó en 2021.",
     steps: [
-      { year: "2009", title: "Empieza la producción", body: "Desarrollo y fabricación de sensores de oxígeno en Wenzhou, para recambio de automoción." },
-      { year: "2021", title: "Exportación con RBIC", body: "El comprador de fuera puede buscar un OEM, consultar y pedir una muestra. La fábrica envía la pieza confirmada." },
+      { year: "2009", title: "Empieza la producción", body: "Desarrollo y fabricación de sensores de oxígeno en Wenzhou, para recambio de automoción.", img: "/shop/line.jpg" },
+      { year: "2014", title: "Gama OEM multi-marca", body: "Los números de fábrica y las referencias OEM se organizan por marca, para más aplicaciones.", img: "/shop/parts.jpg" },
+      { year: "2018", title: "Mejora de línea e inspección", body: "El montaje y el control antes del envío siguen un proceso fijo, no solo la experiencia del banco.", img: "/shop/stations.jpg" },
+      { year: "2021", title: "Exportación con RBIC", body: "El comprador de fuera puede buscar un OEM, consultar y pedir una muestra. La fábrica envía la pieza confirmada.", img: "/shop/finished.jpg" },
+      { year: "2025", title: "Búsqueda OEM en línea", body: "El comprador busca el número OEM en el sitio, lo cruza con la pieza de fábrica y consulta.", img: "/shop/assemble.jpg" },
     ],
     advLabel: "Nuestra ventaja",
     advTitle: "Por qué esta fábrica",
@@ -309,8 +319,11 @@ const ABOUT: Record<Lang, AboutCopy> = {
     journeyTitle: "Da oficina à exportação",
     journeySub: "A produção de sensores começou em 2009. A exportação mundial pela RBIC começou em 2021.",
     steps: [
-      { year: "2009", title: "Começa a produção", body: "Desenvolvimento e fabrico de sensores de oxigénio em Wenzhou, para substituição automóvel." },
-      { year: "2021", title: "Exportação pela RBIC", body: "O comprador no estrangeiro pode procurar um OEM, pedir informação e encomendar uma amostra. A fábrica envia a peça confirmada." },
+      { year: "2009", title: "Começa a produção", body: "Desenvolvimento e fabrico de sensores de oxigénio em Wenzhou, para substituição automóvel.", img: "/shop/line.jpg" },
+      { year: "2014", title: "Gama OEM multi-marca", body: "Números de fábrica e referências OEM organizados por marca, para mais aplicações.", img: "/shop/parts.jpg" },
+      { year: "2018", title: "Melhoria da linha e inspeção", body: "Montagem e controlo antes do envio seguem um processo fixo, não só a experiência de bancada.", img: "/shop/stations.jpg" },
+      { year: "2021", title: "Exportação pela RBIC", body: "O comprador no estrangeiro pode procurar um OEM, pedir informação e encomendar uma amostra. A fábrica envia a peça confirmada.", img: "/shop/finished.jpg" },
+      { year: "2025", title: "Pesquisa OEM online", body: "O comprador pesquisa o número OEM no site, cruza com a peça de fábrica e consulta.", img: "/shop/assemble.jpg" },
     ],
     advLabel: "A nossa vantagem",
     advTitle: "Porque esta fábrica",
@@ -345,8 +358,11 @@ const ABOUT: Record<Lang, AboutCopy> = {
     journeyTitle: "От цеха к экспорту",
     journeySub: "Производство датчиков началось в 2009 году. Экспорт через RBIC — с 2021 года.",
     steps: [
-      { year: "2009", title: "Старт производства", body: "Разработка и выпуск кислородных датчиков в Вэньчжоу для автомобильной замены." },
-      { year: "2021", title: "Экспорт через RBIC", body: "Зарубежный покупатель ищет номер OEM, запрашивает цену и заказывает образец. Завод отгружает подтверждённую деталь." },
+      { year: "2009", title: "Старт производства", body: "Разработка и выпуск кислородных датчиков в Вэньчжоу для автомобильной замены.", img: "/shop/line.jpg" },
+      { year: "2014", title: "Мультибрендовый OEM-ряд", body: "Заводские номера и OEM-соответствия разложены по брендам, покрыто больше применений.", img: "/shop/parts.jpg" },
+      { year: "2018", title: "Линия и контроль", body: "Сборка и проверка перед отгрузкой идут по фиксированному процессу, не только по опыту на столе.", img: "/shop/stations.jpg" },
+      { year: "2021", title: "Экспорт через RBIC", body: "Зарубежный покупатель ищет номер OEM, запрашивает цену и заказывает образец. Завод отгружает подтверждённую деталь.", img: "/shop/finished.jpg" },
+      { year: "2025", title: "Поиск OEM на сайте", body: "Покупатель ищет номер OEM на сайте, сверяет с заводской деталью и делает запрос.", img: "/shop/assemble.jpg" },
     ],
     advLabel: "Наше преимущество",
     advTitle: "Почему этот завод",
@@ -381,8 +397,11 @@ const ABOUT: Record<Lang, AboutCopy> = {
     journeyTitle: "من الورشة إلى التصدير",
     journeySub: "بدأ إنتاج الحساسات عام 2009. بدأ التصدير عبر RBIC عام 2021.",
     steps: [
-      { year: "2009", title: "بدء إنتاج حساسات الأكسجين", body: "تطوير وتصنيع حساسات الأكسجين في ونتشو لقطع غيار السيارات." },
-      { year: "2021", title: "التصدير عبر RBIC", body: "يستطيع المشتري الخارجي البحث برقم OEM وطلب السعر وعينة. المصنع يشحن القطعة المؤكدة." },
+      { year: "2009", title: "بدء إنتاج حساسات الأكسجين", body: "تطوير وتصنيع حساسات الأكسجين في ونتشو لقطع غيار السيارات.", img: "/shop/line.jpg" },
+      { year: "2014", title: "تشكيلة OEM متعددة العلامات", body: "أرقام المصنع ومراجع OEM مرتبة حسب العلامة، لتغطية تطبيقات أكثر.", img: "/shop/parts.jpg" },
+      { year: "2018", title: "تحديث الخط والفحص", body: "التجميع والفحص قبل الشحن يتبعان عملية ثابتة، وليس الخبرة على الطاولة فقط.", img: "/shop/stations.jpg" },
+      { year: "2021", title: "التصدير عبر RBIC", body: "يستطيع المشتري الخارجي البحث برقم OEM وطلب السعر وعينة. المصنع يشحن القطعة المؤكدة.", img: "/shop/finished.jpg" },
+      { year: "2025", title: "بحث OEM على الموقع", body: "يبحث المشتري برقم OEM على الموقع، يطابقه مع قطعة المصنع، ثم يستفسر.", img: "/shop/assemble.jpg" },
     ],
     advLabel: "ميزتنا",
     advTitle: "لماذا هذا المصنع",
@@ -417,8 +436,11 @@ const ABOUT: Record<Lang, AboutCopy> = {
     journeyTitle: "Цехаас экспорт хүртэл",
     journeySub: "Мэдрэгчийн үйлдвэрлэл 2009 онд эхэлсэн. RBIC-ээр дамжсан дэлхийн экспорт 2021 онд эхэлсэн.",
     steps: [
-      { year: "2009", title: "Хүчилтөрөгчийн мэдрэгчийн үйлдвэрлэл эхэлсэн", body: "Вэньжоуд автомашины сэлбэгт зориулсан хүчилтөрөгчийн мэдрэгчийг боловсруулж, үйлдвэрлэж эхэлсэн." },
-      { year: "2021", title: "RBIC-ээр экспорт", body: "Гадаад худалдан авагч OEM дугаар хайж, асууж, дээж захиалж болно. Үйлдвэр баталгаажсан эд ангийг ачина." },
+      { year: "2009", title: "Хүчилтөрөгчийн мэдрэгчийн үйлдвэрлэл эхэлсэн", body: "Вэньжоуд автомашины сэлбэгт зориулсан хүчилтөрөгчийн мэдрэгчийг боловсруулж, үйлдвэрлэж эхэлсэн.", img: "/shop/line.jpg" },
+      { year: "2014", title: "Олон брэндийн OEM хүрээ", body: "Үйлдвэрийн дугаар ба OEM харьцуулалтыг брэндээр цэгцэлж, илүү олон хэрэглээг хамарсан.", img: "/shop/parts.jpg" },
+      { year: "2018", title: "Шугам ба шалгалтын шинэчлэл", body: "Угсралт ба ачилтын өмнөх шалгалт тогтсон процессоор явна, зөвхөн ширээн дээрх туршлагаар биш.", img: "/shop/stations.jpg" },
+      { year: "2021", title: "RBIC-ээр экспорт", body: "Гадаад худалдан авагч OEM дугаар хайж, асууж, дээж захиалж болно. Үйлдвэр баталгаажсан эд ангийг ачина.", img: "/shop/finished.jpg" },
+      { year: "2025", title: "OEM хайлт онлайн болсон", body: "Худалдан авагч сайтаас OEM дугаар хайж, үйлдвэрийн эд ангитай тааруулаад лавлагаа илгээнэ.", img: "/shop/assemble.jpg" },
     ],
     advLabel: "Бидний давуу тал",
     advTitle: "Яагаад энэ үйлдвэр вэ",
