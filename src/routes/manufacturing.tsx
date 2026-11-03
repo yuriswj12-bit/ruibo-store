@@ -169,6 +169,7 @@ const SHOP = [
   "/shop/spools.jpg",
   "/shop/finished.jpg",
   "/shop/spools2.jpg",
+  "/shop/warehouse.jpg",
 ];
 
 function Manufacturing() {
