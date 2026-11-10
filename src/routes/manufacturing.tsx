@@ -73,7 +73,7 @@ const zh: Copy = {
   vidBody: "工厂实拍。开箱外观、功能检测、线束压接、壳体焊接和装箱打带。",
   coming: "影片即将上线",
   videos: [
-    { title: "装箱打带", body: "出货前给纸箱打带。看包装是否收紧、是否适合运输。", youtube: "72vy6tQT7js" },
+    { title: "产品装箱打带", body: "出货前给纸箱打带。看包装是否收紧、是否适合运输。", youtube: "72vy6tQT7js" },
     { title: "功能检测", body: "出厂前的功能检查。影片展示实际用的检测方法。", youtube: "5QIgYeiMKfY" },
     { title: "线束端子压接", body: "线束端子压接。按接口核对插头和线长，避免发错规格。", youtube: "-89H5Rb5EbQ" },
     { title: "壳体激光焊接", body: "氧传感器壳体激光焊接。这是装配环节，不是包装出货。", youtube: "np0QYqIHVvw" },
@@ -124,7 +124,7 @@ const en: Copy = {
   vidBody: "Shot in the factory. Carton strapping, function test, wire terminal crimping, and laser welding of the housing.",
   coming: "Video coming",
   videos: [
-    { title: "Carton strapping before shipment", body: "The carton is strapped before it leaves. This is the packing step, not an unboxing.", youtube: "72vy6tQT7js" },
+    { title: "Product carton strapping", body: "The carton is strapped before it leaves. This is the packing step, not an unboxing.", youtube: "72vy6tQT7js" },
     { title: "Function test", body: "The function check used before shipment. The film shows the method.", youtube: "5QIgYeiMKfY" },
     { title: "Wire terminal crimping", body: "Terminals are crimped on the harness. Plug and wire length are checked against the OEM interface.", youtube: "-89H5Rb5EbQ" },
     { title: "Laser welding the sensor housing", body: "The sensor housing is laser welded. This is an assembly step, not packing.", youtube: "np0QYqIHVvw" },
